@@ -1,0 +1,199 @@
+{
+ "best_of": 3,
+ "first_server": "me",
+ "split_prior": 0.14,
+ "split_prior_sd": 0.3,
+ "set_servers": {
+  "0-1": "opp"
+ },
+ "obs": [
+  {
+   "state": {
+    "games_me": 0,
+    "games_opp": 0
+   },
+   "price": 0.465,
+   "label": "pre-match"
+  },
+  {
+   "state": {
+    "games_me": 0,
+    "games_opp": 1,
+    "sets_me": 0,
+    "sets_opp": 0
+   },
+   "price": 0.365,
+   "label": "Sherif broken in game 1"
+  },
+  {
+   "state": {
+    "games_me": 0,
+    "games_opp": 2,
+    "sets_me": 0,
+    "sets_opp": 0
+   },
+   "price": 0.305,
+   "label": "Oliynykova held game 2"
+  },
+  {
+   "state": {
+    "games_me": 1,
+    "games_opp": 2,
+    "sets_me": 0,
+    "sets_opp": 0
+   },
+   "price": 0.375,
+   "label": "Sherif held game 3"
+  },
+  {
+   "state": {
+    "games_me": 1,
+    "games_opp": 3,
+    "sets_me": 0,
+    "sets_opp": 0
+   },
+   "price": 0.32,
+   "label": "Oliynykova held game 4"
+  },
+  {
+   "state": {
+    "games_me": 2,
+    "games_opp": 3,
+    "sets_me": 0,
+    "sets_opp": 0
+   },
+   "price": 0.365,
+   "label": "Sherif held game 5"
+  },
+  {
+   "state": {
+    "games_me": 2,
+    "games_opp": 4,
+    "sets_me": 0,
+    "sets_opp": 0
+   },
+   "price": 0.325,
+   "label": "Oliynykova held game 6"
+  },
+  {
+   "state": {
+    "games_me": 3,
+    "games_opp": 4,
+    "sets_me": 0,
+    "sets_opp": 0
+   },
+   "price": 0.355,
+   "label": "Sherif held game 7"
+  },
+  {
+   "state": {
+    "games_me": 3,
+    "games_opp": 5,
+    "sets_me": 0,
+    "sets_opp": 0
+   },
+   "price": 0.285,
+   "label": "Oliynykova held game 8"
+  },
+  {
+   "state": {
+    "games_me": 0,
+    "games_opp": 0,
+    "sets_me": 0,
+    "sets_opp": 1
+   },
+   "price": 0.195,
+   "label": "Sherif broken, set 1 lost 3-6"
+  },
+  {
+   "state": {
+    "games_me": 1,
+    "games_opp": 0,
+    "sets_me": 0,
+    "sets_opp": 1
+   },
+   "price": 0.335,
+   "label": "Sherif broke, set 2 game 1"
+  },
+  {
+   "state": {
+    "games_me": 1,
+    "games_opp": 1,
+    "sets_me": 0,
+    "sets_opp": 1
+   },
+   "price": 0.235,
+   "label": "Sherif broken back, set 2"
+  },
+  {
+   "state": {
+    "games_me": 1,
+    "games_opp": 2,
+    "sets_me": 0,
+    "sets_opp": 1
+   },
+   "price": 0.185,
+   "label": "Oliynykova held, set 2"
+  },
+  {
+   "state": {
+    "games_me": 2,
+    "games_opp": 2,
+    "sets_me": 0,
+    "sets_opp": 1
+   },
+   "price": 0.245,
+   "label": "Sherif held, set 2"
+  },
+  {
+   "state": {
+    "games_me": 2,
+    "games_opp": 3,
+    "sets_me": 0,
+    "sets_opp": 1
+   },
+   "price": 0.185,
+   "label": "Oliynykova held, set 2 g5"
+  },
+  {
+   "state": {
+    "games_me": 3,
+    "games_opp": 3,
+    "sets_me": 0,
+    "sets_opp": 1
+   },
+   "price": 0.295,
+   "label": "Sherif held, set 2 g6"
+  },
+  {
+   "state": {
+    "games_me": 3,
+    "games_opp": 4,
+    "sets_me": 0,
+    "sets_opp": 1
+   },
+   "price": 0.215,
+   "label": "Oliynykova held to 4-3 (set 2)"
+  },
+  {
+   "state": {
+    "games_me": 4,
+    "games_opp": 4,
+    "sets_me": 0,
+    "sets_opp": 1
+   },
+   "price": 0.285,
+   "label": "Sherif held to 4-4 (set 2)"
+  },
+  {
+   "state": {
+    "games_me": 4,
+    "games_opp": 5,
+    "sets_me": 0,
+    "sets_opp": 1
+   },
+   "price": 0.195,
+   "label": "Oliynykova held to 5-4 (set 2)"
+  }
+ ]
+}
