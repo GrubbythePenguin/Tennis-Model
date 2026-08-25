@@ -1,0 +1,32 @@
+{
+ "_comment": "Operator-observed pre-match stability, for matches where the capture attached too late to measure it. Drift observed is evidence; a short quiet window is not, so these fill real gaps in pregame_stability.py.",
+ "KXATPMATCH-26AUG24GUEHOL": {
+  "observed_by": "operator",
+  "note": "stable at 0.53-0.54 (Holmgren) right before the match = 0.46-0.47 Guerrieri",
+  "range_c": 1.0,
+  "tracked_anchor": 0.46,
+  "capture_anchor": 0.46,
+  "verdict": "OK - settled before first ball"
+ },
+ "KXATPCHALLENGERMATCH-26AUG24POLSCH": {
+  "observed_by": "operator",
+  "note": "pre-match 52.5/47.5 then 50/50 after game 1; no pre-match tape (attached at 1-1)",
+  "range_c": null,
+  "verdict": "UNMEASURED"
+ },
+ "KXATPMATCH-26AUG24WENTRA": {
+  "observed_by": "operator",
+  "note": "0.595 constant (Wendelken) = 0.405 Travaglia",
+  "range_c": 0.0,
+  "capture_anchor": 0.427,
+  "verdict": "OK - settled before first ball",
+  "caveat": "operator 0.595 vs capture anchor 0.573 Wendelken - ~2c apart; capture attached ~1min pre-start"
+ },
+ "KXATPMATCH-26AUG24WONMOL": {
+  "observed_by": "operator",
+  "note": "0.815 constant (Wong) = 0.185 Moller - matches capture exactly",
+  "range_c": 0.0,
+  "capture_anchor": 0.185,
+  "verdict": "OK - settled before first ball"
+ }
+}

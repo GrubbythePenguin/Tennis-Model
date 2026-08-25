@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+
+# Live capture working directory. Tapes are large (~2MB/match) and are written
+# continuously by running pollers, so they are not committed from here — commit the
+# gzipped bundles under archive/ instead, which carry a manifest with settlement,
+# tracked side and fit summaries. The raw tape is the only irreplaceable artefact
+# (a live match cannot be re-run), so archive before deleting anything in tapes/.
+tapes/
+
+# Local kill switch
+disable_tennis_poller.flag

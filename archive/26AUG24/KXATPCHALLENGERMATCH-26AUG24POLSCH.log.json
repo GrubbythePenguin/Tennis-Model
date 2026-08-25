@@ -1,0 +1,205 @@
+{
+ "best_of": 3,
+ "first_server": "me",
+ "split_prior": 0.28,
+ "split_prior_sd": 0.3,
+ "strict_split": false,
+ "set_servers": {},
+ "obs": [
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 0,
+    "games_opp": 0,
+    "server": "me"
+   },
+   "price": 0.475,
+   "label": "pre-match (operator-read board: Schoenhaus 52.5 / Poljicak 47.5)"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 1,
+    "games_opp": 0,
+    "server": "opp"
+   },
+   "price": 0.5,
+   "label": "Poljicak held game 1 (board 50/50)"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 1,
+    "games_opp": 3,
+    "server": "me"
+   },
+   "price": 0.255,
+   "label": "auto 15:35:47"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 2,
+    "games_opp": 3,
+    "server": "opp"
+   },
+   "price": 0.2613,
+   "label": "auto 15:38:59"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 2,
+    "games_opp": 4,
+    "server": "me"
+   },
+   "price": 0.2921,
+   "label": "auto 15:52:01"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 4,
+    "server": "opp"
+   },
+   "price": 0.315,
+   "label": "auto 15:54:58"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 5,
+    "server": "me"
+   },
+   "price": 0.275,
+   "label": "auto 15:58:49"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 4,
+    "games_opp": 5,
+    "server": "opp"
+   },
+   "price": 0.285,
+   "label": "auto 16:02:09"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 0,
+    "games_opp": 0,
+    "server": "me"
+   },
+   "price": 0.215,
+   "label": "auto 16:05:06"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 1,
+    "games_opp": 0,
+    "server": "opp"
+   },
+   "price": 0.22,
+   "label": "auto 16:12:34"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 1,
+    "games_opp": 1,
+    "server": "me"
+   },
+   "price": 0.205,
+   "label": "auto 16:14:55"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 2,
+    "games_opp": 1,
+    "server": "opp"
+   },
+   "price": 0.245,
+   "label": "auto 16:17:16"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 2,
+    "games_opp": 2,
+    "server": "me"
+   },
+   "price": 0.2576,
+   "label": "auto 16:23:42"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 3,
+    "games_opp": 2,
+    "server": "opp"
+   },
+   "price": 0.2414,
+   "label": "auto 16:30:30"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 3,
+    "games_opp": 3,
+    "server": "me"
+   },
+   "price": 0.205,
+   "label": "auto 16:32:42"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 3,
+    "games_opp": 4,
+    "server": "opp"
+   },
+   "price": 0.065,
+   "label": "auto 16:36:38"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 3,
+    "games_opp": 5,
+    "server": "me"
+   },
+   "price": 0.025,
+   "label": "auto 16:40:09"
+  }
+ ],
+ "meta": {
+  "event": "KXATPCHALLENGERMATCH-26AUG24POLSCH",
+  "title": "Poljicak vs Schoenhaus",
+  "me_ticker": "KXATPCHALLENGERMATCH-26AUG24POLSCH-POL",
+  "opp_ticker": "KXATPCHALLENGERMATCH-26AUG24POLSCH-SCH",
+  "tour": "ATP Challenger",
+  "round": "Round Of 32"
+ }
+}

@@ -1,0 +1,270 @@
+{
+ "best_of": 3,
+ "first_server": "me",
+ "split_prior": 0.14,
+ "split_prior_sd": 0.3,
+ "strict_split": false,
+ "set_servers": {},
+ "obs": [
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 0,
+    "games_opp": 0
+   },
+   "price": 0.395,
+   "label": "auto 17:10:52"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 0,
+    "games_opp": 1,
+    "server": "opp"
+   },
+   "price": 0.4372,
+   "label": "auto 17:51:00"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 0,
+    "games_opp": 2,
+    "server": "me"
+   },
+   "price": 0.315,
+   "label": "auto 17:53:53"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 1,
+    "games_opp": 2,
+    "server": "opp"
+   },
+   "price": 0.29,
+   "label": "auto 17:56:51"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 1,
+    "games_opp": 3,
+    "server": "me"
+   },
+   "price": 0.245,
+   "label": "auto 18:01:24"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 2,
+    "games_opp": 3,
+    "server": "opp"
+   },
+   "price": 0.245,
+   "label": "auto 18:04:45"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 2,
+    "games_opp": 4,
+    "server": "me"
+   },
+   "price": 0.21,
+   "label": "auto 18:08:54"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 4,
+    "server": "opp"
+   },
+   "price": 0.225,
+   "label": "auto 18:18:22"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 5,
+    "server": "me"
+   },
+   "price": 0.205,
+   "label": "auto 18:22:11"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 4,
+    "games_opp": 5,
+    "server": "opp"
+   },
+   "price": 0.225,
+   "label": "auto 18:27:39"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 0,
+    "games_opp": 0,
+    "server": "me"
+   },
+   "price": 0.1717,
+   "label": "auto 18:33:03"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 1,
+    "games_opp": 0,
+    "server": "opp"
+   },
+   "price": 0.1759,
+   "label": "auto 18:40:19"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 1,
+    "games_opp": 1,
+    "server": "me"
+   },
+   "price": 0.145,
+   "label": "auto 18:45:15"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 2,
+    "games_opp": 1,
+    "server": "opp"
+   },
+   "price": 0.195,
+   "label": "auto 18:49:43"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 2,
+    "games_opp": 2,
+    "server": "me"
+   },
+   "price": 0.165,
+   "label": "auto 18:55:02"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 3,
+    "games_opp": 2,
+    "server": "opp"
+   },
+   "price": 0.1786,
+   "label": "auto 19:00:11"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 3,
+    "games_opp": 3,
+    "server": "me"
+   },
+   "price": 0.1791,
+   "label": "auto 19:05:07"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 4,
+    "games_opp": 3,
+    "server": "opp"
+   },
+   "price": 0.215,
+   "label": "auto 19:08:00"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 4,
+    "games_opp": 4,
+    "server": "me"
+   },
+   "price": 0.185,
+   "label": "auto 19:16:24"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 5,
+    "games_opp": 4,
+    "server": "opp"
+   },
+   "price": 0.265,
+   "label": "auto 19:19:12"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 5,
+    "games_opp": 5,
+    "server": "me"
+   },
+   "price": 0.185,
+   "label": "auto 19:23:44"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 6,
+    "games_opp": 5,
+    "server": "opp"
+   },
+   "price": 0.2239,
+   "label": "auto 19:27:01"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 1,
+    "games_me": 6,
+    "games_opp": 6,
+    "server": "me"
+   },
+   "price": 0.165,
+   "label": "auto 19:31:05"
+  }
+ ],
+ "meta": {
+  "event": "KXWTAMATCH-26AUG24KOEMON",
+  "title": "Koevermans vs Monnet",
+  "me_ticker": "KXWTAMATCH-26AUG24KOEMON-MON",
+  "opp_ticker": "KXWTAMATCH-26AUG24KOEMON-KOE",
+  "tour": "WTA",
+  "round": "Round Of 128"
+ }
+}

@@ -1,0 +1,270 @@
+<title>Poljicak–Schoenhaus Tracking Test</title>
+<style>
+  :root{
+    --ground:#F3F5F2; --surface:#FFFFFF; --surface-2:#EAEEE9;
+    --ink:#171C19; --ink-2:#414A45; --ink-3:#6E7A74;
+    --rule:#D5DCD6; --rule-2:#C0C9C1;
+    --pine:#2C6455;      /* running fit */
+    --sienna:#9E5628;    /* static fit */
+    --pos:#3B6F52; --neg:#A9453A; --warn:#8A6A1F;
+    --pos-bg:#E4EFE7; --neg-bg:#F6E3E1; --warn-bg:#F3EBD8;
+    --serif:ui-serif,"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#121614; --surface:#191F1C; --surface-2:#212925;
+      --ink:#E8EDE9; --ink-2:#B3BDB7; --ink-3:#828E88;
+      --rule:#2C3531; --rule-2:#3B4540;
+      --pine:#6FBFA6; --sienna:#D9925A;
+      --pos:#7FBF97; --neg:#E08A7E; --warn:#D6B25E;
+      --pos-bg:#1B2A21; --neg-bg:#2E1E1C; --warn-bg:#2A2418;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#121614; --surface:#191F1C; --surface-2:#212925;
+    --ink:#E8EDE9; --ink-2:#B3BDB7; --ink-3:#828E88;
+    --rule:#2C3531; --rule-2:#3B4540;
+    --pine:#6FBFA6; --sienna:#D9925A;
+    --pos:#7FBF97; --neg:#E08A7E; --warn:#D6B25E;
+    --pos-bg:#1B2A21; --neg-bg:#2E1E1C; --warn-bg:#2A2418;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:var(--sans); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:56px 24px 96px; display:flex; flex-direction:column; gap:44px}
+  h1,h2,h3{font-family:var(--serif); font-weight:600; text-wrap:balance; margin:0; letter-spacing:-.01em}
+  h1{font-size:clamp(30px,4.4vw,42px); line-height:1.15}
+  h2{font-size:23px; line-height:1.25}
+  h3{font-size:17px; line-height:1.3}
+  p{margin:0; max-width:66ch}
+  a{color:var(--pine)}
+  .eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  header{display:flex; flex-direction:column; gap:14px; border-bottom:1px solid var(--rule); padding-bottom:32px}
+  .meta{font-family:var(--mono); font-size:12.5px; color:var(--ink-3); line-height:1.9}
+  .meta b{color:var(--ink-2); font-weight:600}
+  section{display:flex; flex-direction:column; gap:16px}
+
+  /* verdict tiles */
+  .tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1px;
+         background:var(--rule); border:1px solid var(--rule)}
+  .tile{background:var(--surface); padding:18px 18px 16px; display:flex; flex-direction:column; gap:5px}
+  .tile .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+  .tile .v{font-family:var(--mono); font-size:27px; font-variant-numeric:tabular-nums; line-height:1.05}
+  .tile .s{font-size:13px; color:var(--ink-2); line-height:1.45}
+  .v.pine{color:var(--pine)} .v.sienna{color:var(--sienna)}
+
+  /* tables */
+  .scroll{overflow-x:auto; border:1px solid var(--rule); background:var(--surface)}
+  table{border-collapse:collapse; width:100%; font-family:var(--mono); font-size:13px;
+        font-variant-numeric:tabular-nums; white-space:nowrap}
+  th,td{padding:7px 12px; text-align:right; border-bottom:1px solid var(--rule)}
+  th{font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3);
+     font-weight:600; background:var(--surface-2); position:sticky; top:0}
+  td:first-child,th:first-child{text-align:left}
+  tbody tr:last-child td{border-bottom:none}
+  tr.insample td{color:var(--ink-3)}
+  tr.setbreak td{border-top:2px solid var(--rule-2)}
+  .st{color:var(--sienna)} .rn{color:var(--pine)}
+  .win{font-weight:700}
+  .neg{color:var(--neg)} .pos{color:var(--pos)}
+
+  /* replication chips */
+  .chip{display:inline-flex; align-items:center; gap:7px; font-family:var(--mono);
+        font-size:11px; letter-spacing:.09em; text-transform:uppercase; padding:4px 10px;
+        border-radius:2px; font-weight:600}
+  .chip.held{background:var(--pos-bg); color:var(--pos)}
+  .chip.failed{background:var(--neg-bg); color:var(--neg)}
+  .chip.partial{background:var(--warn-bg); color:var(--warn)}
+  .repl{display:flex; flex-direction:column; gap:1px; background:var(--rule); border:1px solid var(--rule)}
+  .repl > div{background:var(--surface); padding:16px 18px; display:flex; flex-direction:column; gap:8px}
+  .repl .row{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+  .repl .nums{font-family:var(--mono); font-size:13px; color:var(--ink-2); font-variant-numeric:tabular-nums}
+
+  .callout{border-left:2px solid var(--sienna); padding:2px 0 2px 18px; display:flex; flex-direction:column; gap:10px}
+  ul{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px; max-width:66ch}
+  li::marker{color:var(--ink-3)}
+  code{font-family:var(--mono); font-size:.9em; background:var(--surface-2); padding:1px 5px; border-radius:2px}
+  footer{border-top:1px solid var(--rule); padding-top:26px; color:var(--ink-3); font-size:13.5px;
+         display:flex; flex-direction:column; gap:10px}
+  :focus-visible{outline:2px solid var(--pine); outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">In-play model validation · 24 Aug 2026</div>
+  <h1>Does a fixed (p, q) track a live tennis market?</h1>
+  <p>First live test of the two-parameter model against Kalshi, captured game-by-game
+     through a complete match. Two fitting regimes compared: one frozen after two prices,
+     one refitted after every game.</p>
+  <div class="meta">
+    <b>Match</b> Poljicak vs Schoenhaus · ATP Challenger Augsburg · R32 · best of 3<br>
+    <b>Result</b> Schoenhaus won 6–4, 6–3 · tracked player: Poljicak (underdog)<br>
+    <b>Data</b> 17 boundary prices, 15 out-of-sample · 1,750 GETs · 4.5 s median cadence
+  </div>
+</header>
+
+<section>
+  <h2>Verdict</h2>
+  <p>Both regimes tracked the market to under three cents RMS across two sets — comparable
+     to the 2.7 c of the earlier hand-logged match. Neither is meaningfully better than the
+     other, and <em>which one wins depends entirely on where you anchor the frozen fit.</em></p>
+  <div class="tiles">
+    <div class="tile"><div class="k">Static RMS</div><div class="v sienna">2.71c</div>
+      <div class="s">frozen on first 2 prices · mean −1.27 c</div></div>
+    <div class="tile"><div class="k">Running RMS</div><div class="v pine">2.93c</div>
+      <div class="s">refit every game · mean −0.04 c</div></div>
+    <div class="tile"><div class="k">Worst miss</div><div class="v">5.5c</div>
+      <div class="s">both regimes, at the first break</div></div>
+    <div class="tile"><div class="k">|err| ≥ 3c</div><div class="v">4<span style="font-size:16px;color:var(--ink-3)">/15</span></div>
+      <div class="s">running fit, out-of-sample</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The anchor decides the winner</h2>
+  <p>Freezing the static fit on the first two prices makes it win. Freezing it on three,
+     four or five makes it lose — consistently. The single configuration where static
+     leads is also the one built on the two prices that were read by hand off the board
+     rather than captured.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Frozen on</th><th>Static RMS</th><th>Running RMS</th><th>Rows</th><th>Winner</th></tr></thead>
+      <tbody>
+        <tr><td>first 2 prices</td><td class="st win">2.71</td><td class="rn">2.93</td><td>15</td><td class="st">static</td></tr>
+        <tr><td>first 3 prices</td><td class="st">3.23</td><td class="rn win">2.72</td><td>14</td><td class="rn">running</td></tr>
+        <tr><td>first 4 prices</td><td class="st">3.32</td><td class="rn win">2.82</td><td>13</td><td class="rn">running</td></tr>
+        <tr><td>first 5 prices</td><td class="st">3.05</td><td class="rn win">2.71</td><td>12</td><td class="rn">running</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Read this as: <b>the two regimes are indistinguishable at this sample size.</b> A result
+     that flips on an arbitrary configuration choice is not a result. Running wins three
+     configurations of four, which is the most that can honestly be claimed.</p>
+</section>
+
+<section>
+  <h2>Replication scorecard</h2>
+  <p>Three claims carried over from the hand-logged Sherif–Oliynykova match. One held,
+     one failed outright, one is new.</p>
+  <div class="repl">
+    <div>
+      <div class="row"><span class="chip failed">Failed</span><h3>Move amplification</h3></div>
+      <div class="nums">median |market move| / |model move| = <b>0.97</b> over 16 moves · prior match: 1.47</div>
+      <p>The strongest claim from the earlier match did not reproduce. Only 8 of 16 moves
+         overshot the model. The mean ratio is 1.61, but that is carried by a single 5.6×
+         outlier — quartiles run 0.13 / 0.75 / 0.89 / 1.36 / 5.62. This market did not
+         systematically over-react, which removes the mechanism that would make
+         "fade the post-game move" tradeable.</p>
+    </div>
+    <div>
+      <div class="row"><span class="chip held">Held</span><h3>Overshoots revert</h3></div>
+      <div class="nums">regression of Δerror on error = <b>−0.65</b> over 15 points · prior match: −0.77</div>
+      <p>Roughly two thirds of each deviation came back by the next game boundary. Close to
+         the prior estimate, and the one finding that survived contact with a second match.</p>
+    </div>
+    <div>
+      <div class="row"><span class="chip partial">New</span><h3>Underdog bias flips at the set boundary</h3></div>
+      <div class="nums">set 1 running mean <b>+1.48 c</b> · set 2 running mean <b>−1.06 c</b></div>
+      <p>Errors ran positive through the back half of set 1, then went −2.9 c the instant
+         the set completed and stayed negative. The prior match showed the same sign flip
+         at the same moment — the market treats a lost set as more damaging than a
+         constant-probability model does. Two matches, same direction.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Every boundary price</h2>
+  <p>Market midpoint is vig-free, normalised across both player markets. Both model columns
+     are out-of-sample: static has seen only the first two prices, running has seen every
+     earlier price and none of the current one. Errors in cents, market minus model.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr>
+        <th>Sets</th><th>Games</th><th>Srv</th><th>Market</th>
+        <th>Static</th><th>Err</th><th>Running</th><th>Err</th><th>run p</th><th>run q</th>
+      </tr></thead>
+      <tbody>
+        <tr class="insample"><td>0–0</td><td>0–0</td><td>me</td><td>0.475</td><td>0.475</td><td>+0.0</td><td>—</td><td>—</td><td>0.637</td><td>0.357</td></tr>
+        <tr class="insample"><td>0–0</td><td>1–0</td><td>opp</td><td>0.500</td><td>0.500</td><td>−0.0</td><td>0.504</td><td>−0.4</td><td>0.637</td><td>0.357</td></tr>
+        <tr><td>0–0</td><td>1–3</td><td>me</td><td>0.255</td><td>0.305</td><td class="neg">−5.0</td><td>0.305</td><td class="neg">−5.0</td><td>0.656</td><td>0.338</td></tr>
+        <tr><td>0–0</td><td>2–3</td><td>opp</td><td>0.261</td><td>0.316</td><td class="neg">−5.5</td><td>0.260</td><td class="pos">+0.2</td><td>0.777</td><td>0.219</td></tr>
+        <tr><td>0–0</td><td>2–4</td><td>me</td><td>0.292</td><td>0.288</td><td class="pos">+0.5</td><td>0.253</td><td>+3.9</td><td>0.774</td><td>0.222</td></tr>
+        <tr><td>0–0</td><td>3–4</td><td>opp</td><td>0.315</td><td>0.297</td><td>+1.8</td><td>0.262</td><td class="neg">+5.3</td><td>0.753</td><td>0.244</td></tr>
+        <tr><td>0–0</td><td>3–5</td><td>me</td><td>0.275</td><td>0.265</td><td>+1.0</td><td>0.256</td><td>+1.9</td><td>0.721</td><td>0.275</td></tr>
+        <tr><td>0–0</td><td>4–5</td><td>opp</td><td>0.285</td><td>0.271</td><td>+1.4</td><td>0.259</td><td>+2.6</td><td>0.725</td><td>0.273</td></tr>
+        <tr class="setbreak"><td>0–1</td><td>0–0</td><td>me</td><td>0.215</td><td>0.234</td><td>−1.9</td><td>0.244</td><td>−2.9</td><td>0.725</td><td>0.273</td></tr>
+        <tr><td>0–1</td><td>1–0</td><td>opp</td><td>0.220</td><td>0.258</td><td class="neg">−3.8</td><td>0.254</td><td>−3.4</td><td>0.701</td><td>0.295</td></tr>
+        <tr><td>0–1</td><td>1–1</td><td>me</td><td>0.205</td><td>0.234</td><td>−2.9</td><td>0.233</td><td>−2.8</td><td>0.693</td><td>0.302</td></tr>
+        <tr><td>0–1</td><td>2–1</td><td>opp</td><td>0.245</td><td>0.261</td><td>−1.6</td><td>0.251</td><td class="pos">−0.6</td><td>0.674</td><td>0.318</td></tr>
+        <tr><td>0–1</td><td>2–2</td><td>me</td><td>0.258</td><td>0.235</td><td>+2.3</td><td>0.229</td><td>+2.9</td><td>0.674</td><td>0.319</td></tr>
+        <tr><td>0–1</td><td>3–2</td><td>opp</td><td>0.241</td><td>0.264</td><td>−2.3</td><td>0.255</td><td>−1.3</td><td>0.689</td><td>0.305</td></tr>
+        <tr><td>0–1</td><td>3–3</td><td>me</td><td>0.205</td><td>0.235</td><td>−3.0</td><td>0.233</td><td>−2.8</td><td>0.690</td><td>0.304</td></tr>
+        <tr><td>0–1</td><td>3–4</td><td>opp</td><td>0.065</td><td>0.061</td><td class="pos">+0.4</td><td>0.048</td><td>+1.7</td><td>0.677</td><td>0.315</td></tr>
+        <tr><td>0–1</td><td>3–5</td><td>me</td><td>0.025</td><td>0.030</td><td class="pos">−0.5</td><td>0.026</td><td class="pos">−0.1</td><td>0.665</td><td>0.327</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>What the running fit actually did</h2>
+  <div class="callout">
+    <p><b>It overcorrected once, then spent the match walking it back.</b> The −5.0 c miss at
+      1–3 pushed <code>p</code> from 0.656 to 0.777 — a 97% hold rate and a 2% break rate,
+      an implausible tennis player. That drove its predictions down to 0.25 just as the
+      market was marking Poljicak up, producing the +3.9 and +5.3 misses that followed.</p>
+    <p>From there <code>p</code> slid monotonically — 0.777, 0.774, 0.753, 0.725, 0.701,
+      0.693, 0.677, 0.665 — and the errors closed. The static fit never moved and the market
+      came back to it: −5.0, −5.5, +0.5, +1.8, crossing through zero on its own.</p>
+  </div>
+  <p>The final refitted values (<code>p</code> 0.665, <code>q</code> 0.327) land close to
+     where the static fit started (0.656 / 0.338). Twelve games of adaptation returned to
+     roughly the opening estimate, which is the cleanest single argument that the extra
+     machinery bought nothing here.</p>
+</section>
+
+<section>
+  <h2>Read these numbers with the caveats attached</h2>
+  <ul>
+    <li><b>One match, one player, 15 out-of-sample points.</b> Nothing here is significant
+      in any statistical sense. The static-versus-running comparison flips on a configuration
+      choice, which is what an underpowered test looks like.</li>
+    <li><b>The first two prices were read by hand off the board</b>, not captured. The capture
+      attached at 1–1, so the pre-match anchor and game 1 were supplied manually. The static
+      line that wins at anchor-2 is built entirely on those two.</li>
+    <li><b>Boundaries for games 2 and 3 are missing.</b> Game 2 completed before the capture
+      attached; game 3 was lost to a poller restart. The 1–3 row is therefore a two-game jump,
+      and it is also the row carrying the worst miss for both regimes.</li>
+    <li><b>Low-price accuracy is partly mechanical.</b> The last rows (0.065, 0.025) show
+      sub-cent errors, but near the tails there is less room in absolute cents for model and
+      market to disagree. Those rows flatter both RMS figures.</li>
+    <li><b>Six gaps over 15 s</b> interrupted the tape, two caused by a bug where a Kalshi
+      read-timeout was misread as "match not live" and triggered a 60 s idle. Fixed after
+      the fact; it may have delayed a boundary price.</li>
+  </ul>
+</section>
+
+<footer>
+  <div><b>Method.</b> Game state and both player midpoints polled every 4 s from Kalshi's
+    public milestone and live-data endpoints. A price is recorded the first poll after the
+    game score changes; the market was observed leading the score feed by ~5 s, so captured
+    prices are settled post-game quotes rather than stale ones. Vig stripped by normalising
+    across both player markets. Point score excluded from fitting — it is 0–0 at a game end.</div>
+  <div><b>Reproduce.</b> <code>python3 compare_fits.py tapes/KXATPCHALLENGERMATCH-26AUG24POLSCH.log.json --static-on 2</code></div>
+  <div>Capture cost 1,750 GETs against the shared Kalshi bucket; 4 requests were rate-limited
+    and recovered by backoff.</div>
+</footer>
+
+</div>

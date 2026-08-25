@@ -15,7 +15,48 @@ Everything is dependency-free; a coarse grid search finds the neighbourhood,
 then a Levenberg–Marquardt polish finds the solution.
 """
 
+import sys
+
 from tennis_model import match_win_prob, G
+
+
+# --------------------------------------------------------- the p > q guardrail
+
+class ImpliedSplitError(ValueError):
+    """Raised (in strict mode) when a fit implies p <= q."""
+
+
+def check_split(p, q, strict=False, warn=True, context='', stream=None):
+    """Guard: a real tennis player wins more points on serve than on return.
+
+    p <= q means the fitted player returns better than they serve. The fit is not
+    wrong arithmetically — it is the least-squares answer to the prices it was given —
+    but it is outside the physical range, so the prices are inconsistent with the iid
+    model (bad quotes, vig not stripped, scores stated from the wrong player's point of
+    view, or a market that simply isn't running this model). Prices built off such a fit
+    should not be traded.
+
+    Returns None if p > q, else the violation message (and raises if strict, warns if warn).
+    """
+    if p > q:
+        return None
+    where = f" [{context}]" if context else ""
+    msg = (f"implied split violation{where}: p = {p:.4f} (hold {G(p):.1%})  "
+           f"q = {q:.4f} (break {G(q):.1%})  p-q = {p - q:+.4f} — "
+           f"the fit says this player returns better than they serve")
+    if strict:
+        raise ImpliedSplitError(msg)
+    if warn:
+        s = stream or sys.stderr
+        bar = "!" * 78
+        print(f"\n{bar}\n!! IMPLIED SPLIT VIOLATION: p <= q{' ' * 43}!!\n"
+              f"!! fit{where}:  p = {p:.4f} (hold {G(p):.1%})   q = {q:.4f} (break {G(q):.1%})   "
+              f"p-q = {p - q:+.4f}\n"
+              f"!! This player would return better than they serve. Real players hold more\n"
+              f"!! than they break, so the observed prices are inconsistent with the model.\n"
+              f"!! Check: vig stripped? scores from the right player's point of view? bad quote?\n"
+              f"!! DO NOT trade off this fit.\n{bar}\n", file=s)
+    return msg
 
 
 # ------------------------------------------------------------- model wrapper
@@ -46,12 +87,16 @@ def _jacobian(p, q, obs, best_of, h=1e-4):
     return [[(a - b) / (2 * h), (c - d) / (2 * h)] for a, b, c, d in zip(rp, rm, rq, rn)]
 
 
-def implied_pq(obs, best_of=3, box=((0.30, 0.95), (0.05, 0.70)), grid_step=0.02, verbose=False):
+def implied_pq(obs, best_of=3, box=((0.30, 0.95), (0.05, 0.70)), grid_step=0.02, verbose=False,
+               strict_split=False, warn_split=True):
     """Least-squares fit of (p, q) to a list of (state, market_prob) observations.
 
     Returns (p, q, rmse). With exactly two observations rmse should be ~0 (exact
     solve); with more, rmse tells you how well one (p, q) explains all the prices —
     a large rmse is evidence the market is NOT using this model (or has vig/noise).
+
+    The fit is checked against p > q (see check_split): strict_split=True raises
+    ImpliedSplitError, otherwise a violation warns loudly on stderr.
     """
     if len(obs) < 2:
         raise ValueError("need at least two observations at different states")
@@ -98,6 +143,7 @@ def implied_pq(obs, best_of=3, box=((0.30, 0.95), (0.05, 0.70)), grid_step=0.02,
         if verbose:
             print(f"iter {it}: p={p:.5f} q={q:.5f} sse={sse:.3e}")
     rmse = (sse / len(obs)) ** 0.5
+    check_split(p, q, strict=strict_split, warn=warn_split, context=f"implied_pq on {len(obs)} prices")
     return p, q, rmse
 
 

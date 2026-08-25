@@ -1,0 +1,31 @@
+{
+ "best_of": 3,
+ "first_server": "me",
+ "split_prior": 0.28,
+ "split_prior_sd": 0.3,
+ "strict_split": false,
+ "set_servers": {},
+ "final_set_tb": 10,
+ "obs": [
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 3,
+    "server": "opp"
+   },
+   "price": 0.415,
+   "label": "auto 23:50:28"
+  }
+ ],
+ "meta": {
+  "event": "KXATPMATCH-26AUG24PINSVA",
+  "title": "Pinnington Jones vs Svajda",
+  "me_ticker": "KXATPMATCH-26AUG24PINSVA-PIN",
+  "opp_ticker": "KXATPMATCH-26AUG24PINSVA-SVA",
+  "tour": "ATP",
+  "round": "Qualification Round 1",
+  "tournament": "US Open Men Singles"
+ }
+}

@@ -1,0 +1,292 @@
+{
+ "best_of": 3,
+ "first_server": "me",
+ "split_prior": 0.28,
+ "split_prior_sd": 0.3,
+ "strict_split": false,
+ "set_servers": {},
+ "obs": [
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 0,
+    "games_opp": 0
+   },
+   "price": 0.185,
+   "label": "auto 21:35:33"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 0,
+    "games_opp": 1,
+    "server": "me"
+   },
+   "price": 0.1931,
+   "label": "auto 21:50:19"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 1,
+    "games_opp": 1,
+    "server": "opp"
+   },
+   "price": 0.2525,
+   "label": "auto 21:54:52"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 1,
+    "games_opp": 2,
+    "server": "me"
+   },
+   "price": 0.225,
+   "label": "auto 21:57:31"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 2,
+    "games_opp": 2,
+    "server": "opp"
+   },
+   "price": 0.2362,
+   "label": "auto 22:07:53"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 2,
+    "games_opp": 3,
+    "server": "me"
+   },
+   "price": 0.1869,
+   "label": "auto 22:10:00"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 3,
+    "server": "opp"
+   },
+   "price": 0.225,
+   "label": "auto 22:16:35"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 4,
+    "server": "me"
+   },
+   "price": 0.205,
+   "label": "auto 22:19:10"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 4,
+    "games_opp": 4,
+    "server": "opp"
+   },
+   "price": 0.225,
+   "label": "auto 22:26:57"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 4,
+    "games_opp": 5,
+    "server": "me"
+   },
+   "price": 0.1859,
+   "label": "auto 22:29:13"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 5,
+    "games_opp": 5,
+    "server": "opp"
+   },
+   "price": 0.201,
+   "label": "auto 22:34:36"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 6,
+    "games_opp": 5,
+    "server": "me"
+   },
+   "price": 0.415,
+   "label": "auto 22:38:09"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 0,
+    "games_opp": 0,
+    "server": "me"
+   },
+   "price": 0.4187,
+   "label": "auto 22:46:56"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 0,
+    "games_me": 0,
+    "games_opp": 0,
+    "server": "opp"
+   },
+   "price": 0.425,
+   "label": "auto 22:48:18"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 0,
+    "games_me": 0,
+    "games_opp": 1,
+    "server": "me"
+   },
+   "price": 0.435,
+   "label": "auto 22:57:37"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 0,
+    "games_me": 1,
+    "games_opp": 1,
+    "server": "opp"
+   },
+   "price": 0.505,
+   "label": "auto 23:01:01"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 0,
+    "games_me": 1,
+    "games_opp": 2,
+    "server": "me"
+   },
+   "price": 0.485,
+   "label": "auto 23:05:57"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 0,
+    "games_me": 2,
+    "games_opp": 2,
+    "server": "opp"
+   },
+   "price": 0.49,
+   "label": "auto 23:13:45"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 0,
+    "games_me": 2,
+    "games_opp": 3,
+    "server": "me"
+   },
+   "price": 0.4776,
+   "label": "auto 23:16:33"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 3,
+    "server": "opp"
+   },
+   "price": 0.4975,
+   "label": "auto 23:29:35"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 4,
+    "server": "me"
+   },
+   "price": 0.445,
+   "label": "auto 23:32:18"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 5,
+    "server": "opp"
+   },
+   "price": 0.3695,
+   "label": "auto 23:39:34"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 1,
+    "games_me": 0,
+    "games_opp": 0,
+    "server": "me"
+   },
+   "price": 0.265,
+   "label": "auto 23:45:33"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 1,
+    "games_me": 1,
+    "games_opp": 0,
+    "server": "opp"
+   },
+   "price": 0.3166,
+   "label": "auto 23:50:06"
+  },
+  {
+   "state": {
+    "sets_me": 1,
+    "sets_opp": 1,
+    "games_me": 1,
+    "games_opp": 1,
+    "server": "me"
+   },
+   "price": 0.34,
+   "label": "auto 23:53:08"
+  }
+ ],
+ "meta": {
+  "event": "KXATPMATCH-26AUG24WONMOL",
+  "title": "Wong vs Moller",
+  "me_ticker": "KXATPMATCH-26AUG24WONMOL-MOL",
+  "opp_ticker": "KXATPMATCH-26AUG24WONMOL-WON",
+  "tour": "ATP",
+  "round": "Qualification Round 1"
+ }
+}

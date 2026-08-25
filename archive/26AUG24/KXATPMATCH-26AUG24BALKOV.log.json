@@ -1,0 +1,42 @@
+{
+ "best_of": 3,
+ "first_server": "me",
+ "split_prior": 0.28,
+ "split_prior_sd": 0.3,
+ "strict_split": false,
+ "set_servers": {},
+ "final_set_tb": 7,
+ "obs": [
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 2,
+    "games_opp": 4,
+    "server": "me"
+   },
+   "price": 0.185,
+   "label": "auto 23:50:28"
+  },
+  {
+   "state": {
+    "sets_me": 0,
+    "sets_opp": 0,
+    "games_me": 3,
+    "games_opp": 4,
+    "server": "opp"
+   },
+   "price": 0.185,
+   "label": "auto 23:50:33"
+  }
+ ],
+ "meta": {
+  "event": "KXATPMATCH-26AUG24BALKOV",
+  "title": "Balshaw vs Kovacevic",
+  "me_ticker": "KXATPMATCH-26AUG24BALKOV-BAL",
+  "opp_ticker": "KXATPMATCH-26AUG24BALKOV-KOV",
+  "tour": "ATP",
+  "round": "Round Of 64",
+  "tournament": "ATP Winston Salem"
+ }
+}

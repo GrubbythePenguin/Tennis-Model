@@ -17,18 +17,36 @@ have been seen — e.g. pre-match and 1-1 — and fades as informative prices ar
 
 import math
 import itertools
+import sys
 from tennis_model import match_win_prob, G, game_win_prob, tiebreak_win_prob
-from market_implied import invert_G
+from market_implied import invert_G, check_split, ImpliedSplitError
 
 
-def _model(p, q, state, best_of):
+def _model(p, q, state, best_of, final_set_tb=7):
     st = dict(state)
-    return match_win_prob(p, q, st.pop('sets_me', 0), st.pop('sets_opp', 0), best_of, **st)
+    return match_win_prob(p, q, st.pop('sets_me', 0), st.pop('sets_opp', 0), best_of,
+                          final_set_tb, **st)
+
+
+def _next_game(state, **bump):
+    """State after the current game, with the server handed to the other player.
+
+    If the state names its server explicitly (poll_tennis.py logs do, read straight
+    off Kalshi's `server` field) it must be FLIPPED — leaving it would credit the
+    next game to the same server. If it doesn't, it is left absent so the
+    games-played alternation resolves it as before.
+    """
+    out = dict(state, **bump)
+    sv = out.get('server')
+    if sv is not None:
+        out['server'] = (not sv) if isinstance(sv, bool) else ('opp' if sv == 'me' else 'me')
+    return out
 
 
 class ImpliedModel:
     def __init__(self, best_of=3, first_server='me', sigma=0.005,
-                 split_prior=0.20, split_prior_sd=0.30):
+                 split_prior=0.20, split_prior_sd=0.30,
+                 strict_split=False, warn_split=True, final_set_tb=7):
         """
         best_of        : 3 or 5
         first_server   : who served game 1 of set 1 ('me' or 'opp')
@@ -38,14 +56,31 @@ class ImpliedModel:
         split_prior_sd : prior SD for p - q. 0.30 is weak: it barely moves a fit that the
                          prices identify, and only stabilises one they don't (e.g. pre-match
                          plus 1-1). Use a large value (5.0) for a pure, prior-free solve.
+        strict_split   : raise ImpliedSplitError if a refit gives p <= q. Default False so a
+                         single bad quote can't kill a live logging session; the violation
+                         still warns loudly and is recorded on .split_violation.
+        warn_split     : print the loud stderr banner on a violation. Set False when refitting
+                         history in a loop (live.py does this) and surface it once instead.
         """
         self.best_of = best_of
+        # 10 at the Grand Slams (deciding-set breaker), 7 everywhere else.
+        self.final_set_tb = final_set_tb
         self.sigma = sigma
         self.split_prior, self.split_prior_sd = split_prior, split_prior_sd
+        self.strict_split, self.warn_split = strict_split, warn_split
         self.first_server = {(0, 0): first_server == 'me'}
+        # (0,0) starts as a PLACEHOLDER, not an observation. Kalshi leaves `server`
+        # empty during warm-up, so a pre-match price carries no server and this
+        # default stands in. Overwriting a placeholder from the feed is normal and
+        # must not warn — only a clash between two OBSERVED servers is a real
+        # alternation break. A detector that cries wolf on every match start is one
+        # nobody reads when a genuine retirement or medical timeout breaks it.
+        self._provisional = {(0, 0)}
         self.obs = []            # (state, market_prob, weight)
         self.p = self.q = None
         self.cov = None
+        self.split_violation = None   # message from the last refit, or None if p > q
+        self._warned_split = False
 
     # ------------------------------------------------------------ state helpers
 
@@ -53,6 +88,7 @@ class ImpliedModel:
         """Who serves game 1 of a later set (tennis: the player who did NOT serve the last
         game of the previous set; after a tiebreak, whoever received first in it)."""
         self.first_server[(sets_me, sets_opp)] = server == 'me'
+        self._provisional.discard((sets_me, sets_opp))   # stated explicitly, not a guess
 
     def _serving(self, sets_me, sets_opp, games_me, games_opp):
         key = (sets_me, sets_opp)
@@ -71,15 +107,43 @@ class ImpliedModel:
 
     # ------------------------------------------------------------------ fitting
 
+    def _register_first_server(self, sm, so, gm, go, i_serve):
+        """Back-fill who served game 1 of set (sm, so) from an observation that states
+        its server explicitly.
+
+        poll_tennis.py reads the server off Kalshi's `server` field on every price and
+        never calls set_first_server, so without this the set is unregistered and any
+        state NOT carrying an explicit server — the report's price grids, the
+        next-game branches — raises. Servers alternate, so game 1's server follows
+        from this game's server and the games-played parity.
+        """
+        key = (sm, so)
+        first_me = i_serve if (gm + go) % 2 == 0 else (not i_serve)
+        prev = self.first_server.get(key)
+        if key in self._provisional:
+            prev = None                      # placeholder — replace it silently
+            self._provisional.discard(key)
+        if prev is not None and prev != first_me:
+            print(f"[server] set {key}: feed says game {gm}-{go} is served by "
+                  f"{'me' if i_serve else 'opp'}, which implies game 1 went to "
+                  f"{'me' if first_me else 'opp'} — contradicting the recorded "
+                  f"{'me' if prev else 'opp'}. Strict alternation may be broken "
+                  f"(retirement, medical timeout, or a bad feed sample).", file=sys.stderr)
+        self.first_server[key] = first_me
+
     def observe(self, market_prob, weight=1.0, **state):
         """Add one observation and refit. `weight` < 1 down-weights a price you trust less
         (e.g. a mid-game price). Returns self so calls can be chained."""
-        self.obs.append((self._state(**state), float(market_prob), float(weight)))
+        st = self._state(**state)
+        if state.get('server') is not None:
+            self._register_first_server(st['sets_me'], st['sets_opp'],
+                                        st['games_me'], st['games_opp'], st['i_serve'])
+        self.obs.append((st, float(market_prob), float(weight)))
         self._fit()
         return self
 
     def _residuals(self, p, q):
-        r = [math.sqrt(w) * (_model(p, q, st, self.best_of) - m) for st, m, w in self.obs]
+        r = [math.sqrt(w) * (_model(p, q, st, self.best_of, self.final_set_tb) - m) for st, m, w in self.obs]
         r.append(self.sigma / self.split_prior_sd * ((p - q) - self.split_prior))   # prior row
         return r
 
@@ -125,6 +189,13 @@ class ImpliedModel:
         det = a * d - b * b
         s2 = self.sigma ** 2
         self.cov = [[s2 * d / det, -s2 * b / det], [-s2 * b / det, s2 * a / det]]
+        # guardrail: the fit must stay inside the physical range p > q
+        self.split_violation = check_split(
+            p, q, strict=self.strict_split,
+            warn=self.warn_split and not self._warned_split,      # loud once per model
+            context=f"{len(self.obs)} price{'s' if len(self.obs) != 1 else ''}")
+        if self.split_violation:
+            self._warned_split = True
 
     # ------------------------------------------------------------------ outputs
 
@@ -133,10 +204,10 @@ class ImpliedModel:
         (from the uncertainty in p, q under random ±sigma errors in the observed prices)."""
         st = self._state(**state)
         h = 1e-4
-        gp = (_model(self.p + h, self.q, st, self.best_of) - _model(self.p - h, self.q, st, self.best_of)) / (2 * h)
-        gq = (_model(self.p, self.q + h, st, self.best_of) - _model(self.p, self.q - h, st, self.best_of)) / (2 * h)
+        gp = (_model(self.p + h, self.q, st, self.best_of, self.final_set_tb) - _model(self.p - h, self.q, st, self.best_of, self.final_set_tb)) / (2 * h)
+        gq = (_model(self.p, self.q + h, st, self.best_of, self.final_set_tb) - _model(self.p, self.q - h, st, self.best_of, self.final_set_tb)) / (2 * h)
         var = gp * gp * self.cov[0][0] + 2 * gp * gq * self.cov[0][1] + gq * gq * self.cov[1][1]
-        return _model(self.p, self.q, st, self.best_of), 1.96 * math.sqrt(max(var, 0.0))
+        return _model(self.p, self.q, st, self.best_of, self.final_set_tb), 1.96 * math.sqrt(max(var, 0.0))
 
     def uncertainty(self):
         """95% half-widths for p, q, p+q, p-q (random errors), plus the worst case if every
@@ -166,7 +237,7 @@ class ImpliedModel:
         """(state, market, model, model - market) for every observation. Large or drifting
         residuals mean no single (p, q) explains the prices — the market isn't running a
         pure iid model, or the prices you fed are noisier than sigma."""
-        return [(st, m, _model(self.p, self.q, st, self.best_of), _model(self.p, self.q, st, self.best_of) - m)
+        return [(st, m, _model(self.p, self.q, st, self.best_of, self.final_set_tb), _model(self.p, self.q, st, self.best_of, self.final_set_tb) - m)
                 for st, m, _ in self.obs]
 
     def game_grid(self, sets_me=0, sets_opp=0):
@@ -177,7 +248,7 @@ class ImpliedModel:
             for b in range(7):
                 if (a == 6 and b == 6) or (max(a, b) <= 5) or (max(a, b) == 6 and abs(a - b) <= 1):
                     st = self._state(games_me=a, games_opp=b, sets_me=sets_me, sets_opp=sets_opp)
-                    row.append(_model(self.p, self.q, st, self.best_of))
+                    row.append(_model(self.p, self.q, st, self.best_of, self.final_set_tb))
                 else:
                     row.append(None)
             rows.append(row)
@@ -209,6 +280,9 @@ class ImpliedModel:
             print(f"  worst case (every price off by up to {2 * self.sigma:.0%}):  p ±{w['p']:.3f}  q ±{w['q']:.3f}  p+q ±{w['sum']:.3f}")
         rms = math.sqrt(sum(d * d for *_, d in self.residuals()) / n)
         print(f"  rms residual on the {n} price{'s' if n != 1 else ''}: {rms:.4f}")
+        if self.split_violation:
+            print(f"  *** p <= q: {self.split_violation}")
+            print(f"  *** every price below is unreliable — do not trade off this fit.")
 
         cur = self._state(**current) if current else None
         sm, so = (cur['sets_me'], cur['sets_opp']) if cur else (0, 0)
@@ -229,8 +303,8 @@ class ImpliedModel:
             print(f"\nNow ({cur['games_me']}-{cur['games_opp']}, {srv} serving, {cur['points_me']}-{cur['points_opp']}):  {prob:.3f} ± {ci:.3f}")
             if not (cur['games_me'] == 6 and cur['games_opp'] == 6):
                 nxt = dict(current); nxt.pop('points_me', None); nxt.pop('points_opp', None)
-                win = dict(nxt, games_me=cur['games_me'] + 1); win.pop('server', None)
-                lose = dict(nxt, games_opp=cur['games_opp'] + 1); lose.pop('server', None)
+                win = _next_game(nxt, games_me=cur['games_me'] + 1)
+                lose = _next_game(nxt, games_opp=cur['games_opp'] + 1)
                 pw, cw = self.price(**win); pl, cl = self.price(**lose)
                 print(f"  if I win this game → {pw:.3f} ± {cw:.3f}     if I lose it → {pl:.3f} ± {cl:.3f}")
                 labels, pg = self.point_grid(**{k: v for k, v in current.items() if k not in ('points_me', 'points_opp')})
