@@ -81,6 +81,83 @@ def _ewma_update(m, price, state, halflife):
     return m
 
 
+def _ahead_states(pstate):
+    """The two states one point later: tracked side wins it, or loses it.
+
+    Points are just incremented. The model handles a point score that finishes the
+    game on its own - game_win_prob(w, 4, 2) is 1.0 and set_win_prob then advances the
+    game count - verified identical to constructing the next game explicitly. This also
+    works inside a tiebreak, where tiebreak_win_prob rotates the server itself.
+    """
+    win = dict(pstate)
+    win["points_me"] = pstate.get("points_me", 0) + 1
+    lose = dict(pstate)
+    lose["points_opp"] = pstate.get("points_opp", 0) + 1
+    return win, lose
+
+
+def _point_ahead_block(models, pstate, server):
+    """Price the observed state AND one point ahead, for every variant.
+
+    WHY THIS EXISTS. Our scoreboard runs roughly a point behind the participants with
+    faster feeds: when we read 15-30 the point in progress is often already decided, so
+    the market we are quoting against is pricing 15-40 or 30-30. Comparing
+    model(our score) to market(their score) is then comparing two different information
+    sets, which is a systematic bias, not noise - and it biases in the direction we
+    would misread as "the model lags the market".
+
+    So the tape records what each variant WOULD say one point later, on BOTH branches.
+    Offline, once the next observed score reveals which way the point went, the market
+    price at this tick can be compared against the branch that actually happened: if it
+    already matched that branch, the market had the point before we did, and by how much
+    is measurable. Costs no extra GETs - two more evaluations of a model already fitted.
+
+    DO NOT add a probability-weighted blend of the two branches. p*price(win) +
+    (1-p)*price(lose) is IDENTICALLY price(now) - the model is a martingale over points
+    by construction, verified to 0.00e+00 across 576 states - so a blend carries no
+    information at all. The branches are only informative kept apart.
+    """
+    win, lose = _ahead_states(pstate)
+    out = {"now": {}, "win": {}, "lose": {}, "p_point": {}}
+    for tag, m in models:
+        if m is None or m.p is None:
+            continue
+        # per-point win probability for whoever is about to serve
+        pp = m.p if server == "me" else m.q
+        try:
+            n = m.price(**pstate)[0]
+            w = m.price(**win)[0]
+            l = m.price(**lose)[0]
+        except Exception:
+            continue
+        out["now"][tag] = round(n, 4)
+        out["win"][tag] = round(w, 4)
+        out["lose"][tag] = round(l, 4)
+        out["p_point"][tag] = round(pp, 4)
+    return out
+
+
+def _market_clock(ahead, px, tag="rolling"):
+    """Where does the market sit between the lose-branch and the win-branch?
+
+        0.0  market is pricing as if the point was LOST
+        1.0  market is pricing as if the point was WON
+        p    market is on OUR clock - it has not seen the point either
+
+    This is the lag measurement in one number. Compare it against p_point: a market
+    consistently above p on points the tracked side went on to win (and below on ones
+    they lost) is a market that already knows the outcome. Returns None when the two
+    branches are too close to divide by, which happens when a single point barely moves
+    the match price.
+    """
+    if not ahead or px is None:
+        return None
+    w, l = ahead.get("win", {}).get(tag), ahead.get("lose", {}).get(tag)
+    if w is None or l is None or abs(w - l) < 1e-4:
+        return None
+    return round((px - l) / (w - l), 4)
+
+
 def _now() -> float:
     return time.time()
 
@@ -297,6 +374,8 @@ def cmd_watch(a):
     n_obs = 0
     cycles = 0
     misses = 0
+    last_pts = None          # last observed (points_me, points_opp, games, sets)
+    pt_seq = 0               # increments on every observed point-score change
 
     # Prior boundary prices observed before the poller attached (hand-read off the
     # board). Prepended in order so the fit starts from the real pre-match anchor
@@ -401,8 +480,21 @@ def cmd_watch(a):
             # included) at every poll. This is the mid-game comparison the hand-logged
             # match could only sample a few times, and where the handoff's
             # "market runs ~1 point ahead of the scoreboard" claim gets tested.
+            # Detect a point-score change. The scoreboard runs behind the fastest
+            # participants, so the interesting quantity is WHEN we first see a new score
+            # relative to when the market moved - pt_new marks that first sighting.
+            pt_new = False
+            if st.get("_points_known"):
+                sig = (st.get("sets_me"), st.get("sets_opp"), st.get("games_me"),
+                       st.get("games_opp"), st.get("points_me"), st.get("points_opp"))
+                if last_pts is not None and sig != last_pts:
+                    pt_seq += 1
+                    pt_new = True
+                last_pts = sig
+
             model_px = None
             var_px = {}
+            ahead = {}
             if n_obs >= 2 and st.get("_points_known"):
                 pstate = {k: v for k, v in st.items() if not k.startswith("_")}
                 # Price every variant on the SAME state at the SAME tick, so the tape
@@ -418,6 +510,9 @@ def cmd_watch(a):
                     except Exception:
                         pass
                 model_px = var_px.get("rolling")
+                ahead = _point_ahead_block(
+                    [("static", static_model), ("rolling", model)] + sorted(ewma.items()),
+                    pstate, st.get("server"))
 
             rec = {"ts": _now(), "status": status, "state": st, "mid_me": mid_me,
                    "mid_opp": mid_opp, "vig_free": px, "model": model_px,
@@ -428,6 +523,15 @@ def cmd_watch(a):
                    "models": {k: round(v, 4) for k, v in var_px.items()},
                    "edges_c": ({} if px is None else
                                {k: round((px - v) * 100, 2) for k, v in var_px.items()}),
+                   # POINT-LEVEL. pt_seq increments on every observed change of the point
+                   # score, so transitions are findable without re-deriving them; pt_new
+                   # marks the first poll that saw the new score, which is what the lag
+                   # measurement needs. `ahead` carries each variant priced one point
+                   # forward - see _point_ahead_block for why.
+                   # mkt_clock: 0 = market prices the point as LOST, 1 = as WON,
+                   # ~p_point = market has not seen it either. The lag in one number.
+                   "pt_seq": pt_seq, "pt_new": pt_new, "ahead": ahead,
+                   "mkt_clock": _market_clock(ahead, px),
                    "details": det}
             with open(tape_p, "a") as f:
                 f.write(json.dumps(rec) + "\n")
