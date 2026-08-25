@@ -48,6 +48,9 @@ def main():
                          "Poljicak/Schoenhaus, which finished 6-4 6-3).")
     ap.add_argument("--interval", type=float, default=4.0)
     ap.add_argument("--pregame-interval", type=float, default=60.0)
+    ap.add_argument("--max-launch", type=int, default=None,
+                    help="stop after launching this many captures this run. Bounds what "
+                         "the run ADDS, so a caller can hold a total fleet size")
     ap.add_argument("--cache", type=int, default=25_000,
                     help="TENNIS_CACHE (memo entries per function) for each launched "
                          "poller. ~56 MB per poller at 25k, ~235 MB at 200k")
@@ -153,8 +156,18 @@ def main():
         if rest and rest[0].startswith("KX"):
             already.add(rest[0])
 
+    # Launch budget. A fleet cap checked only BEFORE a cycle bounds the starting count,
+    # not the result: on 26AUG25 a cycle that began at 39 pollers launched its way to 54
+    # and the cap did not engage until the next cycle, 90 minutes later. This bounds
+    # what this run may ADD.
+    launched = 0
+
     for e, mil, det in upcoming:
         ev = e["event_ticker"]
+        if a.max_launch is not None and launched >= a.max_launch:
+            print(f"  stopping: launch budget {a.max_launch} reached "
+                  f"({len(upcoming) - launched} candidates left for the next cycle)")
+            break
         if ev in already:
             print(f"  skip {ev}: already being captured")
             continue
@@ -208,6 +221,7 @@ def main():
         with open(log, "w") as f:
             subprocess.Popen(cmd, stdout=f, stderr=subprocess.STDOUT, cwd=HERE,
                              start_new_session=True, env=env)
+        launched += 1
         print(f"  launched {ev}  --me {suffix} (underdog @ {mids[under]:.3f}, bo{bo})")
         time.sleep(0.3)
 

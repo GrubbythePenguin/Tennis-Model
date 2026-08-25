@@ -21,7 +21,9 @@
 #   ./rediscover.sh [interval_seconds]     default 90 min
 cd "$(dirname "$0")" || exit 1
 LOG=tapes/rediscover.log
-MAX_FLEET=45          # memory is fine (~55 MB each); this bounds the shared GET bucket
+MAX_FLEET=45          # memory is fine (~55 MB each); this bounds the shared GET bucket.
+                      # Passed to discover.py as --max-launch so it bounds the RESULT:
+                      # checking only before a cycle let 39 pollers become 54 on 26AUG25.
 INTERVAL=${1:-5400}
 
 stamp() { date -u +%H:%M:%S; }
@@ -39,12 +41,19 @@ while true; do
     echo "$(stamp) fleet=$n at cap $MAX_FLEET - skipping cycle" >> "$LOG"
     continue
   fi
-  echo "$(stamp) rediscovery starting, fleet=$n" >> "$LOG"
+  budget=$(( MAX_FLEET - n ))
+  echo "$(stamp) rediscovery starting, fleet=$n budget=$budget" >> "$LOG"
+  # trim pollers idling on matches still hours out before adding more
+  python3 shed_pregame.py --hours 2 --apply >> "$LOG" 2>&1
   # gentler rps than the interactive default: this competes with the trading system
   # and with every poller already running
-  python3 discover.py --tournament "Challenger" "125K" --within-hours 6 \
-          --best-of 3 --interval 10 --rps 3 --launch >> "$LOG" 2>&1
+  python3 discover.py --tournament "Challenger" "125K" --within-hours 2 \
+          --best-of 3 --interval 10 --rps 3 --max-launch "$budget" --launch >> "$LOG" 2>&1
+  # recompute: the challenger run above may have consumed part of the budget, and a
+  # budget spent twice does not bound anything
+  budget=$(( MAX_FLEET - $(fleet) ))
+  [ "$budget" -lt 0 ] && budget=0
   python3 discover.py --tournament "US Open" "Winston Salem" "Monterrey" \
-          --within-hours 6 --interval 10 --rps 3 --launch >> "$LOG" 2>&1
+          --within-hours 2 --interval 10 --rps 3 --max-launch "$budget" --launch >> "$LOG" 2>&1
   echo "$(stamp) rediscovery done, fleet=$(fleet)" >> "$LOG"
 done
