@@ -48,6 +48,9 @@ def main():
                          "Poljicak/Schoenhaus, which finished 6-4 6-3).")
     ap.add_argument("--interval", type=float, default=4.0)
     ap.add_argument("--pregame-interval", type=float, default=60.0)
+    ap.add_argument("--cache", type=int, default=25_000,
+                    help="TENNIS_CACHE (memo entries per function) for each launched "
+                         "poller. ~56 MB per poller at 25k, ~235 MB at 200k")
     a = ap.parse_args()
 
     feed = kt.Feed(rps=a.rps, verbose=False)
@@ -132,12 +135,21 @@ def main():
     print()
     for e, mil, det in upcoming:
         ev = e["event_ticker"]
-        # track the UNDERDOG for consistency with every capture so far
-        mkts = feed.markets(ev)
-        mids = {m["ticker"]: kt.mid(m) for m in mkts if m.get("ticker")}
-        mids = {k: v for k, v in mids.items() if v is not None}
+        # track the UNDERDOG for consistency with every capture so far.
+        # RETRY, for the same reason best_of does below: a 429 here returns an empty
+        # market list, which is indistinguishable from "unpriced" and skipped the
+        # launch outright. That cost 4 of 20 Challenger captures on 26AUG25 — the
+        # matches were priced fine, the bucket was just busy.
+        mids = {}
+        for attempt in range(4):
+            mkts = feed.markets(ev)
+            mids = {m["ticker"]: kt.mid(m) for m in mkts if m.get("ticker")}
+            mids = {k: v for k, v in mids.items() if v is not None}
+            if len(mids) == 2:
+                break
+            time.sleep(2.0)
         if len(mids) != 2:
-            print(f"  SKIP {ev}: {len(mids)} priced markets")
+            print(f"  SKIP {ev}: {len(mids)} priced markets after retries")
             continue
         under = min(mids, key=mids.get)
         suffix = under.rsplit("-", 1)[-1]
@@ -164,9 +176,15 @@ def main():
                "--me", suffix, "--interval", str(a.interval),
                "--pregame-interval", str(a.pregame_interval), "--max-cycles", "4000",
                "--best-of", str(bo)]
+        # Lean memo cache per poller. A capture night launches ~20 of these and they
+        # share the box with the live trading system; at the backtest default they
+        # would plateau at ~235 MB each (4.7 GB total), which this box does not have
+        # to spare. 25k costs ~150 ms more per boundary refit — irrelevant when
+        # boundaries arrive minutes apart — and holds each poller near 56 MB.
+        env = dict(os.environ, TENNIS_CACHE=str(a.cache))
         with open(log, "w") as f:
             subprocess.Popen(cmd, stdout=f, stderr=subprocess.STDOUT, cwd=HERE,
-                             start_new_session=True)
+                             start_new_session=True, env=env)
         print(f"  launched {ev}  --me {suffix} (underdog @ {mids[under]:.3f}, bo{bo})")
         time.sleep(0.3)
 

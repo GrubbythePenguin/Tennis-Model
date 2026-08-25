@@ -41,6 +41,45 @@ from market_implied import ImpliedSplitError
 
 TAPES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tapes")
 
+# FIT VARIANTS CARRIED LIVE. Until 26AUG25 the poller carried one fit — equal-weight,
+# refit on every boundary, i.e. ROLLING — so the static-vs-rolling and EWMA questions
+# could only ever be asked afterwards, by replaying a settled tape. Carrying all of
+# them live means the tape records what each variant believed AT THE TIME, which is the
+# only version of the comparison that is not hindsight. Costs no extra Kalshi GETs:
+# same payload, more local arithmetic.
+#
+#   static    frozen after STATIC_N boundaries — keeps a view the market can diverge from
+#   rolling   equal weight over every boundary (the original `model`)
+#   ewma<h>   weight 0.5**((n-1-j)/h) — follows a genuine re-rating instead of averaging it
+#
+# Only the EWMA fits need a full rebuild per boundary (their weights all shift when n
+# grows); static and rolling stay incremental. Rebuild happens on GAME BOUNDARIES ONLY
+# (~20-30 per match), never on the 2s tick, so it cannot disturb the poll cadence.
+STATIC_N = 2
+
+
+def _ewma_update(m, price, state, halflife):
+    """Fold one boundary into an EWMA fit IN PLACE. One _fit(), not n.
+
+    The weights are 0.5**((n-1-j)/h) and every one of them shifts when n grows, which
+    is why this looks like it needs a rebuild from scratch on each boundary. It does
+    not: decaying every stored weight by 0.5**(1/h) and appending the new one at 1.0
+    yields exactly the same weight vector. Verified identical to the rebuild to 6.4e-09
+    in p and q across a 30-boundary match, for 15x less work (9.87s -> 0.64s) and well
+    under half the memo traffic.
+
+    The weights cannot simply be left un-normalised to dodge this: _residuals appends a
+    PRIOR row carrying a fixed weight, so scaling the observation weights by any
+    constant silently changes the balance between the data and the split prior.
+
+    The 1e-6 floor keeps a boundary many halflives old from reaching exactly zero,
+    which would drop it out of the residual set and change the fit's rank.
+    """
+    dec = 0.5 ** (1.0 / halflife)
+    m.obs = [(st, px, max(w * dec, 1e-6)) for st, px, w in m.obs]
+    m.observe(price, weight=1.0, **state)
+    return m
+
 
 def _now() -> float:
     return time.time()
@@ -240,6 +279,20 @@ def cmd_watch(a):
                                "tournament": det_m.get("tournament_name")}}
     model = ImpliedModel(best_of=best_of, first_server="me", split_prior=prior,
                          final_set_tb=final_tb)
+    # STATIC keeps its view: it stops observing after STATIC_N boundaries, so a genuine
+    # mispricing persists and stays tradeable instead of being absorbed into p/q at the
+    # next refit. `model` above remains ROLLING and remains what the tape's existing
+    # "model"/"edge_c" fields mean — downstream readers of old tapes are unaffected.
+    static_model = ImpliedModel(best_of=best_of, first_server="me", split_prior=prior,
+                                warn_split=False, final_set_tb=final_tb)
+    # getattr, not a.ewma_halflives: cmd_watch is also driven programmatically with a
+    # hand-built namespace (test_live_path.py), and a missing attribute must not be able
+    # to kill a poller mid-match — a live capture cannot be re-run.
+    halflives = list(getattr(a, "ewma_halflives", None) or [])
+    ewma = {f"ewma{h}": ImpliedModel(best_of=best_of, first_server="me",
+                                     split_prior=prior, warn_split=False,
+                                     final_set_tb=final_tb)
+            for h in halflives}
     last_key = None
     n_obs = 0
     cycles = 0
@@ -253,6 +306,10 @@ def cmd_watch(a):
             log["obs"].append(o)
             model.observe(o["price"], **o["state"])
             n_obs += 1
+            if n_obs <= STATIC_N:
+                static_model.observe(o["price"], **o["state"])
+            for h in halflives:
+                _ewma_update(ewma[f"ewma{h}"], o["price"], o["state"], float(h))
         with open(log_p, "w") as f:
             json.dump(log, f, indent=1)
         print(f"seeded {n_obs} prior boundary price(s) from {a.seed}: "
@@ -340,17 +397,32 @@ def cmd_watch(a):
             # match could only sample a few times, and where the handoff's
             # "market runs ~1 point ahead of the scoreboard" claim gets tested.
             model_px = None
+            var_px = {}
             if n_obs >= 2 and st.get("_points_known"):
-                try:
-                    model_px, _ = model.price(**{k: v for k, v in st.items()
-                                                 if not k.startswith("_")})
-                except Exception:
-                    model_px = None
+                pstate = {k: v for k, v in st.items() if not k.startswith("_")}
+                # Price every variant on the SAME state at the SAME tick, so the tape
+                # carries a like-for-like comparison rather than four series that each
+                # sampled the match at slightly different moments. A variant with no
+                # fit yet (p is None) is skipped rather than recorded as a guess.
+                for tag, m in ([("static", static_model), ("rolling", model)]
+                               + sorted(ewma.items())):
+                    if m is None or m.p is None:
+                        continue
+                    try:
+                        var_px[tag] = m.price(**pstate)[0]
+                    except Exception:
+                        pass
+                model_px = var_px.get("rolling")
 
             rec = {"ts": _now(), "status": status, "state": st, "mid_me": mid_me,
                    "mid_opp": mid_opp, "vig_free": px, "model": model_px,
                    "edge_c": (None if (model_px is None or px is None)
                               else round((px - model_px) * 100, 2)),
+                   # "model"/"edge_c" stay ROLLING so every existing tape reader keeps
+                   # working unchanged; the per-variant detail is additive.
+                   "models": {k: round(v, 4) for k, v in var_px.items()},
+                   "edges_c": ({} if px is None else
+                               {k: round((px - v) * 100, 2) for k, v in var_px.items()}),
                    "details": det}
             with open(tape_p, "a") as f:
                 f.write(json.dumps(rec) + "\n")
@@ -369,16 +441,35 @@ def cmd_watch(a):
                     with open(log_p, "w") as f:
                         json.dump(log, f, indent=1)
                     n_obs += 1
-                    pred = None
-                    if n_obs > 1:
+                    # OUT-OF-SAMPLE: every variant prices this boundary BEFORE it is
+                    # allowed to observe it. Collected first, for all variants, so the
+                    # errors printed below are directly comparable.
+                    preds = {}
+                    for tag, m in ([("static", static_model), ("rolling", model)]
+                                   + sorted(ewma.items())):
+                        if m is None or m.p is None:
+                            continue
                         try:
-                            pred, _ = model.price(**obs_state)
+                            preds[tag] = m.price(**obs_state)[0]
                         except Exception:
-                            pred = None
+                            pass
+                    pred = preds.get("rolling") if n_obs > 1 else None
+                    t_fit = time.time()
                     try:
                         model.observe(px, **obs_state)
                     except ImpliedSplitError as e:
                         print(f"\n*** strict split: {e}", file=sys.stderr)
+                    if n_obs <= STATIC_N:
+                        try:
+                            static_model.observe(px, **obs_state)
+                        except ImpliedSplitError:
+                            pass          # rolling already reported it; don't double-warn
+                    for h in halflives:
+                        try:
+                            _ewma_update(ewma[f"ewma{h}"], px, obs_state, float(h))
+                        except ImpliedSplitError:
+                            pass          # rolling already reported it; don't double-warn
+                    fit_ms = (time.time() - t_fit) * 1000
                     err = f"{(px - pred) * 100:+5.1f}c" if pred is not None else "    -"
                     flag = " !p<=q" if model.split_violation else ""
                     print(f"\n[{time.strftime('%H:%M:%S')}] "
@@ -386,7 +477,17 @@ def cmd_watch(a):
                           f"{st['games_me']}-{st['games_opp']} games  "
                           f"srv={st.get('server', '?'):3s}  mkt {px:.3f}  "
                           f"pred {pred if pred is None else round(pred, 3)}  err {err}  "
-                          f"| p={model.p:.3f} q={model.q:.3f}{flag}")
+                          f"| p={model.p:.3f} q={model.q:.3f}{flag}  [refit {fit_ms:.0f}ms]")
+                    # Per-variant out-of-sample error at this boundary. p/q shown are
+                    # POST-update, matching what the rolling line above reports.
+                    cur = {"static": static_model, "rolling": model, **ewma}
+                    for tag in ["static", "rolling"] + sorted(ewma):
+                        if tag not in preds:
+                            continue
+                        mv = cur[tag]
+                        print(f"      {tag:9s} pred {preds[tag]:.3f}  "
+                              f"err {(px - preds[tag]) * 100:+5.1f}c   "
+                              f"p={mv.p:.3f} q={mv.q:.3f}")
                 last_key = key
             else:
                 lbl = ['0', '15', '30', '40', 'AD']
@@ -435,6 +536,11 @@ if __name__ == "__main__":
     p.add_argument("--split-prior", type=float, help="prior mean for p-q (default 0.28 men / 0.14 women)")
     p.add_argument("--final-set-tb", type=int, choices=(7, 10),
                    help="deciding-set tiebreak length (default: 10 at Grand Slams, 7 elsewhere)")
+    p.add_argument("--ewma-halflives", nargs="*", default=["2", "4"], metavar="H",
+                   help="EWMA halflives (in boundaries) carried live alongside static and "
+                        "rolling; pass nothing to disable. Default 2 4 — h4 is top-2 on both "
+                        "rms and P&L, h2 is the rms winner; h8 was dropped because it "
+                        "duplicated h4 exactly on 4 of 10 matches. See per_match_pnl.py")
     p.add_argument("--interval", type=float, default=2.0)
     p.add_argument("--idle-interval", type=float, default=60.0)
     p.add_argument("--pregame-interval", type=float, default=60.0,

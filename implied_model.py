@@ -21,6 +21,30 @@ import sys
 from tennis_model import match_win_prob, G, game_win_prob, tiebreak_win_prob
 from market_implied import invert_G, check_split, ImpliedSplitError
 
+# Levenberg-Marquardt stopping tolerance on the step in (p, q).
+#
+# This was 1e-9, which resolves p roughly six orders of magnitude finer than a price
+# can express. Measured sensitivity at a mid-match state: the match price moves
+# 4.37 cents per 0.01 of p, i.e.
+#
+#     dp = 1e-3  ->  0.44   cents        Kalshi tick        = 1 cent
+#     dp = 1e-4  ->  0.044  cents        tape mid resolution = 0.5 cent
+#     dp = 1e-5  ->  0.0044 cents
+#     dp = 1e-9  ->  0.0000004 cents     <- what we were paying for
+#
+# Chosen by running the whole 10-match backtest at each tolerance and diffing the
+# output against the 1e-9 reference:
+#
+#     1e-5, 1e-4, 1e-3   byte-identical — every trade, every P&L figure
+#     1e-2               DIFFERS, up to $102 on a single match
+#
+# 1e-3 is the coarsest that still reproduces the reference exactly, but it sits one
+# decade from the cliff and the live board will hit match states this book does not
+# contain. 1e-4 keeps a full decade of margin below 1e-3 and two below the cliff, and
+# gives up almost nothing: 1,861 residual evaluations per match against 1e-3's 1,663,
+# versus 5,077 at the old 1e-9. Fitted p lands within 2.3e-6 of the 1e-9 answer.
+_FIT_TOL = 1e-4
+
 
 def _model(p, q, state, best_of, final_set_tb=7):
     st = dict(state)
@@ -179,7 +203,7 @@ class ImpliedModel:
             new = sse(pn, qn)
             if new < cur:
                 p, q, cur, lam = pn, qn, new, max(lam / 3, 1e-9)
-                if abs(dp) < 1e-9 and abs(dq) < 1e-9:
+                if abs(dp) < _FIT_TOL and abs(dq) < _FIT_TOL:
                     break
             else:
                 lam *= 10

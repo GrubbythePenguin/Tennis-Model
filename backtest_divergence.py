@@ -46,6 +46,7 @@ BOOK = [
     ("Balshaw vs Kovacevic",   "bt_KXATPMATCH-26AUG24BALKOV",           0),
     ("PinningtonJones/Svajda", "bt_KXATPMATCH-26AUG24PINSVA",           1),
     ("Vedder vs Andreescu",    "bt_KXWTAMATCH-26AUG24VEDAND",           0),
+    ("Parry vs Vekic",          "bt_KXWTAMATCH-26AUG23PARVEK",           1),
 ]
 
 
@@ -54,9 +55,15 @@ def fee(contracts, price):
     return math.ceil(0.07 * contracts * price * (1 - price) * 100) / 100
 
 
-def run(path, settle, size, thresh, tb=10):
+def run(path, settle, size, thresh, tb=None):
     d = json.load(open(path))
     obs, prior = d["obs"], d["split_prior"]
+    # Use the match's OWN deciding-set tiebreak. Hardcoding 10 priced every
+    # Challenger / Winston Salem / Monterrey match as a Grand Slam. The direct effect
+    # is small, but it shifts model prices across the trade threshold and so changes
+    # WHICH trades fire — worth several hundred dollars on one match.
+    if tb is None:
+        tb = d.get("final_set_tb") or 7
 
     def build(n):
         m = ImpliedModel(best_of=d["best_of"], first_server="me", split_prior=prior,

@@ -133,6 +133,8 @@ def main():
         args = types.SimpleNamespace(
             event=EV, me="POL", best_of=3, split_prior=None, rps=99,
             interval=0, idle_interval=0, log_first=True, seed=None, final_set_tb=None, pregame_interval=0,
+            # exercise the live multi-variant path: static + rolling + two EWMAs
+            ewma_halflives=["2", "4"],
             max_cycles=len(SCRIPT))
         pt.cmd_watch(args)
     finally:

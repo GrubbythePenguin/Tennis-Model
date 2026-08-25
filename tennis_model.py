@@ -18,11 +18,32 @@ Points are integers 0, 1, 2, 3, 4, ... (3-3 is deuce, 4-3 is my advantage).
 Tennis notation is also accepted as strings: '0', '15', '30', '40', 'AD'.
 """
 
+import os
 from functools import lru_cache
+
+# CACHE SIZE — DO NOT SET THIS BACK TO None. The three memos below are keyed on p/q,
+# which are CONTINUOUS fit parameters, so every Levenberg-Marquardt step and every one
+# of the 961 points in ImpliedModel._fit's cold-start grid mints a fresh key set that
+# is never looked up again. The memo only pays off WITHIN a single (p, q) evaluation;
+# across evaluations an unbounded cache is a pure leak. Measured 26AUG25 on a 17-point
+# match: 11,797 distinct (p, q) pairs, 1.6M live entries, 288 MB — growing ~450 MB per
+# match for the life of the process, which is what was OOM-killing the box during
+# ewma_fit.py grid runs. Bounding is behaviour-preserving (verified: identical error
+# checksums over 5 matches, 31.5s -> 33.9s, 2,263 MB -> 217 MB). Quantising p/q into
+# the key would ALSO bound it but changes fit results — don't do that instead.
+#
+# TENNIS_CACHE tunes it per process, because the two workloads want opposite things:
+#   backtests  one process, wants speed, has the whole box  -> 200k, ~235 MB, fastest
+#   live       ~20 concurrent pollers sharing the box with the trading system
+#              -> 25k, ~56 MB each. Costs ~150 ms more per boundary refit, which is
+#              nothing against boundaries that arrive minutes apart, and turns
+#              20 x 235 MB = 4.7 GB into 20 x 56 MB = 1.1 GB. discover.py sets this
+#              for every poller it launches.
+_CACHE = int(os.environ.get("TENNIS_CACHE") or 200_000)
 
 # ---------------------------------------------------------------- point -> game
 
-@lru_cache(maxsize=None)
+@lru_cache(maxsize=_CACHE)
 def game_win_prob(w, x=0, y=0):
     """P(I win the current game) at point score x-y, where w is my per-point win
     probability in this game (p if I'm serving, q if I'm returning)."""
@@ -47,7 +68,7 @@ def G(w):
 
 # ------------------------------------------------------------ point -> tiebreak
 
-@lru_cache(maxsize=None)
+@lru_cache(maxsize=_CACHE)
 def tiebreak_win_prob(p, q, x=0, y=0, i_serve_next=True, target=7):
     """P(I win the tiebreak) at point score x-y, given whether I serve the next
     point. Rotation: one point, then two each; i.e. the server changes after
@@ -83,7 +104,7 @@ def tiebreak_win_prob(p, q, x=0, y=0, i_serve_next=True, target=7):
 
 # ---------------------------------------------------------------- game -> set
 
-@lru_cache(maxsize=None)
+@lru_cache(maxsize=_CACHE)
 def set_from_games(p, q, a, b, i_serve_next_game=True, tb_target=7):
     """P(I win the set) at game score a-b, standing at the start of a game.
 
