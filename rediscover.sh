@@ -43,8 +43,8 @@ while true; do
   # gentler rps than the interactive default: this competes with the trading system
   # and with every poller already running
   python3 discover.py --tournament "Challenger" "125K" --within-hours 6 \
-          --best-of 3 --interval 5 --rps 3 --launch >> "$LOG" 2>&1
+          --best-of 3 --interval 10 --rps 3 --launch >> "$LOG" 2>&1
   python3 discover.py --tournament "US Open" "Winston Salem" "Monterrey" \
-          --within-hours 6 --interval 5 --rps 3 --launch >> "$LOG" 2>&1
+          --within-hours 6 --interval 10 --rps 3 --launch >> "$LOG" 2>&1
   echo "$(stamp) rediscovery done, fleet=$(fleet)" >> "$LOG"
 done
