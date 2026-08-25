@@ -366,11 +366,16 @@ def cmd_watch(a):
                     p_opp = kt.mid(mm.get(opp_tick) or {})
                     px_pre = kt.vig_free(p_me, p_opp)
                     with open(tape_p, "a") as f:
+                        # models/edges_c empty rather than absent: there is no fit yet
+                        # (no boundaries have happened), but keeping the key present on
+                        # every row means tomorrow's analysis can read tape["models"]
+                        # unconditionally instead of guarding each row.
                         f.write(json.dumps({"ts": _now(), "status": status,
                                             "state": kt.model_state(det, me_id, opp_id) or {},
                                             "mid_me": p_me, "mid_opp": p_opp,
                                             "vig_free": px_pre, "model": None,
-                                            "edge_c": None, "details": det}) + "\n")
+                                            "edge_c": None, "models": {}, "edges_c": {},
+                                            "details": det}) + "\n")
                     print(f"\r[{time.strftime('%H:%M:%S')}] pre-match {status or '?'} "
                           f"mkt={px_pre if px_pre is None else round(px_pre, 3)} "
                           f"({feed.n_get}g/{feed.n_429}x) ", end="", flush=True)
