@@ -418,10 +418,19 @@ def cmd_watch(a):
             # to the not-live branch would idle 60s and can black out a whole game.
             if det is None:
                 misses += 1
+                # BACK OFF ON CONSECUTIVE misses. The first retry stays fast, which is
+                # the original point of this branch: an isolated ReadTimeout must not
+                # black out a game. But a 429 ALSO returns an empty payload, so a fixed
+                # fast retry turns every waiting poller into a fast poller exactly when
+                # the bucket is busiest, and drives more 429s. Measured 26AUG25: 786 such
+                # retries across 61 pollers, 11.5 GET/s against an expected 5.5, and by
+                # 18:15 the bucket was so contended that a board scan could not complete
+                # at all (4 GETs, 4 rate-limited). Doubling per consecutive miss keeps
+                # the isolated-failure protection and stops the feedback loop.
+                back = min(a.interval * (2 ** (misses - 1)), 60.0)
                 print(f"\n[{time.strftime('%H:%M:%S')}] live_data returned nothing "
-                      f"(miss {misses}) — retrying at the live cadence, NOT idling.",
-                      file=sys.stderr)
-                time.sleep(min(a.interval * 2, 10.0))
+                      f"(miss {misses}) — retrying in {back:.0f}s.", file=sys.stderr)
+                time.sleep(back)
                 continue
             misses = 0
 
