@@ -133,8 +133,31 @@ def main():
         return
 
     print()
+    # Events already being captured by a live poller. Without this, re-running
+    # discovery to pick up later matches (see rediscover.sh) launches a SECOND poller
+    # for everything already running — duplicate GETs against a shared bucket, and two
+    # processes appending interleaved rows to the same tape.
+    try:
+        _ps = subprocess.run(["ps", "-eo", "args"], capture_output=True, text=True).stdout
+    except Exception:
+        _ps = ""
+    # match the exact invocation "poll_tennis.py watch <EVENT>", not the two tokens
+    # separately — a shell one-liner mentioning both would otherwise register as a
+    # running capture and silently suppress a real launch.
+    _MARK = "poll_tennis.py watch "
+    already = set()
+    for ln in _ps.splitlines():
+        if _MARK not in ln:
+            continue
+        rest = ln.split(_MARK, 1)[1].split()
+        if rest and rest[0].startswith("KX"):
+            already.add(rest[0])
+
     for e, mil, det in upcoming:
         ev = e["event_ticker"]
+        if ev in already:
+            print(f"  skip {ev}: already being captured")
+            continue
         # track the UNDERDOG for consistency with every capture so far.
         # RETRY, for the same reason best_of does below: a 429 here returns an empty
         # market list, which is indistinguishable from "unpriced" and skipped the
