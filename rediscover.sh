@@ -54,12 +54,12 @@ while true; do
   # gentler rps than the interactive default: this competes with the trading system
   # and with every poller already running
   python3 discover.py --tournament "Challenger" "125K" --within-hours 2 --include-started \
-          --best-of 3 --interval 10 --rps 3 --max-launch "$budget" --launch >> "$LOG" 2>&1
+          --best-of 3 --interval 3 --rps 3 --max-launch "$budget" --launch >> "$LOG" 2>&1
   # recompute: the challenger run above may have consumed part of the budget, and a
   # budget spent twice does not bound anything
   budget=$(( MAX_FLEET - $(fleet) ))
   [ "$budget" -lt 0 ] && budget=0
   python3 discover.py --tournament "US Open" "Winston Salem" "Monterrey" \
-          --within-hours 2 --include-started --interval 10 --rps 3 --max-launch "$budget" --launch >> "$LOG" 2>&1
+          --within-hours 2 --include-started --interval 3 --rps 3 --max-launch "$budget" --launch >> "$LOG" 2>&1
   echo "$(stamp) rediscovery done, fleet=$(fleet)" >> "$LOG"
 done
