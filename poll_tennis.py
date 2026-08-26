@@ -453,6 +453,8 @@ def cmd_watch(a):
                     p_me = kt.mid(mm.get(me_tick) or {})
                     p_opp = kt.mid(mm.get(opp_tick) or {})
                     px_pre = kt.vig_free(p_me, p_opp)
+                    pb_me, pa_me = kt.top_of_book(mm.get(me_tick) or {})
+                    pb_opp, pa_opp = kt.top_of_book(mm.get(opp_tick) or {})
                     with open(tape_p, "a") as f:
                         # models/edges_c empty rather than absent: there is no fit yet
                         # (no boundaries have happened), but keeping the key present on
@@ -463,6 +465,8 @@ def cmd_watch(a):
                                             "mid_me": p_me, "mid_opp": p_opp,
                                             "vig_free": px_pre, "model": None,
                                             "edge_c": None, "models": {}, "edges_c": {},
+                                            "book": {"bid_me": pb_me, "ask_me": pa_me,
+                                                     "bid_opp": pb_opp, "ask_opp": pa_opp},
                                             "details": det}) + "\n")
                     print(f"\r[{time.strftime('%H:%M:%S')}] pre-match {status or '?'} "
                           f"mkt={px_pre if px_pre is None else round(px_pre, 3)} "
@@ -484,6 +488,16 @@ def cmd_watch(a):
             mm = {m.get("ticker"): m for m in mkts}
             mid_me, mid_opp = kt.mid(mm.get(me_tick) or {}), kt.mid(mm.get(opp_tick) or {})
             px = kt.vig_free(mid_me, mid_opp)
+            # RAW BOOK. Until 26AUG26 only the derived mids were kept, so every backtest
+            # filled at the vig-free midpoint — a price nobody can actually trade — while
+            # still charging the real Kalshi fee. That is optimistic on entry and
+            # realistic on cost, and it makes every P&L number an upper bound: the
+            # 107-match review could not even size the error, because reconstructing the
+            # spread from two mids that sum to 1 by construction is impossible.
+            # Storing top of book lets a fill be modelled where it really happens —
+            # buy at the ask, sell at the bid.
+            bid_me, ask_me = kt.top_of_book(mm.get(me_tick) or {})
+            bid_opp, ask_opp = kt.top_of_book(mm.get(opp_tick) or {})
 
             # Once the fit has something to say, price the FULL state (point score
             # included) at every poll. This is the mid-game comparison the hand-logged
@@ -541,6 +555,9 @@ def cmd_watch(a):
                    # ~p_point = market has not seen it either. The lag in one number.
                    "pt_seq": pt_seq, "pt_new": pt_new, "ahead": ahead,
                    "mkt_clock": _market_clock(ahead, px),
+                   # raw top of book, both sides — what a fill would actually pay
+                   "book": {"bid_me": bid_me, "ask_me": ask_me,
+                            "bid_opp": bid_opp, "ask_opp": ask_opp},
                    "details": det}
             with open(tape_p, "a") as f:
                 f.write(json.dumps(rec) + "\n")
