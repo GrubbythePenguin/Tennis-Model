@@ -40,6 +40,11 @@ import sys
 import time
 from collections import defaultdict
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import kalshi_tennis as kt
+import poll_tennis as pt
+from implied_model import ImpliedModel
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 TAPES = os.path.join(HERE, "tapes")
 TENNIS_SHARD = 3
@@ -123,8 +128,166 @@ def quotes_for(cfg, row):
     return out
 
 
+def live_quote_board(a):
+    """Self-contained: poll one event, fit, and show the market beside our quotes.
+
+    Standalone rather than tape-consuming so a single event can be watched without a
+    poll_tennis process running. Same quoting rule either way.
+
+    STARTING MID-MATCH the fit has no history, so the first market price observed is
+    seeded as one observation - enough for ImpliedModel to fit against its split prior,
+    but THIN. p/q only becomes meaningful after a few real game boundaries, and the
+    board marks how many it has.
+    """
+    feed = kt.Feed(rps=a.rps, verbose=False)
+    mil = feed.milestone(a.event)
+    if not mil:
+        print(f"milestone not found for {a.event}")
+        return 1
+    det_m = mil.get("details") or {}
+    mid_id = mil.get("id")
+
+    mkts = feed.markets(a.event)
+    mm = {m.get("ticker"): m for m in mkts if m.get("ticker")}
+    if len(mm) != 2:
+        print(f"{a.event}: {len(mm)} priced markets")
+        return 1
+    # SHARD GATE. Never quote a market we have not proven is on shard 3.
+    auth_ok = True
+    try:
+        import tennis_parsed_markets as tpm
+        auth = tpm._auth()
+        for tk in mm:
+            shard, code = tpm.market_shard(auth, tk)
+            if shard != TENNIS_SHARD:
+                print(f"REFUSED {tk}: exchange_index={shard!r} (HTTP {code})")
+                return 1
+        print(f"  shard check: both markets verified exchange_index={TENNIS_SHARD}")
+    except Exception as e:
+        print(f"  shard check unavailable ({e}) — refusing to quote")
+        return 1
+
+    prices = {t: kt.mid(mm[t]) for t in mm}
+    me_tick = a.me_ticker or min(prices, key=lambda t: prices[t])
+    opp_tick = next(t for t in mm if t != me_tick)
+    d0 = feed.live_data([mid_id]).get(mid_id) or {}
+    c1, c2 = d0.get("competitor1_id") or "", d0.get("competitor2_id") or ""
+    st0 = kt.model_state(d0, c1, c2) or {}
+    # which competitor is "me" — match the tracked ticker suffix against the market
+    me_id, opp_id = c1, c2
+    if kt.model_state(d0, c1, c2) is None:
+        me_id, opp_id = c2, c1
+
+    # best_of from the EXACT-SCORE market, which enumerates possible set scores and is
+    # therefore ground truth. resolve_best_of deliberately refuses Kalshi's own
+    # best_of=3 on a men's Grand Slam event, because it reports 3 for main-draw
+    # best-of-FIVE matches; passing the market-verified value satisfies that guard
+    # honestly instead of overriding it by hand.
+    verified = None
+    try:
+        verified = kt.best_of_from_exact_market(feed, a.event)
+    except Exception:
+        pass
+    try:
+        best_of = kt.resolve_best_of(det_m, a.best_of, verified)
+    except ValueError as e:
+        print(f"  best_of unresolved: {e}")
+        print("  (exact-score market returned %r)" % verified)
+        return 1
+    print(f"  best_of={best_of} (exact-score market said {verified!r}, "
+          f"kalshi said {det_m.get('best_of')!r})")
+    prior = kt.split_prior_for(det_m) if hasattr(kt, "split_prior_for") else (
+        0.14 if (det_m.get("gender") or "").lower().startswith("f") else 0.28)
+    tb = kt.resolve_final_set_tb(det_m, a.final_set_tb) if hasattr(kt, "resolve_final_set_tb") else 7
+
+    print(f"  {mil.get('title')}  [best of {best_of}, split_prior {prior}, tb {tb}]")
+    print(f"  quoting BOTH sides | me={me_tick}  opp={opp_tick}")
+    print(f"  size {a.size} | margin {a.margin:.1f}c | DRY RUN — no order code in this process")
+    print("=" * 100)
+
+    model = ImpliedModel(best_of=best_of, first_server="me", split_prior=prior,
+                         warn_split=False, final_set_tb=tb)
+    last_key, n_obs, cycles = None, 0, 0
+    try:
+        while True:
+            cycles += 1
+            if a.max_cycles and cycles > a.max_cycles:
+                break
+            if os.path.exists(KILL):
+                print("kill flag present — stopping."); break
+            d = feed.live_data([mid_id]).get(mid_id)
+            if d is None:
+                time.sleep(a.interval); continue
+            st = kt.model_state(d, me_id, opp_id)
+            if st is None:
+                time.sleep(a.interval); continue
+            mkts = feed.markets(a.event)
+            mm = {m.get("ticker"): m for m in mkts if m.get("ticker")}
+            bid_me, ask_me = kt.top_of_book(mm.get(me_tick) or {})
+            bid_opp, ask_opp = kt.top_of_book(mm.get(opp_tick) or {})
+            px = kt.vig_free(kt.mid(mm.get(me_tick) or {}), kt.mid(mm.get(opp_tick) or {}))
+
+            obs_state = {k: v for k, v in st.items()
+                         if k not in ("points_me", "points_opp") and not k.startswith("_")}
+            key = kt.boundary_key(st)
+            if px is not None and key != last_key:
+                model.observe(px, **obs_state)
+                n_obs += 1
+                last_key = key
+
+            if model.p is None or not st.get("_points_known"):
+                time.sleep(a.interval); continue
+            pstate = {k: v for k, v in st.items() if not k.startswith("_")}
+            ah = pt._point_ahead_block([("m", model)], pstate, st.get("server"))
+            if "m" not in ah["win"]:
+                time.sleep(a.interval); continue
+            w, l = ah["win"]["m"], ah["lose"]["m"]
+            val_me, val_opp = min(w, l), 1.0 - max(w, l)
+            q_me = round(val_me - a.margin / 100.0, 2)
+            q_opp = round(val_opp - a.margin / 100.0, 2)
+            lbl = ['0', '15', '30', '40', 'AD']
+            pm, po = st['points_me'], st['points_opp']
+            intb = st['games_me'] == 6 and st['games_opp'] == 6
+            pts = f"{pm}-{po}" if intb else (f"{lbl[pm]}-{lbl[po]}" if pm < 5 and po < 5 else "?")
+            print(f"\n[{time.strftime('%H:%M:%S')}] {st['sets_me']}-{st['sets_opp']} sets  "
+                  f"{st['games_me']}-{st['games_opp']} games  {pts:>7}  srv={st.get('server','?')}"
+                  f"   fit p={model.p:.3f} q={model.q:.3f} on {n_obs} boundar"
+                  f"{'y' if n_obs==1 else 'ies'}")
+            print(f"     one-point bracket {abs(w-l)*100:5.2f}c   "
+                  f"(win {w:.3f} / lose {l:.3f})")
+            for tag, tick, val, q, b, ak in (
+                    ("ME ", me_tick, val_me, q_me, bid_me, ask_me),
+                    ("OPP", opp_tick, val_opp, q_opp, bid_opp, ask_opp)):
+                if b is None or ak is None:
+                    continue
+                inband = a.min_price <= q <= a.max_price
+                through = q >= ak
+                if through:
+                    note = "SKIP (would cross the offer — that is taking)"
+                elif not inband:
+                    note = f"SKIP (outside {a.min_price:.2f}-{a.max_price:.2f})"
+                else:
+                    note = f"QUOTE {q:.2f} x{a.size}   edge vs bid {(val-b)*100:+5.2f}c"
+                print(f"     {tag} mkt {b:.2f}/{ak:.2f}   worst-branch value {val:.3f}   {note}")
+            time.sleep(a.interval)
+    except KeyboardInterrupt:
+        print("\ninterrupted.")
+    print(f"\n[{feed.n_get} GETs, {feed.n_429} rate-limited]  DRY RUN — nothing was placed.")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--event", help="run self-contained on ONE event (a run.py-style "
+                                    "live quote board) instead of consuming tapes")
+    ap.add_argument("--me-ticker", help="force the tracked side; default = underdog")
+    ap.add_argument("--best-of", type=int, choices=(3, 5))
+    ap.add_argument("--final-set-tb", type=int, choices=(7, 10))
+    ap.add_argument("--size", type=int, default=10)
+    ap.add_argument("--margin", type=float, default=2.0)
+    ap.add_argument("--min-price", type=float, default=0.10)
+    ap.add_argument("--max-price", type=float, default=0.90)
+    ap.add_argument("--rps", type=float, default=4.0)
     ap.add_argument("--config", default="tennis_quoter_config.csv")
     ap.add_argument("--interval", type=float, default=2.0)
     ap.add_argument("--once", action="store_true")
@@ -133,6 +296,12 @@ def main():
                          "rate a live quoter would draw on shard 3's budget")
     ap.add_argument("--max-cycles", type=int, default=0)
     a = ap.parse_args()
+
+    if a.event:
+        print("=" * 100)
+        print("  TENNIS QUOTER — LIVE DRY RUN. No order-placement code in this process.")
+        print("=" * 100)
+        return live_quote_board(a)
 
     cfg = load_config(a.config)
     if not cfg:

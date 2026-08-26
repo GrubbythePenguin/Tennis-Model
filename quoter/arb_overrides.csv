@@ -1,0 +1,12 @@
+ticker_contains,min_edge,volumes,tick_step,max_position,max_fire_size,execution_type,config_id_contains,stop_quoting,min_absolute_edge,series_edge_mult
+# Leave execution_type blank to apply to ALL (arber, quoter, hedger).
+# Set to "arber", "quoter", or "hedger" to target only that type.
+# config_id_contains is a substring match on config_id (col 0) — use to target
+# a specific layer (e.g. QUOTE_L1 vs QUOTE_L2) within an execution_type.
+# stop_quoting: "False" to ACTIVATE rows that are stopped-by-default in market_parameters.
+#
+# 2026-07-15: activate VERIFIED native-date Kalshi-only LoL games (tier-2). Remove after settle.
+# (LRS aliased games 7DVTC/MG9Z/DOHZEN removed 2026-07-15 — date-divergence hallucination; see memory.)
+26JUL161400SECZNT,,,,,,,,False,,
+26JUL161300BANFEC,,,,,,,,False,,
+141400MYTHOUAT,,,,,,,,False,,
