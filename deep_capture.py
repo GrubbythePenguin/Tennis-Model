@@ -124,10 +124,12 @@ def main():
         return 0
 
     log = os.path.join(HERE, "tapes", f"deep_{pick['event'].rsplit('-',1)[-1].lower()}.log")
-    cmd = [sys.executable, "-u", os.path.join(HERE, "poll_tennis.py"), "watch",
+    # --rps is a TOP-LEVEL flag on poll_tennis.py, before the subcommand. Passing it
+    # after "watch" makes argparse reject it and the capture never starts.
+    cmd = [sys.executable, "-u", os.path.join(HERE, "poll_tennis.py"),
+           "--rps", str(a.rps), "watch",
            pick["event"], "--me", pick["me"], "--interval", str(a.interval),
-           "--pregame-interval", "30", "--max-cycles", str(a.max_cycles),
-           "--rps", str(a.rps)]
+           "--pregame-interval", "30", "--max-cycles", str(a.max_cycles)]
     env = dict(os.environ, TENNIS_CACHE=str(a.cache))
     with open(log, "a") as f:
         subprocess.Popen(cmd, stdout=f, stderr=subprocess.STDOUT, cwd=HERE,
