@@ -48,6 +48,22 @@ log = logging.getLogger(__name__)
 TAPES = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "tapes")
 DEFAULT_VARIANT = "ewma2"
 MAX_TAPE_AGE_SEC = 30.0
+# Minimum real game boundaries behind the fit before it may price anything.
+#
+# ImpliedModel fits p and q TO OBSERVED MARKET PRICES at boundaries - it carries no
+# independent information about tennis. With 20 boundaries the structure genuinely
+# interpolates between them. With one or two it does not: the fit is seeded from the
+# current market price and the output is that same price with an unconstrained bracket
+# around it.
+#
+# Measured 26AUG27, pollers attached mid-match ~15 minutes earlier:
+#     SACLLA  bracket 24.88c    <- 1-2 boundaries, fit meaningless
+#     LIURAD  bracket 14.23c
+#     KALCOS  bracket  6.52c    <- more boundaries, plausible
+# Those thin-fit markets quoted and traded 30 fills for a realised -$90.92, round-
+# tripping flat. Config discipline did not prevent it and cannot: matches are added
+# while the quoter runs. The gate belongs here, where the theo is produced.
+MIN_BOUNDARIES = 8
 MIN_THEO_C = 2.0
 MAX_THEO_C = 98.0
 
@@ -56,22 +72,24 @@ class TennisBranchTheoGenerator(BaseTheoGenerator):
     """bid/offer theos in CENTS from the one-point-ahead bracket."""
 
     def __init__(self, client: Any, configs: List[Any] = None,
-                 variant: str = DEFAULT_VARIANT, max_age: float = MAX_TAPE_AGE_SEC):
+                 variant: str = DEFAULT_VARIANT, max_age: float = MAX_TAPE_AGE_SEC,
+                 min_boundaries: int = MIN_BOUNDARIES):
         self.variant = variant
         self.max_age = max_age
+        self.min_boundaries = min_boundaries
         self._cache: Dict[str, Any] = {}      # event -> (mtime, row, meta)
         super().__init__(client, configs)
 
     # ---------------------------------------------------------------- tape access
     def _meta(self, event: str):
-        """me_ticker / opp_ticker for an event, from the boundary log poll_tennis writes."""
+        """(me_ticker, opp_ticker, n_boundaries) from the log poll_tennis writes."""
         p = os.path.join(TAPES, event + ".log.json")
         try:
             d = json.load(open(p))
             m = d.get("meta") or {}
-            return m.get("me_ticker"), m.get("opp_ticker")
+            return m.get("me_ticker"), m.get("opp_ticker"), len(d.get("obs") or [])
         except Exception:
-            return None, None
+            return None, None, 0
 
     def _latest(self, event: str):
         """Most recent in-play tape row carrying both branches, or None if stale/absent."""
@@ -124,9 +142,15 @@ class TennisBranchTheoGenerator(BaseTheoGenerator):
             l = (ah.get("lose") or {}).get(self.variant)
             if w is None or l is None:
                 continue
-            me_tick, _opp_tick = self._meta(event)
+            me_tick, _opp_tick, n_obs = self._meta(event)
             if not me_tick:
                 log.warning("TENNIS THEO | %s has no me_ticker in its log — skipping", event)
+                continue
+            # THIN-FIT GATE. Below this the "theo" is just the market price with an
+            # unconstrained bracket; quoting it trades on fit noise.
+            if n_obs < self.min_boundaries:
+                log.info("TENNIS THEO | %s only %d/%d boundaries — no theo yet "
+                         "(fit too thin to price)", event, n_obs, self.min_boundaries)
                 continue
 
             lo, hi = (w, l) if w <= l else (l, w)
