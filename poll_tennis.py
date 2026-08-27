@@ -555,6 +555,15 @@ def cmd_watch(a):
                    # ~p_point = market has not seen it either. The lag in one number.
                    "pt_seq": pt_seq, "pt_new": pt_new, "ahead": ahead,
                    "mkt_clock": _market_clock(ahead, px),
+                   # THE FIT ITSELF, per variant. ahead.p_point carries p OR q depending
+                   # on who serves, so neither the raw parameters nor how many
+                   # boundaries stand behind them were recoverable downstream. A
+                   # consumer needs both to judge whether a theo is worth acting on -
+                   # a bracket is only as meaningful as the fit that produced it.
+                   "fit": {t: {"p": round(m.p, 4), "q": round(m.q, 4), "n": len(m.obs)}
+                           for t, m in ([("static", static_model), ("rolling", model)]
+                                        + sorted(ewma.items()))
+                           if m is not None and m.p is not None},
                    # raw top of book, both sides — what a fill would actually pay
                    "book": {"bid_me": bid_me, "ask_me": ask_me,
                             "bid_opp": bid_opp, "ask_opp": ask_opp},

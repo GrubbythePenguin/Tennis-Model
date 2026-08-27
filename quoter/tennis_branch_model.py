@@ -64,6 +64,7 @@ MAX_TAPE_AGE_SEC = 30.0
 # tripping flat. Config discipline did not prevent it and cannot: matches are added
 # while the quoter runs. The gate belongs here, where the theo is produced.
 MIN_BOUNDARIES = 8
+STATUS_EVERY_SEC = 5.0
 MIN_THEO_C = 2.0
 MAX_THEO_C = 98.0
 
@@ -77,6 +78,7 @@ class TennisBranchTheoGenerator(BaseTheoGenerator):
         self.variant = variant
         self.max_age = max_age
         self.min_boundaries = min_boundaries
+        self._last_status: Dict[str, float] = {}
         self._cache: Dict[str, Any] = {}      # event -> (mtime, row, meta)
         super().__init__(client, configs)
 
@@ -125,6 +127,48 @@ class TennisBranchTheoGenerator(BaseTheoGenerator):
         self._cache[event] = (st.st_mtime, row)
         return row
 
+    def _status(self, event, row, ticker):
+        """One compact line per event, the tennis analogue of run.py's [LEAD-LAG].
+
+        Emitted whether or not the fit clears the gate, because watching p and q settle
+        IS the signal for whether the gate is set right. MIN_BOUNDARIES=8 was a guess
+        from eyeballing three brackets; if p/q are still swinging at n=8 it is too low,
+        and the only way to know is to log them the whole way through.
+        """
+        now = time.time()
+        if now - self._last_status.get(event, 0.0) < STATUS_EVERY_SEC:
+            return
+        self._last_status[event] = now
+        st = row.get("state") or {}
+        bk = row.get("book") or {}
+        f = (row.get("fit") or {}).get(self.variant) or {}
+        a = row.get("ahead") or {}
+        w = (a.get("win") or {}).get(self.variant)
+        l = (a.get("lose") or {}).get(self.variant)
+        lbl = ["0", "15", "30", "40", "AD"]
+        pm, po = st.get("points_me"), st.get("points_opp")
+        try:
+            intb = st.get("games_me") == 6 and st.get("games_opp") == 6
+            pts = f"{pm}-{po}" if intb else f"{lbl[pm]}-{lbl[po]}"
+        except Exception:
+            pts = f"{pm}-{po}"
+        n = f.get("n", 0)
+        gate = "PRICING" if n >= self.min_boundaries else f"gated {n}/{self.min_boundaries}"
+        brk = f"{abs(w - l) * 100:5.2f}c" if (w is not None and l is not None) else "   -  "
+        if w is not None and l is not None:
+            lo, hi = min(w, l), max(w, l)
+            me_q = f"{lo*100:5.1f}/{hi*100:5.1f}"
+            op_q = f"{(1-hi)*100:5.1f}/{(1-lo)*100:5.1f}"
+        else:
+            me_q = op_q = "  -  /  -  "
+        log.info("[TENNIS] %-14s %s-%s %s-%s %-7s srv=%-4s | p=%.3f q=%.3f n=%-3s %-13s | "
+                 "brkt %s | me %s mkt %s/%s | opp %s mkt %s/%s",
+                 event.rsplit("-", 1)[-1], st.get("sets_me"), st.get("sets_opp"),
+                 st.get("games_me"), st.get("games_opp"), pts, st.get("server", "?"),
+                 f.get("p", float("nan")), f.get("q", float("nan")), n, gate,
+                 brk, me_q, bk.get("bid_me"), bk.get("ask_me"),
+                 op_q, bk.get("bid_opp"), bk.get("ask_opp"))
+
     # ---------------------------------------------------------------- generation
     def _batch_generate(self, tickers: List[str],
                         dt_market_state: Dict[str, Any]) -> Dict[str, Dict[str, float]]:
@@ -142,6 +186,7 @@ class TennisBranchTheoGenerator(BaseTheoGenerator):
             l = (ah.get("lose") or {}).get(self.variant)
             if w is None or l is None:
                 continue
+            self._status(event, row, ticker)
             me_tick, _opp_tick, n_obs = self._meta(event)
             if not me_tick:
                 log.warning("TENNIS THEO | %s has no me_ticker in its log — skipping", event)

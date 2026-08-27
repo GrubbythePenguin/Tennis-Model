@@ -41276,3 +41276,1491 @@ Error POST /trade-api/v2/portfolio/events/orders/01a040c4-a018-7a7a-b26a-fd17704
 2026-08-27 01:12:07,344 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(111s)]
 2026-08-27 01:12:07,534 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(111s)]
 2026-08-27 01:12:07,724 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(112s)]
+2026-08-27 01:14:39,833 - __main__ - Starting VWAP Esports Evaluator Engine... (run.py last modified: 2026-08-19 05:50:34)
+2026-08-27 01:14:39,833 - __main__ - [1;91m  LIVE TRADING — orders will fire to Kalshi.[0m
+2026-08-27 01:14:39,834 - position_store - POSITION STORE | Initiating critical boot-load physical REST synchronization globally...
+2026-08-27 01:14:39,926 - position_store - POSITION STORE | Synchronous boot REST API sync completed successfully (9 positions, 0 reverse-aliased). Decoupling sequence initialized!
+2026-08-27 01:14:39,927 - live_series_model - [LIVE SERIES] Loaded 0 probabilities
+2026-08-27 01:14:39,927 - orderbook_poller - [POLLER] heartbeat cycles=1 registry=0 empty_books=0 429s=0 dropped404=0
+2026-08-27 01:14:39,928 - orderbook_poller - [POLLER] started (poll_interval=1.0s, ticker_refresh=30.0s, local_rps=15.0)
+2026-08-27 01:14:39,928 - hedge_staleness - [POLY-STALE FALLBACK] provider installed (_kalshi_map_fallback_provider)
+2026-08-27 01:14:39,928 - trade_logger - TRADE LOGGER | Autonomous background physical capture daemon engaged seamlessly.
+2026-08-27 01:14:39,929 - trade_logger - TRADE LOGGER | Background WebSocket thread successfully ignited...
+2026-08-27 01:14:39,929 - trade_logger - TRADE LOGGER | Syphoning recent native fills from Kalshi REST gateway...
+[POLY MAP] Loaded 29 pre-verified mappings (29 with Poly, 0 Kalshi-only)
+2026-08-27 01:14:39,929 - __main__ - [WS LISTENER] _poly_ws_listener.py not found — Poly books will use the REST path
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 71x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 11x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 200x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 65x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 1x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 1c
+ Time   : 2026-08-26T21:50:06.706395Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 55x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 200x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 1x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 65x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 5x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 200x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 28x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 94c
+ Time   : 2026-08-26T21:52:33.212081Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 128x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 79c
+ Time   : 2026-08-26T21:53:08.931439Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 16c
+ Time   : 2026-08-26T21:55:30.96913Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 84c
+ Time   : 2026-08-26T21:57:53.568651Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 85c
+ Time   : 2026-08-26T21:58:06.057416Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 85c
+ Time   : 2026-08-26T21:58:06.057416Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 1x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 85c
+ Time   : 2026-08-26T21:58:06.057416Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 50x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 86c
+ Time   : 2026-08-26T21:58:21.674034Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 2x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 86c
+ Time   : 2026-08-26T21:58:21.674034Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 1x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 86c
+ Time   : 2026-08-26T21:58:21.674615Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 4x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 86c
+ Time   : 2026-08-26T21:58:21.674615Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 1c
+ Time   : 2026-08-26T21:59:57.557389Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 100x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 88c
+ Time   : 2026-08-26T22:00:33.248584Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 30x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 88c
+ Time   : 2026-08-26T22:00:33.249198Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 1x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 88c
+ Time   : 2026-08-26T22:00:33.249198Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 100x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 88c
+ Time   : 2026-08-26T22:00:33.249198Z
+==============================================
+
+2026-08-27 01:14:40,011 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 78x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 94c
+ Time   : 2026-08-26T22:02:43.486825Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 8c
+ Time   : 2026-08-26T22:04:50.911305Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 7x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-KBM
+ Price  : 94c
+ Time   : 2026-08-26T22:06:52.782099Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 93c
+ Time   : 2026-08-26T22:07:10.202921Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 50x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 10c
+ Time   : 2026-08-26T22:07:14.302175Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 148x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 94c
+ Time   : 2026-08-26T22:07:42.239995Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 24x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 9c
+ Time   : 2026-08-26T22:12:14.165098Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 0x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 9c
+ Time   : 2026-08-26T22:12:14.209347Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-KBM
+ Price  : 3c
+ Time   : 2026-08-26T22:12:54.661319Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 9c
+ Time   : 2026-08-26T22:13:36.946714Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 6c
+ Time   : 2026-08-26T22:19:51.651621Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 2c
+ Time   : 2026-08-26T22:22:25.288765Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 80x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 93c
+ Time   : 2026-08-26T22:24:07.1518Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 93c
+ Time   : 2026-08-26T22:24:47.061806Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 93c
+ Time   : 2026-08-26T22:24:47.077041Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 93c
+ Time   : 2026-08-26T22:33:10.787439Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 26x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 94c
+ Time   : 2026-08-26T22:41:30.264809Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 93c
+ Time   : 2026-08-26T22:42:50.919225Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:43:32.371923Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 32x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:44:33.927614Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 119x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:47:08.97949Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 25x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 2c
+ Time   : 2026-08-26T22:52:18.79901Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 19x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 2c
+ Time   : 2026-08-26T22:52:18.79901Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 0x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 2c
+ Time   : 2026-08-26T22:52:18.830293Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 3c
+ Time   : 2026-08-26T22:52:21.492071Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 3c
+ Time   : 2026-08-26T22:55:00.115546Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 4x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.022953Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 597x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.022953Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.022953Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.023871Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.023871Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 49x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.023871Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 0x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.057232Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 9x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:56:26.359236Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 48x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 95c
+ Time   : 2026-08-26T22:56:26.362452Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:56:26.368274Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:56:26.376559Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 20x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:56:26.39902Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 94c
+ Time   : 2026-08-26T22:57:17.142963Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 78x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:58:31.706163Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXATPMATCH-26AUG26CINDEL-CIN
+ Price  : 20c
+ Time   : 2026-08-27T00:55:27.062176Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXATPMATCH-26AUG26CINDEL-DEL
+ Price  : 19c
+ Time   : 2026-08-27T00:55:34.977457Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXWTAMATCH-26AUG26LIURAD-RAD
+ Price  : 28c
+ Time   : 2026-08-27T00:55:45.165541Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXWTAMATCH-26AUG26LIURAD-RAD
+ Price  : 28c
+ Time   : 2026-08-27T00:55:48.615092Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXWTAMATCH-26AUG26KALCOS-KAL
+ Price  : 19c
+ Time   : 2026-08-27T00:56:01.07642Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXATPMATCH-26AUG26SCHHON-SCH
+ Price  : 83c
+ Time   : 2026-08-27T00:56:09.224224Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXATPMATCH-26AUG26SCHHON-HON
+ Price  : 83c
+ Time   : 2026-08-27T00:56:09.226481Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXWTAMATCH-26AUG26KALCOS-KAL
+ Price  : 15c
+ Time   : 2026-08-27T00:56:33.167203Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXATPMATCH-26AUG26SACLLA-SAC
+ Price  : 56c
+ Time   : 2026-08-27T00:57:27.012768Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXWTAMATCH-26AUG26LIURAD-RAD
+ Price  : 71c
+ Time   : 2026-08-27T00:57:50.642339Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXATPMATCH-26AUG26DAMMAR-DAM
+ Price  : 19c
+ Time   : 2026-08-27T00:57:52.664258Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXATPMATCH-26AUG26DAMMAR-DAM
+ Price  : 17c
+ Time   : 2026-08-27T00:58:00.674022Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXWTAMATCH-26AUG26LIURAD-LIU
+ Price  : 11c
+ Time   : 2026-08-27T00:58:03.649675Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXWTAMATCH-26AUG25VALSAS-VAL
+ Price  : 55c
+ Time   : 2026-08-27T00:59:14.910805Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXWTAMATCH-26AUG25VALSAS-VAL
+ Price  : 57c
+ Time   : 2026-08-27T01:00:00.111996Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 1x
+ Ticker : KXATPMATCH-26AUG26CINDEL-DEL
+ Price  : 72c
+ Time   : 2026-08-27T01:03:20.905452Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXATPMATCH-26AUG26SACLLA-SAC
+ Price  : 54c
+ Time   : 2026-08-27T01:05:00.474281Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXATPMATCH-26AUG26CINDEL-DEL
+ Price  : 79c
+ Time   : 2026-08-27T01:05:36.25226Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXWTAMATCH-26AUG26UDVMER-MER
+ Price  : 72c
+ Time   : 2026-08-27T01:06:20.395593Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXATPMATCH-26AUG26SACLLA-LLA
+ Price  : 31c
+ Time   : 2026-08-27T01:06:36.763616Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXATPMATCH-26AUG26SACLLA-LLA
+ Price  : 27c
+ Time   : 2026-08-27T01:06:37.950074Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXATPMATCH-26AUG26SACLLA-SAC
+ Price  : 27c
+ Time   : 2026-08-27T01:06:37.957501Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXWTAMATCH-26AUG26SEMSHU-SHU
+ Price  : 73c
+ Time   : 2026-08-27T01:06:47.359295Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXWTAMATCH-26AUG26SEMSHU-SEM
+ Price  : 73c
+ Time   : 2026-08-27T01:06:47.361206Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXWTAMATCH-26AUG26UDVMER-UDV
+ Price  : 70c
+ Time   : 2026-08-27T01:06:51.148994Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXWTAMATCH-26AUG26UDVMER-MER
+ Price  : 70c
+ Time   : 2026-08-27T01:06:51.151239Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXATPMATCH-26AUG26CINDEL-DEL
+ Price  : 79c
+ Time   : 2026-08-27T01:07:17.32158Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXATPMATCH-26AUG26CINDEL-CIN
+ Price  : 79c
+ Time   : 2026-08-27T01:07:17.322647Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXATPMATCH-26AUG26CINDEL-CIN
+ Price  : 76c
+ Time   : 2026-08-27T01:07:20.386881Z
+==============================================
+
+2026-08-27 01:14:40,012 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXWTAMATCH-26AUG26UDVMER-MER
+ Price  : 23c
+ Time   : 2026-08-27T01:08:23.060424Z
+==============================================
+
+2026-08-27 01:14:40,013 - trade_logger - TRADE LOGGER | ws_ready=False (connecting), seen_fills=100 in dedup set
+2026-08-27 01:14:40,030 - __main__ - [WS_DELTA] default-on mode — all active esports tickers subscribed dynamically each loop iteration (periodic_reseed=600s)
+2026-08-27 01:14:40,104 - trade_logger - TRADE LOGGER | Authenticated Live WebSocket Protocol Engaged. Listening for fills seamlessly...
+2026-08-27 01:14:40,130 - trade_logger - TRADE LOGGER | ws_ready=True — hedge buffer now ARMED. {'type': 'subscribed', 'id': 1, 'msg': {'channel': 'fill', 'sid': 1}}
+2026-08-27 01:14:40,131 - __main__ - [MAP WS] dedicated map feed started (isolated from series; dormant until a map routes to Kalshi)
+2026-08-27 01:14:40,131 - hedge_staleness - [FB-WS-SHADOW] provider installed (_kalshi_map_ws_shadow_provider)
+2026-08-27 01:14:40,132 - ws_rest_shadow - ws_rest_shadow ARMED (idle). Enable live WITHOUT a restart: `touch /Users/bradleyguan/Documents/Coding/Tennis-Model/quoter/enable_ws_rest_shadow.flag` (remove it to stop). Read-only, zero new REST calls.
+2026-08-27 01:14:40,133 - manager - Loaded 2 QuoterBots natively from template_quoter_config.csv
+2026-08-27 01:14:40,133 - __main__ - VWAP Engine armed with configuration from template_quoter_config.csv. Engaging loop...
+2026-08-27 01:14:40,134 - __main__ - [METADATA-CACHE] loaded 32 cached ticker(s)
+2026-08-27 01:14:40,311 - __main__ - [WS-PROBE] resolved 2/2 via WS in 0.18s
+2026-08-27 01:14:40,311 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-08-27 01:14:40,319 - book_view - [ISOLATED WS] READ PATH -> ws_delta (old book)
+2026-08-27 01:14:40,319 - __main__ - [WS FALLBACK] Fetching 2 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-CHW [isolated=? ws_delta=not_live] | KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=not_live]
+2026-08-27 01:14:40,407 - manager - [FAST-CANCEL] context registered (main loop + shared engine)
+2026-08-27 01:15:09,936 - orderbook_poller - [POLLER] tickers added=2 removed=0 total=2
+2026-08-27 01:15:40,003 - orderbook_poller - [POLLER] heartbeat cycles=61 registry=2 empty_books=0 429s=0 dropped404=0
+2026-08-27 01:15:40,217 - __main__ - [WS MISS ROLLUP] 60s window | served: ws_delta=1176 | misses: ws_delta:not_live=2
+    KXWTAMATCH-26AUG25CHWPAR-CHW: ws_delta:not_live=1
+    KXWTAMATCH-26AUG25CHWPAR-PAR: ws_delta:not_live=1
+Error GET /trade-api/v2/portfolio/orders: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-08-27 01:15:40,442 - manager - RECONCILIATION | resting-orders fetch returned no 'orders' key — Kalshi API call likely 429/timeout. Skipping cycle; will retry next tick.
+2026-08-27 01:16:40,033 - orderbook_poller - [POLLER] heartbeat cycles=121 registry=2 empty_books=0 429s=0 dropped404=0
+2026-08-27 01:17:40,055 - orderbook_poller - [POLLER] heartbeat cycles=181 registry=2 empty_books=0 429s=0 dropped404=0
+2026-08-27 01:18:40,062 - orderbook_poller - [POLLER] heartbeat cycles=241 registry=2 empty_books=0 429s=0 dropped404=0
+2026-08-27 01:19:40,094 - orderbook_poller - [POLLER] heartbeat cycles=301 registry=2 empty_books=0 429s=0 dropped404=0
+2026-08-27 01:19:40,381 - __main__ - [WS-PROBE] resolved 2/2 via WS in 0.18s
+2026-08-27 01:19:40,381 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+Error GET /trade-api/v2/portfolio/orders: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-08-27 01:19:40,596 - manager - RECONCILIATION | resting-orders fetch returned no 'orders' key — Kalshi API call likely 429/timeout. Skipping cycle; will retry next tick.
+2026-08-27 01:20:40,120 - orderbook_poller - [POLLER] heartbeat cycles=361 registry=2 empty_books=0 429s=0 dropped404=0
+2026-08-27 01:21:40,152 - orderbook_poller - [POLLER] heartbeat cycles=421 registry=2 empty_books=0 429s=0 dropped404=0
+2026-08-27 01:22:40,171 - orderbook_poller - [POLLER] heartbeat cycles=481 registry=2 empty_books=0 429s=0 dropped404=0
+Error GET /trade-api/v2/portfolio/orders: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-08-27 01:22:40,665 - manager - RECONCILIATION | resting-orders fetch returned no 'orders' key — Kalshi API call likely 429/timeout. Skipping cycle; will retry next tick.
+2026-08-27 01:22:44,415 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(60s)]
+2026-08-27 01:22:44,597 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(60s)]
+2026-08-27 01:22:44,779 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(60s)]
+2026-08-27 01:22:44,965 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(61s)]
+2026-08-27 01:22:45,150 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(61s)]
+2026-08-27 01:22:45,335 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(61s)]
+2026-08-27 01:22:45,524 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(61s)]
+2026-08-27 01:22:45,717 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(61s)]
+2026-08-27 01:22:45,899 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:22:46,082 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:22:46,277 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:22:46,460 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:22:46,650 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:22:46,837 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:22:47,025 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:22:47,206 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:22:47,399 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:22:47,586 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:22:47,777 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:22:47,961 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(64s)]
+2026-08-27 01:22:48,152 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(64s)]
+2026-08-27 01:22:48,335 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(64s)]
+2026-08-27 01:22:48,526 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(64s)]
+2026-08-27 01:22:48,713 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(64s)]
+2026-08-27 01:22:48,901 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(65s)]
+2026-08-27 01:22:49,103 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(65s)]
+2026-08-27 01:22:49,301 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(65s)]
+2026-08-27 01:22:49,494 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(65s)]
+2026-08-27 01:22:49,690 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(65s)]
+2026-08-27 01:22:49,876 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:22:50,065 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:22:50,267 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:22:50,451 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:22:50,635 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:22:50,819 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:22:51,016 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:22:51,204 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:22:51,391 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:22:51,576 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:22:51,765 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:22:51,958 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(68s)]
+2026-08-27 01:22:52,152 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(68s)]
+2026-08-27 01:22:52,352 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(68s)]
+2026-08-27 01:22:52,543 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(68s)]
+2026-08-27 01:22:52,730 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(68s)]
+2026-08-27 01:22:52,919 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:22:53,107 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:22:53,300 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:22:53,484 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:22:53,686 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:22:53,876 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(70s)]
+2026-08-27 01:22:54,064 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(70s)]
+2026-08-27 01:22:54,254 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(70s)]
+2026-08-27 01:22:54,447 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(70s)]
+2026-08-27 01:22:54,640 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(70s)]
+2026-08-27 01:22:54,833 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:22:55,026 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:22:55,219 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:22:55,410 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:22:55,593 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:22:55,787 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:22:55,975 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(72s)]
+2026-08-27 01:22:56,165 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(72s)]
+2026-08-27 01:22:56,347 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(72s)]
+2026-08-27 01:22:56,542 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(72s)]
+2026-08-27 01:22:56,729 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(72s)]
+2026-08-27 01:22:56,916 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(73s)]
+2026-08-27 01:22:57,104 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(73s)]
+2026-08-27 01:22:57,297 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(73s)]
+2026-08-27 01:22:57,493 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(73s)]
+2026-08-27 01:22:57,677 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(73s)]
+2026-08-27 01:22:57,873 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(74s)]
+2026-08-27 01:22:58,067 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(74s)]
+2026-08-27 01:22:58,258 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(74s)]
+2026-08-27 01:22:58,445 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(74s)]
+2026-08-27 01:22:58,632 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(74s)]
+2026-08-27 01:22:58,815 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(74s)]
+2026-08-27 01:22:59,007 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(75s)]
+2026-08-27 01:22:59,201 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(75s)]
+2026-08-27 01:22:59,382 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(75s)]
+2026-08-27 01:22:59,573 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(75s)]
+2026-08-27 01:22:59,758 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(75s)]
+2026-08-27 01:22:59,942 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(76s)]
+2026-08-27 01:23:00,139 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(76s)]
+2026-08-27 01:23:00,320 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(76s)]
+2026-08-27 01:23:00,509 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(76s)]
+2026-08-27 01:23:00,707 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(76s)]
+2026-08-27 01:23:00,888 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(77s)]
+2026-08-27 01:23:01,078 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(77s)]
+2026-08-27 01:23:01,268 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(77s)]
+2026-08-27 01:23:01,452 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(77s)]
+2026-08-27 01:23:01,641 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(77s)]
+2026-08-27 01:23:01,837 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(78s)]
+2026-08-27 01:23:02,048 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(78s)]
+2026-08-27 01:23:02,243 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(78s)]
+2026-08-27 01:23:02,443 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(78s)]
+2026-08-27 01:23:02,658 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(78s)]
+2026-08-27 01:23:02,840 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(79s)]
+2026-08-27 01:23:03,042 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(79s)]
+2026-08-27 01:23:03,233 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(79s)]
+2026-08-27 01:23:03,419 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(79s)]
+2026-08-27 01:23:03,608 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(79s)]
+2026-08-27 01:23:03,799 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(79s)]
+2026-08-27 01:23:03,997 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(80s)]
+2026-08-27 01:23:04,190 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(80s)]
+2026-08-27 01:23:04,378 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(80s)]
+2026-08-27 01:23:04,571 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(80s)]
+2026-08-27 01:23:04,761 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(80s)]
+2026-08-27 01:23:04,948 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(81s)]
+2026-08-27 01:23:05,148 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(81s)]
+2026-08-27 01:23:05,334 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(81s)]
+2026-08-27 01:23:05,523 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(81s)]
+2026-08-27 01:23:05,712 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(81s)]
+2026-08-27 01:23:05,905 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(82s)]
+2026-08-27 01:23:06,092 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(82s)]
+2026-08-27 01:23:06,282 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(82s)]
+2026-08-27 01:23:06,472 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(82s)]
+2026-08-27 01:23:06,672 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(82s)]
+2026-08-27 01:23:06,856 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(83s)]
+2026-08-27 01:23:07,041 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(83s)]
+2026-08-27 01:23:07,247 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(83s)]
+2026-08-27 01:23:07,440 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(83s)]
+2026-08-27 01:23:07,623 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(83s)]
+2026-08-27 01:23:07,819 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(84s)]
+2026-08-27 01:23:08,009 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(84s)]
+2026-08-27 01:23:37,603 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 30s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:37,603 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 30s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:37,705 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 30s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:37,705 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 30s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:37,806 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 30s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:37,806 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 30s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:37,907 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 30s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:37,907 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 30s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,009 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 30s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,009 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 30s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,110 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,110 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,211 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,211 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,313 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,314 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,417 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,417 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,518 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,518 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,619 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,620 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,721 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,721 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,822 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,822 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,923 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:38,924 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,025 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,025 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 31s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,127 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,127 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,228 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,228 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,329 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,329 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,431 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,440 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,542 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,542 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,643 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,643 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,744 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,745 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,846 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,846 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,947 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:39,947 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 32s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,050 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,050 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,151 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,152 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,219 - orderbook_poller - [POLLER] heartbeat cycles=541 registry=2 empty_books=0 429s=0 dropped404=0
+2026-08-27 01:23:40,254 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,254 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,355 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,355 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,456 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,456 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,557 - __main__ - [WS MISS ROLLUP] 60s window | served: ws_delta=839 | misses: ws_delta:stale=125
+    KXWTAMATCH-26AUG25CHWPAR-PAR: ws_delta:stale=125
+2026-08-27 01:23:40,558 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,558 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,756 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,756 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,858 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,858 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,959 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:40,959 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 33s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,061 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,061 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,162 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,162 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,263 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,263 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,365 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,365 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,466 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,466 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,568 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,568 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,669 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,669 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,771 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,771 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,872 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,873 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,974 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:41,974 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 34s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,075 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,075 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,177 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,177 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,278 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,278 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,379 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,379 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,481 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,481 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,595 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,595 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,697 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,697 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,798 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,798 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,900 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:42,900 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,001 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,001 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 35s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,104 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,104 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,206 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,206 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,307 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,307 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,409 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,409 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,510 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,511 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,612 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,612 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,714 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,714 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,815 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,815 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,917 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:43,917 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,018 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,018 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 36s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,119 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,119 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,221 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,221 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,322 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,322 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,424 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,424 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,525 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,525 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,632 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,632 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,733 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,734 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,835 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,835 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,937 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:44,937 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 37s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,038 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,038 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,140 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,140 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,241 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,241 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,343 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,343 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,444 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,444 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,545 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,546 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,647 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,647 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,748 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,748 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,849 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,849 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,951 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:45,951 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 38s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,052 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,052 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,154 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,154 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,255 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,255 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,356 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,356 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,458 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,458 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,559 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,559 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,661 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,661 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,762 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,762 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,863 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,863 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,965 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:46,965 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 39s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,066 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,066 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,167 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,167 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,268 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,269 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,370 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,370 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,471 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,471 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,572 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,573 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,674 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,674 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,777 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,777 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,879 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,879 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,980 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:47,980 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 40s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,082 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,082 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,184 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,184 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,285 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,285 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,387 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,389 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,490 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,490 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,591 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,591 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,693 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,693 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,794 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,794 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,896 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,896 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,997 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:48,997 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 41s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,098 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,098 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,199 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,200 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,301 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,301 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,402 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,402 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,504 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,504 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,605 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,605 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,706 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,706 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,808 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,808 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,909 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:49,909 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,011 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,011 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 42s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,113 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,113 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,214 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,215 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,316 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,316 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,418 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,423 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,525 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,525 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,627 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,627 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,728 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,728 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,830 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,830 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,931 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:50,931 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 43s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,032 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,032 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,134 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,134 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,235 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,235 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,336 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,337 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,438 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,438 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,539 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,539 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,641 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,641 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,742 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,742 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,844 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,844 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,945 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:51,945 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 44s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,046 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,047 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,148 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,148 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,249 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,250 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,351 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,352 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,453 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,453 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,554 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,554 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,657 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,657 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,758 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,758 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,863 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,864 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,965 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:52,974 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 45s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,076 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,076 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,178 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,183 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,285 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,288 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,389 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,389 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,491 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,491 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,592 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,592 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,695 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,695 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,797 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,797 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,898 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:53,898 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,000 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,000 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 46s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,101 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,101 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,202 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,203 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,304 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,304 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,405 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,405 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,507 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,507 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,609 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,609 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,710 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,710 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,812 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,812 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,913 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:54,913 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,014 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,015 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 47s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,117 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,117 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,219 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,219 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,321 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,321 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,422 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,422 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,524 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,524 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,625 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,625 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,726 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,727 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,828 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,828 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,929 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:55,930 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 48s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,031 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,031 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,132 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,132 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,234 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,234 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,335 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,335 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,437 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,437 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,538 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,539 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,640 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,640 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,741 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,741 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,842 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,843 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,944 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:56,944 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 49s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,049 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,049 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,151 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,152 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,254 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,254 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,355 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,355 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,462 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,463 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,564 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,564 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,666 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,666 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,767 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,767 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,869 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,869 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,970 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:57,970 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 50s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,072 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,072 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,173 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,180 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,284 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,284 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,385 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,385 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,487 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,487 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,588 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,588 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,689 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,689 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,791 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,791 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,892 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,892 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,994 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:58,994 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 51s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,095 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,095 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,196 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,196 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,297 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,297 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,399 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,399 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,500 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,500 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,602 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,602 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,703 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,703 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,804 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,805 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,906 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:23:59,906 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:24:00,008 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:24:00,008 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 52s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:24:00,109 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 53s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:24:00,109 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 53s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:24:00,213 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 53s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:24:00,213 - tennis_branch_model - TENNIS THEO | KXWTAMATCH-26AUG25CHWPAR tape is 53s stale (>30s) — no theo, quotes should be pulled
+2026-08-27 01:24:08,133 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(60s)]
+2026-08-27 01:24:08,323 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(60s)]
+2026-08-27 01:24:08,515 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(60s)]
+2026-08-27 01:24:08,708 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(61s)]
+2026-08-27 01:24:08,892 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(61s)]
+2026-08-27 01:24:09,074 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(61s)]
+2026-08-27 01:24:09,251 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(61s)]
+2026-08-27 01:24:09,443 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(61s)]
+2026-08-27 01:24:09,643 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:24:09,830 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:24:10,025 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:24:10,211 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:24:10,402 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:24:10,585 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(62s)]
+2026-08-27 01:24:10,775 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:24:10,958 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:24:11,148 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:24:11,344 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:24:11,538 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(63s)]
+2026-08-27 01:24:11,726 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(64s)]
+2026-08-27 01:24:11,916 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(64s)]
+2026-08-27 01:24:12,100 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(64s)]
+2026-08-27 01:24:12,282 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(64s)]
+2026-08-27 01:24:12,470 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(64s)]
+2026-08-27 01:24:12,673 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(65s)]
+2026-08-27 01:24:12,866 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(65s)]
+2026-08-27 01:24:13,059 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(65s)]
+2026-08-27 01:24:13,247 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(65s)]
+2026-08-27 01:24:13,437 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(65s)]
+2026-08-27 01:24:13,615 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:24:13,815 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:24:14,007 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:24:14,193 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:24:14,380 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:24:14,570 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(66s)]
+2026-08-27 01:24:14,751 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:24:14,929 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:24:15,121 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:24:15,303 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:24:15,492 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(67s)]
+2026-08-27 01:24:15,690 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(68s)]
+2026-08-27 01:24:15,881 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(68s)]
+2026-08-27 01:24:16,066 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(68s)]
+2026-08-27 01:24:16,249 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(68s)]
+2026-08-27 01:24:16,436 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(68s)]
+2026-08-27 01:24:16,625 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:24:16,813 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:24:17,006 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:24:17,189 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:24:17,377 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:24:17,567 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(69s)]
+2026-08-27 01:24:17,747 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(70s)]
+2026-08-27 01:24:17,938 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(70s)]
+2026-08-27 01:24:18,120 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(70s)]
+2026-08-27 01:24:18,309 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(70s)]
+2026-08-27 01:24:18,492 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(70s)]
+2026-08-27 01:24:18,677 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:24:18,868 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:24:19,054 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:24:19,249 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:24:19,447 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(71s)]
+2026-08-27 01:24:19,631 - __main__ - [WS FALLBACK] Fetching 1 tickers via REST: KXWTAMATCH-26AUG25CHWPAR-PAR [isolated=? ws_delta=stale(72s)]
+2026-08-27 01:24:39,968 - ws_delta_book - WS closed intentionally (reseed) after 600s up — reconnecting immediately, no backoff
+2026-08-27 01:24:40,272 - orderbook_poller - [POLLER] heartbeat cycles=601 registry=2 empty_books=0 429s=0 dropped404=0
+2026-08-27 01:24:40,367 - __main__ - [WS-PROBE] resolved 2/2 via WS in 0.16s
+2026-08-27 01:24:40,367 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-08-27 01:24:40,570 - __main__ - [WS MISS ROLLUP] 60s window | served: ws_delta=1008 | misses: ws_delta:stale=62
+    KXWTAMATCH-26AUG25CHWPAR-PAR: ws_delta:stale=62
