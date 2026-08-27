@@ -70676,3 +70676,77 @@ Error GET /trade-api/v2/portfolio/orders: ('Connection aborted.', RemoteDisconne
 2026-08-27 02:19:06,006 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 15-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.79c | me  16.8/ 17.5 mkt 0.15/0.16 | opp  82.5/ 83.2 mkt 0.84/0.85
 2026-08-27 02:19:11,016 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 15-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.79c | me  16.8/ 17.5 mkt 0.15/0.16 | opp  82.5/ 83.2 mkt 0.84/0.85
 2026-08-27 02:19:16,042 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 15-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.79c | me  16.8/ 17.5 mkt 0.15/0.16 | opp  82.5/ 83.2 mkt 0.84/0.85
+2026-08-27 02:19:21,089 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 15-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.79c | me  16.8/ 17.5 mkt 0.15/0.16 | opp  82.5/ 83.2 mkt 0.84/0.85
+2026-08-27 02:19:26,114 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 15-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.79c | me  16.8/ 17.5 mkt 0.15/0.16 | opp  82.5/ 83.2 mkt 0.84/0.85
+2026-08-27 02:19:31,127 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 15-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.79c | me  16.8/ 17.5 mkt 0.16/0.17 | opp  82.5/ 83.2 mkt 0.84/0.85
+2026-08-27 02:19:36,146 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.56c | me  17.2/ 17.8 mkt 0.16/0.17 | opp  82.2/ 82.8 mkt 0.84/0.85
+2026-08-27 02:19:41,171 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.56c | me  17.2/ 17.8 mkt 0.16/0.17 | opp  82.2/ 82.8 mkt 0.84/0.85
+2026-08-27 02:19:46,198 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.56c | me  17.2/ 17.8 mkt 0.16/0.17 | opp  82.2/ 82.8 mkt 0.84/0.85
+2026-08-27 02:19:51,213 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.56c | me  17.2/ 17.8 mkt 0.16/0.17 | opp  82.2/ 82.8 mkt 0.84/0.85
+2026-08-27 02:19:53,246 - orderbook_poller - [POLLER] heartbeat cycles=3121 registry=4 empty_books=0 429s=0 dropped404=0
+2026-08-27 02:19:56,218 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.56c | me  17.2/ 17.8 mkt 0.16/0.17 | opp  82.2/ 82.8 mkt 0.84/0.85
+2026-08-27 02:20:01,243 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-15   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  0.56c | me  17.2/ 17.8 mkt 0.16/0.17 | opp  82.2/ 82.8 mkt 0.84/0.85
+2026-08-27 02:20:06,323 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-30   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  1.14c | me  16.5/ 17.6 mkt 0.15/0.16 | opp  82.4/ 83.5 mkt 0.84/0.85
+2026-08-27 02:20:11,359 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-30   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  1.14c | me  16.5/ 17.6 mkt 0.15/0.16 | opp  82.4/ 83.5 mkt 0.84/0.85
+2026-08-27 02:20:16,377 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-30   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  1.14c | me  16.5/ 17.6 mkt 0.15/0.16 | opp  82.4/ 83.5 mkt 0.84/0.85
+2026-08-27 02:20:21,407 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-30   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  1.14c | me  16.5/ 17.6 mkt 0.15/0.16 | opp  82.4/ 83.5 mkt 0.84/0.85
+2026-08-27 02:20:26,440 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-30   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  1.14c | me  16.5/ 17.6 mkt 0.15/0.16 | opp  82.4/ 83.5 mkt 0.84/0.85
+2026-08-27 02:20:31,470 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-30   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  1.14c | me  16.5/ 17.6 mkt 0.15/0.16 | opp  82.4/ 83.5 mkt 0.84/0.85
+2026-08-27 02:20:36,510 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-30   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  1.14c | me  16.5/ 17.6 mkt 0.14/0.17 | opp  82.4/ 83.5 mkt 0.85/0.86
+2026-08-27 02:20:41,530 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-30   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  1.14c | me  16.5/ 17.6 mkt 0.14/0.17 | opp  82.4/ 83.5 mkt 0.85/0.86
+2026-08-27 02:20:46,555 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.14/0.17 | opp  82.8/ 84.9 mkt 0.85/0.86
+2026-08-27 02:20:51,575 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.14/0.17 | opp  82.8/ 84.9 mkt 0.85/0.86
+2026-08-27 02:20:53,266 - orderbook_poller - [POLLER] heartbeat cycles=3181 registry=4 empty_books=0 429s=0 dropped404=0
+Error GET /trade-api/v2/portfolio/orders: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-08-27 02:20:54,888 - manager - RECONCILIATION | resting-orders fetch returned no 'orders' key — Kalshi API call likely 429/timeout. Skipping cycle; will retry next tick.
+2026-08-27 02:20:56,627 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.13/0.14 | opp  82.8/ 84.9 mkt 0.86/0.87
+2026-08-27 02:21:01,650 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.13/0.14 | opp  82.8/ 84.9 mkt 0.86/0.87
+2026-08-27 02:21:06,680 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.13/0.14 | opp  82.8/ 84.9 mkt 0.86/0.87
+2026-08-27 02:21:11,707 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.13/0.14 | opp  82.8/ 84.9 mkt 0.86/0.87
+2026-08-27 02:21:16,725 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.13/0.14 | opp  82.8/ 84.9 mkt 0.86/0.87
+2026-08-27 02:21:21,768 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.13/0.14 | opp  82.8/ 84.9 mkt 0.86/0.87
+2026-08-27 02:21:26,794 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.12/0.14 | opp  82.8/ 84.9 mkt 0.86/0.88
+2026-08-27 02:21:31,828 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.12/0.14 | opp  82.8/ 84.9 mkt 0.86/0.88
+2026-08-27 02:21:36,850 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-0 3-5 30-40   srv=me   | p=0.641 q=0.324 n=9   PRICING       | brkt  2.04c | me  15.2/ 17.2 mkt 0.12/0.14 | opp  82.8/ 84.9 mkt 0.86/0.88
+2026-08-27 02:21:41,869 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.641 q=0.324 n=9   PRICING       | brkt  2.43c | me  14.4/ 16.8 mkt 0.12/0.14 | opp  83.2/ 85.6 mkt 0.86/0.88
+2026-08-27 02:21:43,104 - bot - [ARBER MAKER FIRE] KXWTAMATCH-26AUG25CHWPAR-CHW state=? active_map=? | bid_theo=84.6 offer_theo=87.1 | bids=[(82, 10)] offers=[] | top=88/89 | cons_map_no=? cons_map_yes=? | syn_long=? syn_short=? | p1=? p2=? series=?
+2026-08-27 02:21:43,104 - manager - [DIFF] 135360277806256 KXWTAMATCH-26AUG25CHWPAR-CHW type=quoter existing=1 kept=0 cancel=0 post=0 amend=1 amends=[(80->82,10->10,bid,yes)] cancels=[] posts=[]
+2026-08-27 02:21:43,104 - bot - [ARBER MAKER FIRE] KXWTAMATCH-26AUG25CHWPAR-PAR state=? active_map=? | bid_theo=12.9 offer_theo=15.4 | bids=[] offers=[(18, 10)] | top=11/12 | cons_map_no=? cons_map_yes=? | syn_long=? syn_short=? | p1=? p2=? series=?
+2026-08-27 02:21:43,104 - manager - [DIFF] 135360278566928 KXWTAMATCH-26AUG25CHWPAR-PAR type=quoter existing=1 kept=0 cancel=0 post=0 amend=1 amends=[(80->82,10->10,offer,no)] cancels=[] posts=[]
+2026-08-27 02:21:43,104 - execution - [AMEND BATCH START] n=2 oids=[01a04102-31d0-70fa-a6fb-d33acba29b95,01a04102-31d0-73f8-ab9c-1f0e4ef5d6b5]
+Error POST /trade-api/v2/portfolio/events/orders/01a04102-31d0-70fa-a6fb-d33acba29b95/amend: 404 - {"error":{"code":"not_found","message":"not found"}}
+2026-08-27 02:21:43,194 - execution - [AMEND FAIL] KXWTAMATCH-26AUG25CHWPAR-CHW order=01a04102-31d0-70fa-a6fb-d33acba29b95 side=yes price=80->82 size=10->10 idx=0/2 kind=reject status=404 — routing to cancel+post
+Error POST /trade-api/v2/portfolio/events/orders/01a04102-31d0-73f8-ab9c-1f0e4ef5d6b5/amend: 404 - {"error":{"code":"not_found","message":"not found"}}
+2026-08-27 02:21:43,223 - execution - [AMEND FAIL] KXWTAMATCH-26AUG25CHWPAR-PAR order=01a04102-31d0-73f8-ab9c-1f0e4ef5d6b5 side=no price=80->82 size=10->10 idx=1/2 kind=reject status=404 — routing to cancel+post
+2026-08-27 02:21:43,223 - execution - [AMEND BATCH END] in=2 succeeded=0 failed=2 gate_declined=0 — conservation OK
+2026-08-27 02:21:43,223 - manager - [P0-2 AMEND FAILED] 2/2 amend(s) failed → fallback: 2 reject (repost now), 0 ambiguous/other (cancel + defer repost). oids=[01a04102-31d0-70fa-a6fb-d33acba29b95,01a04102-31d0-73f8-ab9c-1f0e4ef5d6b5]
+2026-08-27 02:21:43,223 - manager - [AMEND FALLBACK] KXWTAMATCH-26AUG25CHWPAR-CHW order=01a04102-31d0-70fa-a6fb-d33acba29b95 side=yes kind=reject routed to cancel+post
+2026-08-27 02:21:43,223 - manager - [AMEND FALLBACK] KXWTAMATCH-26AUG25CHWPAR-PAR order=01a04102-31d0-73f8-ab9c-1f0e4ef5d6b5 side=no kind=reject routed to cancel+post
+2026-08-27 02:21:46,894 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:21:51,919 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:21:53,292 - orderbook_poller - [POLLER] heartbeat cycles=3241 registry=4 empty_books=0 429s=0 dropped404=0
+2026-08-27 02:21:56,977 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:01,995 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:07,026 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:12,051 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:17,075 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:22,106 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:27,142 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:32,156 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:37,192 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:42,224 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:47,266 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:50,852 - __main__ - 
+>>> CSV MATRIX FRAGMENTATION DETECTED! Triggering native hot-reload protocol! <<<
+2026-08-27 02:22:50,855 - bot - [STOP-CAP] KXWTAMATCH-26AUG25CHWPAR-CHW: |pos|=20 < 1.4×max_position=420 — released, resuming both sides
+2026-08-27 02:22:50,855 - bot - [ARBER MAKER FIRE] KXWTAMATCH-26AUG25CHWPAR-CHW state=? active_map=? | bid_theo=84.6 offer_theo=87.1 | bids=[(82, 10)] offers=[(90, 10)] | top=88/89 | cons_map_no=? cons_map_yes=? | syn_long=? syn_short=? | p1=? p2=? series=?
+2026-08-27 02:22:50,866 - manager - [DIFF] 135360277806256 KXWTAMATCH-26AUG25CHWPAR-CHW type=quoter existing=1 kept=1 cancel=0 post=1 amend=0 amends=[] cancels=[] posts=[(10,10,offer,no)]
+2026-08-27 02:22:50,866 - bot - [STOP-CAP] KXWTAMATCH-26AUG25CHWPAR-PAR: |pos|=20 < 1.4×max_position=420 — released, resuming both sides
+2026-08-27 02:22:50,866 - bot - [ARBER MAKER FIRE] KXWTAMATCH-26AUG25CHWPAR-PAR state=? active_map=? | bid_theo=12.9 offer_theo=15.4 | bids=[(10, 10)] offers=[(18, 10)] | top=11/12 | cons_map_no=? cons_map_yes=? | syn_long=? syn_short=? | p1=? p2=? series=?
+2026-08-27 02:22:50,866 - manager - [DIFF] 135360278566928 KXWTAMATCH-26AUG25CHWPAR-PAR type=quoter existing=1 kept=1 cancel=0 post=1 amend=0 amends=[] cancels=[] posts=[(10,10,bid,yes)]
+2026-08-27 02:22:52,330 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:22:53,228 - __main__ - [WS-PROBE] resolved 2/4 via WS in 0.18s
+2026-08-27 02:22:53,266 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-08-27 02:22:53,307 - orderbook_poller - [POLLER] heartbeat cycles=3301 registry=4 empty_books=0 429s=0 dropped404=0
+2026-08-27 02:22:57,404 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
+2026-08-27 02:23:02,420 - tennis_branch_model - [TENNIS] 26AUG25CHWPAR  0-1 0-0 0-0     srv=opp  | p=0.595 q=0.367 n=10  PRICING       | brkt  2.50c | me  12.9/ 15.4 mkt 0.11/0.12 | opp  84.6/ 87.1 mkt 0.88/0.89
