@@ -10,3 +10,7 @@ tapes/
 
 # Local kill switch
 disable_tennis_poller.flag
+
+# Local venv for the quoter stack (mirrors the esports venv's packages).
+# Not committed: 37 packages, and it is reproducible from pip freeze.
+.venv/
