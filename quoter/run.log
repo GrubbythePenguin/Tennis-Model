@@ -1,0 +1,842 @@
+2026-08-27 00:14:00,897 - __main__ - Starting VWAP Esports Evaluator Engine... (run.py last modified: 2026-08-19 05:50:34)
+2026-08-27 00:14:00,904 - __main__ - [1;91m  LIVE TRADING — orders will fire to Kalshi.[0m
+2026-08-27 00:14:00,910 - position_store - POSITION STORE | Initiating critical boot-load physical REST synchronization globally...
+2026-08-27 00:14:01,010 - position_store - POSITION STORE | Synchronous boot REST API sync completed successfully (0 positions, 0 reverse-aliased). Decoupling sequence initialized!
+2026-08-27 00:14:01,012 - live_series_model - [LIVE SERIES] Loaded 0 probabilities
+2026-08-27 00:14:01,012 - orderbook_poller - [POLLER] heartbeat cycles=1 registry=0 empty_books=0 429s=0 dropped404=0
+2026-08-27 00:14:01,012 - orderbook_poller - [POLLER] started (poll_interval=1.0s, ticker_refresh=30.0s, local_rps=15.0)
+2026-08-27 00:14:01,012 - hedge_staleness - [POLY-STALE FALLBACK] provider installed (_kalshi_map_fallback_provider)
+2026-08-27 00:14:01,018 - trade_logger - TRADE LOGGER | Autonomous background physical capture daemon engaged seamlessly.
+[POLY MAP] Loaded 29 pre-verified mappings (29 with Poly, 0 Kalshi-only)
+2026-08-27 00:14:01,018 - trade_logger - TRADE LOGGER | Background WebSocket thread successfully ignited...
+2026-08-27 00:14:01,019 - trade_logger - TRADE LOGGER | Syphoning recent native fills from Kalshi REST gateway...
+2026-08-27 00:14:01,019 - __main__ - [WS LISTENER] _poly_ws_listener.py not found — Poly books will use the REST path
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 25x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 60c
+ Time   : 2026-08-26T21:36:36.205831Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 104x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 60c
+ Time   : 2026-08-26T21:36:38.370147Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 47x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 65c
+ Time   : 2026-08-26T21:36:41.189509Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 51x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 65c
+ Time   : 2026-08-26T21:36:42.295876Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 6x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 75c
+ Time   : 2026-08-26T21:36:46.434301Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 4x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 75c
+ Time   : 2026-08-26T21:36:46.434301Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 120x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 76c
+ Time   : 2026-08-26T21:36:46.434301Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 6x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 75c
+ Time   : 2026-08-26T21:36:46.434301Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 6x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 75c
+ Time   : 2026-08-26T21:36:46.434301Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 25x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 64c
+ Time   : 2026-08-26T21:37:24.854579Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 1x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 66c
+ Time   : 2026-08-26T21:37:24.854579Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 43x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 66c
+ Time   : 2026-08-26T21:37:24.854579Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 55x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 69c
+ Time   : 2026-08-26T21:37:24.854579Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 1x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-NEM
+ Price  : 84c
+ Time   : 2026-08-26T21:39:13.819921Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 47x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 80c
+ Time   : 2026-08-26T21:44:08.09365Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 7x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 80c
+ Time   : 2026-08-26T21:44:49.642107Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 124x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 91c
+ Time   : 2026-08-26T21:45:01.91726Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 775x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:46:48.014858Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 110x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:46:48.014858Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 402x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:46:48.014858Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 4x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 97c
+ Time   : 2026-08-26T21:46:48.014858Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 34x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 97c
+ Time   : 2026-08-26T21:46:48.014858Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 65x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 97c
+ Time   : 2026-08-26T21:46:48.014858Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 19x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 97c
+ Time   : 2026-08-26T21:46:48.014858Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 1x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:46:48.014858Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 7x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:46:48.014858Z
+==============================================
+
+2026-08-27 00:14:01,103 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 168x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:46:48.014858Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 1c
+ Time   : 2026-08-26T21:49:40.15342Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 17x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 93c
+ Time   : 2026-08-26T21:49:40.402164Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 71x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 11x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 200x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 65x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 1x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 7x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:49:58.862375Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 1c
+ Time   : 2026-08-26T21:50:06.706395Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 55x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 200x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 1x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 65x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 98c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 5x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 200x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXCS2MAP-26AUG2614001WINNEM-2-1WIN
+ Price  : 99c
+ Time   : 2026-08-26T21:52:00.728787Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 28x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 94c
+ Time   : 2026-08-26T21:52:33.212081Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 128x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 79c
+ Time   : 2026-08-26T21:53:08.931439Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 16c
+ Time   : 2026-08-26T21:55:30.96913Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 84c
+ Time   : 2026-08-26T21:57:53.568651Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 85c
+ Time   : 2026-08-26T21:58:06.057416Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 85c
+ Time   : 2026-08-26T21:58:06.057416Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 1x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 85c
+ Time   : 2026-08-26T21:58:06.057416Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 50x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 86c
+ Time   : 2026-08-26T21:58:21.674034Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 2x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 86c
+ Time   : 2026-08-26T21:58:21.674034Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 1x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 86c
+ Time   : 2026-08-26T21:58:21.674615Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 4x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 86c
+ Time   : 2026-08-26T21:58:21.674615Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 1c
+ Time   : 2026-08-26T21:59:57.557389Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 100x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 88c
+ Time   : 2026-08-26T22:00:33.248584Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 30x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 88c
+ Time   : 2026-08-26T22:00:33.249198Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 1x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 88c
+ Time   : 2026-08-26T22:00:33.249198Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 100x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 88c
+ Time   : 2026-08-26T22:00:33.249198Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 78x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 94c
+ Time   : 2026-08-26T22:02:43.486825Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 8c
+ Time   : 2026-08-26T22:04:50.911305Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 7x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-KBM
+ Price  : 94c
+ Time   : 2026-08-26T22:06:52.782099Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 93c
+ Time   : 2026-08-26T22:07:10.202921Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 50x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 10c
+ Time   : 2026-08-26T22:07:14.302175Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 148x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 94c
+ Time   : 2026-08-26T22:07:42.239995Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 24x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 9c
+ Time   : 2026-08-26T22:12:14.165098Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 0x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 9c
+ Time   : 2026-08-26T22:12:14.209347Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-KBM
+ Price  : 3c
+ Time   : 2026-08-26T22:12:54.661319Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 10x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 9c
+ Time   : 2026-08-26T22:13:36.946714Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 6c
+ Time   : 2026-08-26T22:19:51.651621Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261600KBM7RE-7RE
+ Price  : 2c
+ Time   : 2026-08-26T22:22:25.288765Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 80x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 93c
+ Time   : 2026-08-26T22:24:07.1518Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 93c
+ Time   : 2026-08-26T22:24:47.061806Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 93c
+ Time   : 2026-08-26T22:24:47.077041Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 93c
+ Time   : 2026-08-26T22:33:10.787439Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 26x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 94c
+ Time   : 2026-08-26T22:41:30.264809Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 93c
+ Time   : 2026-08-26T22:42:50.919225Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:43:32.371923Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 32x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:44:33.927614Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 119x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:47:08.97949Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 25x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 2c
+ Time   : 2026-08-26T22:52:18.79901Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 19x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 2c
+ Time   : 2026-08-26T22:52:18.79901Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 0x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 2c
+ Time   : 2026-08-26T22:52:18.830293Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 3c
+ Time   : 2026-08-26T22:52:21.492071Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 3c
+ Time   : 2026-08-26T22:55:00.115546Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 4x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.022953Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 597x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.022953Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.022953Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.023871Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.023871Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 49x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.023871Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 0x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 4c
+ Time   : 2026-08-26T22:55:36.057232Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 9x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:56:26.359236Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 48x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-CNV
+ Price  : 95c
+ Time   : 2026-08-26T22:56:26.362452Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 5x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:56:26.368274Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:56:26.376559Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 20x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:56:26.39902Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 94c
+ Time   : 2026-08-26T22:57:17.142963Z
+==============================================
+
+2026-08-27 00:14:01,104 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 78x
+ Ticker : KXLOLGAME-26AUG261700DOGCNV-DOG
+ Price  : 95c
+ Time   : 2026-08-26T22:58:31.706163Z
+==============================================
+
+2026-08-27 00:14:01,105 - trade_logger - TRADE LOGGER | ws_ready=False (connecting), seen_fills=100 in dedup set
+2026-08-27 00:14:01,124 - __main__ - [WS_DELTA] default-on mode — all active esports tickers subscribed dynamically each loop iteration (periodic_reseed=600s)
+2026-08-27 00:14:01,196 - trade_logger - TRADE LOGGER | Authenticated Live WebSocket Protocol Engaged. Listening for fills seamlessly...
+2026-08-27 00:14:01,221 - trade_logger - TRADE LOGGER | ws_ready=True — hedge buffer now ARMED. {'type': 'subscribed', 'id': 1, 'msg': {'channel': 'fill', 'sid': 1}}
+2026-08-27 00:14:01,230 - __main__ - [MAP WS] dedicated map feed started (isolated from series; dormant until a map routes to Kalshi)
+2026-08-27 00:14:01,230 - hedge_staleness - [FB-WS-SHADOW] provider installed (_kalshi_map_ws_shadow_provider)
+2026-08-27 00:14:01,240 - ws_rest_shadow - ws_rest_shadow ARMED (idle). Enable live WITHOUT a restart: `touch /Users/bradleyguan/Documents/Coding/Tennis-Model/quoter/enable_ws_rest_shadow.flag` (remove it to stop). Read-only, zero new REST calls.
+2026-08-27 00:14:01,248 - arber_bot - [ARBER INIT] KXLOLGAME-26AUG261600KBM7RE-7RE min_edge=3.0 min_abs_edge=1.5 series_edge_mult=100.0 max_pos=12000 data_source=poly
+2026-08-27 00:14:01,248 - arber_bot - --- FATAL RISK HALT --- | No pre-game probabilities for KXLOLGAME-26AUG261600KBM7RE-7RE. Arber deactivating.
+2026-08-27 00:14:01,248 - arber_bot - [ARBER INIT] KXLOLGAME-26AUG261600KBM7RE-KBM min_edge=3.0 min_abs_edge=1.5 series_edge_mult=100.0 max_pos=12000 data_source=poly
+2026-08-27 00:14:01,248 - arber_bot - --- FATAL RISK HALT --- | No pre-game probabilities for KXLOLGAME-26AUG261600KBM7RE-KBM. Arber deactivating.
+2026-08-27 00:14:01,249 - arber_bot - [ARBER INIT] KXLOLGAME-26AUG261700DOGCNV-CNV min_edge=3.0 min_abs_edge=1.5 series_edge_mult=100.0 max_pos=12000 data_source=poly
+2026-08-27 00:14:01,249 - arber_bot - --- FATAL RISK HALT --- | No pre-game probabilities for KXLOLGAME-26AUG261700DOGCNV-CNV. Arber deactivating.
+2026-08-27 00:14:01,249 - arber_bot - [ARBER INIT] KXLOLGAME-26AUG261700DOGCNV-DOG min_edge=3.0 min_abs_edge=1.5 series_edge_mult=100.0 max_pos=12000 data_source=poly
+2026-08-27 00:14:01,249 - arber_bot - --- FATAL RISK HALT --- | No pre-game probabilities for KXLOLGAME-26AUG261700DOGCNV-DOG. Arber deactivating.
+2026-08-27 00:14:01,249 - manager - Loaded 36 QuoterBots natively from template_quoter_config.csv
+2026-08-27 00:14:01,249 - __main__ - VWAP Engine armed with configuration from template_quoter_config.csv. Engaging loop...
+2026-08-27 00:14:01,435 - __main__ - [WS-PROBE] resolved 0/4 via WS in 0.19s
+2026-08-27 00:14:01,470 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-08-27 00:14:01,470 - __main__ - [FINALIZED-SKIP] now excluding 4 settled ticker(s) from per-tick fetch (+4 new: ['KXLOLGAME-26AUG261600KBM7RE-7RE', 'KXLOLGAME-26AUG261600KBM7RE-KBM', 'KXLOLGAME-26AUG261700DOGCNV-CNV', 'KXLOLGAME-26AUG261700DOGCNV-DOG'])
+2026-08-27 00:14:01,472 - manager - [FAST-CANCEL] context registered (main loop + shared engine)
+2026-08-27 00:14:01,510 - live_series_model - [LIVE SERIES] KXLOLGAME-26AUG261700DOGCNV-DOG: no probs — inactive
+2026-08-27 00:14:01,510 - live_series_model - [LIVE SERIES] KXLOLGAME-26AUG261600KBM7RE-KBM: no probs — inactive
+2026-08-27 00:14:01,510 - live_series_model - [LIVE SERIES] KXLOLGAME-26AUG261700DOGCNV-CNV: no probs — inactive
+2026-08-27 00:14:01,510 - live_series_model - [LIVE SERIES] KXLOLGAME-26AUG261600KBM7RE-7RE: no probs — inactive
+2026-08-27 00:14:01,510 - arber_bot - --- FATAL RISK HALT --- | No pre-game probabilities for KXLOLGAME-26AUG261600KBM7RE-7RE. Arber deactivating.
+2026-08-27 00:14:01,510 - arber_bot - --- FATAL RISK HALT --- | No pre-game probabilities for KXLOLGAME-26AUG261600KBM7RE-KBM. Arber deactivating.
+2026-08-27 00:14:01,510 - arber_bot - --- FATAL RISK HALT --- | No pre-game probabilities for KXLOLGAME-26AUG261700DOGCNV-CNV. Arber deactivating.
+2026-08-27 00:14:01,510 - arber_bot - --- FATAL RISK HALT --- | No pre-game probabilities for KXLOLGAME-26AUG261700DOGCNV-DOG. Arber deactivating.

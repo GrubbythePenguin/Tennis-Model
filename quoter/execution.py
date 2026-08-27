@@ -30,6 +30,24 @@ TENNIS_SHARD = 3
 TENNIS_SUBACCOUNT = 0
 V2_BATCHED_PATH = "/trade-api/v2/portfolio/events/orders/batched"
 
+# Series that actually live on shard 3. TENNIS_SHARD is stamped on every order this
+# fork builds, so a NON-tennis ticker reaching here would be routed to the tennis shard
+# - drawing on tennis collateral, or simply rejected. That is not hypothetical: on
+# 26AUG27 template_quoter_config.csv still held the 36 esports rows that came along with
+# the copied stack (KXLOLGAME / KXLOLMAP), and run.py read them. Nothing was posted, but
+# only because the process had not been started.
+#
+# The config being correct is not a safety property. This is: an order for a ticker
+# outside these series is refused at construction, so a wrong config cannot route
+# esports flow onto shard 3 no matter how it got there.
+TENNIS_SERIES = ("KXATPMATCH", "KXWTAMATCH",
+                 "KXATPCHALLENGERMATCH", "KXWTACHALLENGERMATCH")
+
+
+def _is_tennis_ticker(ticker: str) -> bool:
+    """True only for a market in a series known to be on shard 3."""
+    return str(ticker or "").split("-", 1)[0] in TENNIS_SERIES
+
 
 
 def _is_not_found(err) -> bool:
@@ -455,6 +473,16 @@ class QuoterExecutionEngine:
             # count and price are FIXED-POINT STRINGS in V2, not integer cents.
             # self_trade_prevention_type is REQUIRED - omitting it returns
             # 400 missing_parameters (verified 26AUG26 with a live 1-lot test order).
+            # SHARD GUARD. Refuse anything that is not a shard-3 tennis market before a
+            # payload exists. Skips the single quote rather than raising, so one bad
+            # config row cannot take down the whole batch.
+            _wire = ticker_aliases.resolve(q["ticker"])
+            if not _is_tennis_ticker(_wire):
+                log.error("SHARD GUARD | refusing %s — not a tennis series, and this "
+                          "fork stamps exchange_index=%d on every order. Check "
+                          "template_quoter_config.csv.", _wire, TENNIS_SHARD)
+                continue
+
             ks = q["kalshi_side"].lower()
             if ks not in ("yes", "no"):
                 raise ValueError(f"unexpected kalshi_side {ks!r}")
@@ -470,7 +498,7 @@ class QuoterExecutionEngine:
                 # Wire ticker: synthetic → real (pass-through for non-aliased).
                 # Internal state (q["ticker"], ActiveQuote.ticker, telemetry
                 # by client_order_id) stays on the synthetic name.
-                "ticker": ticker_aliases.resolve(q["ticker"]),
+                "ticker": _wire,
                 "client_order_id": cid,
                 "side": v2_side,
                 "count": f"{int(q['size']):.2f}",
