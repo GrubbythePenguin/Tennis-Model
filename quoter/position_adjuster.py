@@ -104,7 +104,7 @@ class PositionAdjuster:
         esports_groups = {}
         
         for t in active_tickers:
-            if "LOL" in t or "CS2" in t or "VALORANT" in t or "DOTA2" in t or "COD" in t or "ATP" in t or "WTA" in t:
+            if "LOL" in t or "CS2" in t or "VALORANT" in t or "DOTA2" in t or "COD" in t or "ATP" in t or "WTA" in t or "ITF" in t:
                 # Group by base Game ID (stripping the categorical suffix "-DRXC")
                 game_id = "-".join(t.split("-")[:-1])
                 esports_groups.setdefault(game_id, []).append(t)

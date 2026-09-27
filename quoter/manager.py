@@ -14,6 +14,8 @@ from arber_bot import EsportsArberBot
 from momentum_bot import MomentumBot
 from map_arber_bot import EsportsMapArberBot
 from taker_bot import SeriesTakerBot
+from tennis_set1_taker_bot import Set1TauTakerBot
+from tennis_break_dog_taker_bot import BreakDogTakerBot
 from mma_arber_bot import MMAArberBot
 from polar_bear_bot import PolarBearBot
 from hedge_bot import HedgeBot
@@ -38,7 +40,13 @@ log = logging.getLogger(__name__)
 # concludes it has nothing working, and reposts every cycle - an unbounded duplicate
 # loop that the position caps cannot catch, because the manager's view of its own
 # exposure comes from this very read. Every order read below passes it explicitly.
-TENNIS_SHARD = 3
+#
+# Imported from execution, not redefined: QUOTER_SPORT selects the shard for the
+# WHOLE process (tennis -> 3, tt -> 0), and reads and writes must agree on it or
+# the duplicate loop above comes back in the other direction. Same for the
+# subaccount: reads default to sub 0 (verified 2026-09-09), so every order read
+# below passes BOTH params explicitly.
+from execution import TENNIS_SHARD, TENNIS_SUBACCOUNT
 
 
 
@@ -387,7 +395,8 @@ class MarketManager:
         try:
             path = "/trade-api/v2/portfolio/orders"
             resp = self.client_ref._get(path, params={"status": "resting", "limit": 1000,
-                                                      "exchange_index": TENNIS_SHARD})
+                                                      "exchange_index": TENNIS_SHARD,
+                                                      "subaccount": TENNIS_SUBACCOUNT})
 
             resting_orders = resp.get("orders", [])
             orphans_to_delete = []
@@ -402,7 +411,35 @@ class MarketManager:
             if orphans_to_delete:
                 log.warning(f"MANAGER SHUTDOWN | Tracing {len(orphans_to_delete)} physical resting orphans. Dispatching sync obliteration batch...")
                 self._execute_sync_cancel(orphans_to_delete)
-                log.info("MANAGER SHUTDOWN | Wipe successful.")
+                # VERIFY (2026-09-01): never declare the wipe successful on
+                # faith again — re-read shard-3 resting orders and report what
+                # is actually left. (The 26SEP01 06:55 wipe reported success
+                # after cancelling nothing.)
+                try:
+                    # 2s settle (2026-09-03): the batched DELETEs succeed but the
+                    # /portfolio/orders listing lags ~sub-second behind them — an
+                    # immediate re-read reported "WIPE INCOMPLETE - 34 STILL
+                    # RESTING" on 26SEP03 16:37 while a listing 40s later showed 0.
+                    # Give the listing a beat before judging the wipe.
+                    import time as _t
+                    _t.sleep(2.0)
+                    resp2 = self.client_ref._get(path, params={"status": "resting",
+                                                               "limit": 1000,
+                                                               "exchange_index": TENNIS_SHARD,
+                                                               "subaccount": TENNIS_SUBACCOUNT})
+                    left = [o for o in (resp2.get("orders") or [])
+                            if o.get("ticker") in active_tickers]
+                    if left:
+                        log.error("MANAGER SHUTDOWN | WIPE INCOMPLETE — %d order(s) "
+                                  "STILL RESTING on shard %d: %s",
+                                  len(left), TENNIS_SHARD,
+                                  ", ".join(f"{o.get('ticker')}@{str(o.get('order_id'))[:8]}"
+                                            for o in left[:10]))
+                    else:
+                        log.info("MANAGER SHUTDOWN | Wipe VERIFIED: 0 resting orders "
+                                 "on shard %d for active tickers.", TENNIS_SHARD)
+                except Exception as _ve:
+                    log.warning("MANAGER SHUTDOWN | wipe verification read failed: %s", _ve)
             else:
                 log.info("MANAGER SHUTDOWN | Clean teardown natively. No orphans found.")
         except Exception as e:
@@ -424,8 +461,44 @@ class MarketManager:
         """
         if not order_ids:
             return
+        # ── SHARD 3 (2026-09-01) ─────────────────────────────────────────────
+        # kalshi_client.cancel_order_batch builds {"orders":[{"order_id": oid}]}
+        # with NO exchange_index — the DELETE auto-routes to shard 0, every
+        # shard-3 tennis order returns not_found, and the wipe logged
+        # "successful" while ALL orders stayed resting (26SEP01 06:55 shutdown:
+        # 28/28 not_found). Build the shard-scoped body here instead: same V2
+        # endpoint, chunked 20, same write-token accounting, entries carry
+        # exchange_index + subaccount exactly like execution.py's cancel path.
         try:
-            resp = self.client_ref.cancel_order_batch(order_ids)
+            import requests as _rq
+            from kalshi_client import KALSHI_API_BASE as _base
+            from execution import TENNIS_SUBACCOUNT as _sub
+            path = "/trade-api/v2/portfolio/events/orders/batched"
+            aggregated = []
+            for i in range(0, len(order_ids), 20):
+                chunk = order_ids[i:i + 20]
+                try:
+                    self.client_ref._wait_for_token()
+                    self.client_ref._consume_write_tokens(len(chunk) * 2, is_cancel=True)
+                except Exception as _te:
+                    log.warning("Sync cancel: token gating failed (%s); proceeding", _te)
+                body = {"orders": [{"order_id": oid,
+                                    "exchange_index": TENNIS_SHARD,
+                                    "subaccount": _sub} for oid in chunk]}
+                headers = self.client_ref.auth.get_headers("DELETE", path)
+                headers["Content-Type"] = "application/json"
+                resp_http = _rq.delete(f"{_base}{path}", json=body,
+                                       headers=headers, timeout=5.0)
+                if resp_http.status_code in (200, 204):
+                    try:
+                        if resp_http.content:
+                            aggregated.extend(resp_http.json().get("orders", []))
+                    except Exception:
+                        pass
+                else:
+                    log.error("Sync cancel chunk HTTP %s: %s",
+                              resp_http.status_code, resp_http.text[:200])
+            resp = {"orders": aggregated}
         except Exception as e:
             log.error("Sync cancel batch failed (network/exception): %s", e)
             return
@@ -476,6 +549,10 @@ class MarketManager:
                 bot = EsportsMapArberBot(config=conf)
             elif conf.execution_type == "taker":
                 bot = SeriesTakerBot(config=conf)
+            elif conf.execution_type == "set1_taker":
+                bot = Set1TauTakerBot(config=conf)
+            elif conf.execution_type == "break_dog_taker":
+                bot = BreakDogTakerBot(config=conf)
             elif conf.execution_type == "mma_arber":
                 bot = MMAArberBot(config=conf)
             elif conf.execution_type == "polar_bear":
@@ -491,7 +568,7 @@ class MarketManager:
         # Map configurations downward into the Theo Generation Pipeline.
         # Only quoter configs — arbers/hedgers bypass theos entirely and must
         # never influence the theo model routing.
-        quoter_configs = [c for c in configs if c.execution_type not in ("arber", "map_arber", "mma_arber", "polar_bear", "hedger", "taker", "momentum")]
+        quoter_configs = [c for c in configs if c.execution_type not in ("arber", "map_arber", "mma_arber", "polar_bear", "hedger", "taker", "momentum", "set1_taker", "break_dog_taker")]
         if hasattr(self.theo_generator, 'configs'):
             self.theo_generator.configs = {c.ticker: c for c in quoter_configs}
         if hasattr(self.theo_generator, 'position_adjuster'):
@@ -585,6 +662,10 @@ class MarketManager:
                     bot = EsportsMapArberBot(config=config)
                 elif config.execution_type == "taker":
                     bot = SeriesTakerBot(config=config)
+                elif config.execution_type == "set1_taker":
+                    bot = Set1TauTakerBot(config=config)
+                elif config.execution_type == "break_dog_taker":
+                    bot = BreakDogTakerBot(config=config)
                 elif config.execution_type == "mma_arber":
                     bot = MMAArberBot(config=config)
                 elif config.execution_type == "polar_bear":
@@ -602,7 +683,7 @@ class MarketManager:
                 active_map[u_key].config = config
 
         # Rebake Theo mappings — quoter configs only.
-        _NON_THEO_TYPES = ("arber", "map_arber", "mma_arber", "polar_bear", "hedger", "taker", "momentum")
+        _NON_THEO_TYPES = ("arber", "map_arber", "mma_arber", "polar_bear", "hedger", "taker", "momentum", "set1_taker", "break_dog_taker")
         quoter_bots = [b for b in self.bots if b.config.execution_type not in _NON_THEO_TYPES]
 
         if hasattr(self.theo_generator, 'configs'):
@@ -698,7 +779,8 @@ class MarketManager:
             try:
                 d = await asyncio.to_thread(
                     lambda o=oid: self.client_ref._get(f"/trade-api/v2/portfolio/orders/{o}",
-                                                       params={"exchange_index": TENNIS_SHARD})
+                                                       params={"exchange_index": TENNIS_SHARD,
+                                                               "subaccount": TENNIS_SUBACCOUNT})
                 )
                 o = (d or {}).get("order", {}) if d else {}
                 status = (o.get("status") or "").lower()
@@ -828,7 +910,8 @@ class MarketManager:
             d = await asyncio.to_thread(
                 lambda: self.client_ref._get("/trade-api/v2/portfolio/orders",
                                               params={"status": "resting", "limit": 1000,
-                                                      "exchange_index": TENNIS_SHARD})
+                                                      "exchange_index": TENNIS_SHARD,
+                                                      "subaccount": TENNIS_SUBACCOUNT})
             )
         except Exception as e:
             log.error(f"RECONCILIATION | failed to fetch resting orders: {e}")
@@ -1263,7 +1346,7 @@ class MarketManager:
                 continue
 
             # Quoters permanently rely on mathematical pipelines. Arbers structurally bypass them entirely!
-            is_arber = bot.config.execution_type in ["arber", "mma_arber", "polar_bear", "hedger"]
+            is_arber = bot.config.execution_type in ["arber", "mma_arber", "polar_bear", "hedger", "set1_taker", "break_dog_taker"]
             if not is_arber and (bid_theo is None or offer_theo is None):
                 # Cancel any resting orders for this bot — theos disappeared (game over, etc.)
                 if bot_id in self.active_quotes_by_bot and self.active_quotes_by_bot[bot_id]:
@@ -1275,6 +1358,28 @@ class MarketManager:
             t_bid = top_level_bids.get(ticker, 0.0)
             t_offer = top_level_offers.get(ticker, 100.0)
 
+            # Own resting prices for the self-jump guard (quoter.py): YES-side
+            # bids in yes cents, NO-side bids as yes-terms offers (100 - no).
+            # Same tracking filters as the run.py book scrub — LIVE-ish only,
+            # skip cancels in flight. The guard treats a top level at one of
+            # these prices as our own and joins rather than improves it.
+            _own_bids, _own_offers = set(), set()
+            try:
+                _if = self.exec_engine._cancel_in_flight
+                for _q in self.exec_engine.active_quotes.values():
+                    if _q.ticker != ticker or _q.order_id in _if:
+                        continue
+                    if _q.status.name not in ("LIVE", "PARTIALLY_FILLED"):
+                        continue
+                    if _q.side.name != "BID":
+                        continue
+                    if _q.kalshi_side == "yes":
+                        _own_bids.add(int(_q.limit_cents))
+                    else:
+                        _own_offers.add(100 - int(_q.limit_cents))
+            except Exception:
+                pass                    # guard degrades to old behavior
+
             log.debug(f"BOT EVALUATION | Calling evaluate() on Bot for {market_tag} [{bot_id}] ({ticker}) | top_bid={t_bid}, top_offer={t_offer}, bid_theo={bid_theo}, offer_theo={offer_theo}")
             
             # Pass full system states to the bot since Arbers must cross-reference maps against series.
@@ -1285,6 +1390,8 @@ class MarketManager:
                 "market_state": t_state,
                 "top_level_bid": t_bid,
                 "top_level_offer": t_offer,
+                "own_bid_prices": frozenset(_own_bids),
+                "own_offer_prices": frozenset(_own_offers),
                 "bid_theo": bid_theo,
                 "offer_theo": offer_theo,
                 "full_market_state": dt_market_state,

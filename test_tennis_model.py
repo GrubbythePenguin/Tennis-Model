@@ -167,6 +167,65 @@ for (a,b,exp) in [(0,0,True),(1,0,False),(1,1,True),(2,1,False),(3,3,True)]:
     print(f"{'OK ' if got==exp else 'FAIL'} serving at {a}-{b}: {got} (expect {exp})")
     if got!=exp: fails.append(f"serving {a}-{b}")
 
+print("\n=== 12. set_number_win_prob: numbered-set (SETWINNER) pricing ===")
+from tennis_model import set_number_win_prob
+p, q = 0.62, 0.41
+pb, qb = 1 - q, 1 - p
+st = dict(games_me=3, games_opp=2, i_serve=True, points_me=2, points_opp=1)
+mirror = dict(games_me=2, games_opp=3, i_serve=False, points_me=1, points_opp=2)
+chk("set_no==current == set_win_prob",
+    set_number_win_prob(p, q, 1, **st), set_win_prob(p, q, tb_target=7, **st), 1e-12)
+chk("decider tb=10 honored (1-1, set 3)",
+    set_number_win_prob(p, q, 3, sets_me=1, sets_opp=1, best_of=3, final_set_tb=10, **st),
+    set_win_prob(p, q, tb_target=10, **st), 1e-12)
+chk("current-set zero-sum",
+    set_number_win_prob(p, q, 1, **st) + set_number_win_prob(pb, qb, 1, **mirror), 1.0, 1e-12)
+# set 2 of a bo3 is ALWAYS played -> its two sides ARE complements even priced from set 1
+chk("set-2 zero-sum (always played)",
+    set_number_win_prob(p, q, 2, **st) + set_number_win_prob(pb, qb, 2, **mirror), 1.0, 1e-12)
+# martingale over the next point, for a FUTURE set market ('me' is serving -> point prob p)
+w_st = dict(st, points_me=st["points_me"] + 1)
+l_st = dict(st, points_opp=st["points_opp"] + 1)
+chk("future-set (3) martingale over next point",
+    p * set_number_win_prob(p, q, 3, **w_st) + (1 - p) * set_number_win_prob(p, q, 3, **l_st),
+    set_number_win_prob(p, q, 3, **st), 1e-12)
+
+print("\n=== 13. Monte Carlo: set-3 winner from mid-set-1 state (unplayed = neither) ===")
+def sim_set_from_state(a, b, srv, x, y):
+    while not ((x >= 4 and x - y >= 2) or (y >= 4 and y - x >= 2)):
+        if random.random() < (p if srv else q): x += 1
+        else: y += 1
+    if x > y: a += 1
+    else: b += 1
+    s = not srv
+    while True:
+        if a >= 6 and a - b >= 2: return True
+        if b >= 6 and b - a >= 2: return False
+        if a == 6 and b == 6: return sim_tb(p, q, s)
+        if sim_game(p if s else q): a += 1
+        else: b += 1
+        s = not s
+N = 40000
+res = {"me": 0, "opp": 0, "unplayed": 0}
+for _ in range(N):
+    sm = so = 0
+    if sim_set_from_state(st["games_me"], st["games_opp"], st["i_serve"],
+                          st["points_me"], st["points_opp"]): sm += 1
+    else: so += 1
+    if sim_set(p, q, True): sm += 1
+    else: so += 1
+    if sm == 1 and so == 1:
+        res["me" if sim_set(p, q, True) else "opp"] += 1
+    else:
+        res["unplayed"] += 1
+m_me, m_opp = set_number_win_prob(p, q, 3, **st), set_number_win_prob(pb, qb, 3, **mirror)
+for label, mc_n, model in (("me wins set 3", res["me"], m_me),
+                           ("opp wins set 3", res["opp"], m_opp),
+                           ("set 3 unplayed", res["unplayed"], 1.0 - m_me - m_opp)):
+    mc = mc_n / N
+    se = math.sqrt(max(mc * (1 - mc), 1e-9) / N)
+    chk(f"MC {label} (2se={2*se:.4f})", mc, model, 3 * se)
+
 print("\n" + "="*60)
 print(f"{len(fails)} FAILURES" if fails else "ALL CHECKS PASSED")
 for f in fails: print("  -", f)

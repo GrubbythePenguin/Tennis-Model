@@ -16,6 +16,21 @@ import write_gate
 
 log = logging.getLogger(__name__)
 
+# ── 429 TRACKER (2026-09-01) ──────────────────────────────────────────────────
+# Every write-side 429 is a probable collision with the esports system on the
+# shared account bucket (the two processes cannot serialize in-flight writes
+# against each other). Logged loudly with running totals so a slate's collision
+# rate is one grep:  grep -c '429 TRACKER' run.log
+_429_counts = {"post": 0, "amend": 0, "cancel": 0}
+
+def _note_429(kind: str, detail: str = "") -> None:
+    _429_counts[kind] = _429_counts.get(kind, 0) + 1
+    log.warning("[429 TRACKER] write 429 on %s%s — session totals post=%d amend=%d "
+                "cancel=%d (shared-bucket collision with esports likely)",
+                kind, f" ({detail})" if detail else "",
+                _429_counts.get("post", 0), _429_counts.get("amend", 0),
+                _429_counts.get("cancel", 0))
+
 # ── TENNIS / SHARD 3 ──────────────────────────────────────────────────────────
 # This is the tennis fork of the esports quoter. Tennis markets moved to exchange
 # shard 3 on 26AUG24. Two things follow and both are load-bearing:
@@ -25,28 +40,118 @@ log = logging.getLogger(__name__)
 #     /portfolio/orders with no index returned exactly the shard-0 orders (6 of 6) and
 #     zero shard-3 orders. A reconciliation pass that omits it sees NO resting tennis
 #     orders and reposts them - an unbounded duplicate loop.
-# Collateral is per-shard and per-subaccount: sub 0 on shard 3 holds the funded balance.
-TENNIS_SHARD = 3
-TENNIS_SUBACCOUNT = 0
+# Collateral is per-shard and per-subaccount: the funded tennis balance lived on
+# shard 3 / sub 0 until 2026-09-09; both sports now trade sub 1 (see below).
+#
+# ── SPORT MODE (2026-09-09) ──────────────────────────────────────────────────
+# This process runs ONE shard, chosen by QUOTER_SPORT. Table tennis
+# (KXTTELITEMATCH) lives on exchange_index 0 — verified 2026-09-09 with authed
+# per-ticker GETs (tennis_populate_configs.verify_shard) on 6 live tickers, all
+# shard 0 — so it CANNOT share a process with tennis: every order write stamps
+# one exchange_index and every order read passes one, and splitting them
+# per-ticker would fork the reconciliation sweep too. A whole-process mode
+# keeps the single-shard invariant this file was built on.
+#
+#   QUOTER_SPORT unset / "tennis"  -> shard 3, tennis series only (unchanged)
+#   QUOTER_SPORT=tt                -> shard 0, KXTTELITEMATCH only
+#
+# BOTH sports run on SUBACCOUNT 1 (see TENNIS_SUBACCOUNT below): shard 0 sub 0
+# is the esports system's collateral pool, and sub 1 isolates this book from it
+# (verified: sub 1 exists, $5,000 funded, no resting orders — only terminal
+# Valorant test orders from 26AUG13). Rate buckets are still per-shard, so TT
+# and esports SHARE order-rate limits on shard 0 regardless of subaccount.
+#
+# READS ARE SUBACCOUNT-SCOPED. Verified 2026-09-09 against /portfolio/orders
+# on shard 0: subaccount=1 -> 3 orders, subaccount=0 -> 100, param omitted ->
+# the same 100 (defaults to sub 0). So every order read must pass subaccount
+# explicitly, or a sub-1 quoter sees NONE of its own resting orders and
+# reposts forever — the same unbounded duplicate loop as the shard parameter
+# (26AUG26), one level down.
+#
+# The series tuple is the safety property, same as ever: an order for a ticker
+# outside it is refused at construction, so a wrong config row cannot route
+# flow onto this process's shard no matter how it got there (26AUG27: 36
+# leftover esports rows in template_quoter_config.csv; nothing posted only
+# because the process was down). In TT mode that guard also refuses every
+# TENNIS ticker, which is exactly right — they live on shard 3.
 V2_BATCHED_PATH = "/trade-api/v2/portfolio/events/orders/batched"
 
-# Series that actually live on shard 3. TENNIS_SHARD is stamped on every order this
-# fork builds, so a NON-tennis ticker reaching here would be routed to the tennis shard
-# - drawing on tennis collateral, or simply rejected. That is not hypothetical: on
-# 26AUG27 template_quoter_config.csv still held the 36 esports rows that came along with
-# the copied stack (KXLOLGAME / KXLOLMAP), and run.py read them. Nothing was posted, but
-# only because the process had not been started.
+_SPORT = os.environ.get("QUOTER_SPORT", "tennis").strip().lower()
+
+# BOTH sports trade on subaccount 1 (operator decision 2026-09-09, "ease of
+# access"): sub 0 stays the esports pool, sub 1 is the racquet-sports book —
+# one place to fund, one place to read fills. Collateral is per-shard AND
+# per-subaccount, so tennis orders now need funds on SHARD 3 / SUB 1 (the old
+# tennis balance sits on shard 3 / sub 0 — transfer before the next tennis
+# session, or every order rejects on collateral). Legacy sub-0 tennis
+# positions are likewise invisible to position_store after this change.
+# QUOTER_SUBACCOUNT (2026-09-10, set3 dog maker): env override kept for future
+# isolation, but the set-3 dog maker runs on SUB 1 / SHARD 3 — the existing
+# tennis book — by operator decision 26SEP10 ("use subaccount 1 shard 3"), i.e.
+# the default below, no env var needed. Every order write stamps this value and
+# every order/fill/position read passes it (manager, position_store,
+# trade_logger all import TENNIS_SUBACCOUNT from here).
 #
-# The config being correct is not a safety property. This is: an order for a ticker
-# outside these series is refused at construction, so a wrong config cannot route
-# esports flow onto shard 3 no matter how it got there.
-TENNIS_SERIES = ("KXATPMATCH", "KXWTAMATCH",
-                 "KXATPCHALLENGERMATCH", "KXWTACHALLENGERMATCH")
+# ONE FRAMEWORK INSTANCE PER (SHARD, SUBACCOUNT) — this is load-bearing:
+# _reconcile_orders sweeps EVERY resting order on its shard+sub that is not in
+# its own tracking, so a second instance on the same pair has its quotes
+# cancelled as orphans within a reconciliation cycle. Sharing sub 1 therefore
+# makes the set3 instance and the recenter tennis instance MUTUALLY EXCLUSIVE
+# while running; positions are also pooled per ticker, so a recenter bot that
+# quotes a ticker carrying set3 inventory (>1.5x its max_position) goes
+# reduce-only and would unwind fills that are meant to ride to settlement.
+TENNIS_SUBACCOUNT = int(os.environ.get("QUOTER_SUBACCOUNT", "1"))
+
+if _SPORT == "tt":
+    TENNIS_SHARD = 0                       # verified 2026-09-09, see above
+    # TT series come from tt_quotable_series.json — written only for series
+    # whose shard was VERIFIED 0 by an authed per-ticker GET (initial entries
+    # by hand 2026-09-09, new ones by tt_populate_configs' auto-verify). The
+    # file is mtime-cache-reloaded inside _is_tennis_ticker so a newly
+    # verified series becomes orderable without a run.py restart, and the
+    # guard's trust model is unchanged: file membership == shard-verified.
+    _TT_SERIES_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   "tt_quotable_series.json")
+    _tt_series_cache = {"mtime": -1.0, "series": ("KXTTELITEMATCH",)}
+
+    def _tt_quotable_series() -> tuple:
+        import json as _json
+        try:
+            mt = os.path.getmtime(_TT_SERIES_FILE)
+        except OSError:
+            return _tt_series_cache["series"]
+        if mt != _tt_series_cache["mtime"]:
+            try:
+                with open(_TT_SERIES_FILE) as f:
+                    data = _json.load(f)
+                good = tuple(sorted(s for s, v in data.items()
+                                    if isinstance(v, dict) and v.get("shard") == 0))
+                if good:
+                    _tt_series_cache["series"] = good
+                _tt_series_cache["mtime"] = mt
+            except Exception:
+                pass                       # keep last-good on a torn/bad file
+        return _tt_series_cache["series"]
+
+    TENNIS_SERIES = _tt_quotable_series()
+else:
+    TENNIS_SHARD = 3
+    TENNIS_SERIES = ("KXATPMATCH", "KXWTAMATCH",
+                     "KXATPCHALLENGERMATCH", "KXWTACHALLENGERMATCH",
+                     "KXITFMATCH", "KXITFWMATCH",      # ITF added 26AUG28, verified shard 3
+                     # Per-set winner series (26AUG31). An order for one of these can only
+                     # arise from a config row, and tennis_populate_configs --sets verifies
+                     # every SETWINNER ticker on-shard with a per-ticker GET before writing
+                     # the row - so listing them here extends the guard, not the trust.
+                     "KXATPSETWINNER", "KXWTASETWINNER",
+                     "KXATPCHALLENGERSETWINNER", "KXWTACHALLENGERSETWINNER",
+                     "KXITFSETWINNER", "KXITFWSETWINNER")
 
 
 def _is_tennis_ticker(ticker: str) -> bool:
-    """True only for a market in a series known to be on shard 3."""
-    return str(ticker or "").split("-", 1)[0] in TENNIS_SERIES
+    """True only for a market in a series known to be on THIS process's shard."""
+    series = _tt_quotable_series() if _SPORT == "tt" else TENNIS_SERIES
+    return str(ticker or "").split("-", 1)[0] in series
 
 
 
@@ -244,6 +349,29 @@ class QuoterExecutionEngine:
     def __init__(self, client: Any, trading_enabled: bool = True):
         self.client = client
         self.trading_enabled = trading_enabled
+        # ── TENNIS RATE BUDGET: HALF of the shared-client defaults (2026-09-01,
+        # operator request). The tennis quoter shares one Kalshi account bucket
+        # with the esports system in general_level_based_quoting; when both run
+        # in tandem, tennis must not starve it. Applied to THIS process's client
+        # INSTANCE only (the module is shared on disk — never edit the class
+        # defaults, that would halve esports too). Read: _max_rps 75 -> 37.5.
+        # Write: rolling-window cap_tokens 600 -> 300 (same 2s window; per-op
+        # costs unchanged: POST=10/order, DELETE=2/order). Guarded so a second
+        # engine construction on the same client cannot compound the halving.
+        if not getattr(client, "_tennis_budget_halved", False):
+            try:
+                client._max_rps = client._max_rps * 0.5
+                client._write_window.cap_tokens = client._write_window.cap_tokens * 0.5
+                client._tennis_budget_halved = True
+                log.info("TENNIS RATE BUDGET | halved shared-client budgets for this "
+                         "process: read=%.1f rps, write=%.0f tokens/%.0fs window",
+                         client._max_rps, client._write_window.cap_tokens,
+                         client._write_window.window_sec)
+            except AttributeError as e:
+                # Loud by design — a client refactor must not silently restore
+                # full budgets while esports runs in tandem.
+                log.error("TENNIS RATE BUDGET | FAILED to halve client budgets: %s — "
+                          "running at FULL shared budget", e)
         # Write-priority gate (WRITE_PRIORITY_GATE_PLAN.md): P0 = IOC fires
         # (incl. hedger — IOC by construction), P1 = cancels, posts/amends by
         # admission only. Flag-gated (write_gate.flag); flag absent =
@@ -267,6 +395,36 @@ class QuoterExecutionEngine:
         # at most one per ticker per interval to avoid hammering /markets.
         self._last_phantom_probe_ts: Dict[str, float] = {}
         self._PHANTOM_PROBE_MIN_INTERVAL_SEC = 3.0
+
+    def _amend_order_shard3(self, order_id: str, ticker: str, side: str,
+                            new_count: int, new_limit_cents: int,
+                            client_order_id: str) -> dict:
+        """Amend wrapper that adds 429 accounting. Delegates to the shared
+        client's amend_order UNCHANGED on the wire: the amend endpoint routes
+        by order_id (verified 26SEP01 morning session — 5/6 amends succeeded
+        with no exchange_index in the body; the 404s were post-fill races,
+        NOT shard mis-routing). Contrast with the batched DELETE, which DOES
+        require exchange_index per entry (the 26SEP01 06:55 wipe bug). This
+        wrapper exists only so a 429 on the amend path lands in the
+        [429 TRACKER] totals — a probable in-flight collision with esports."""
+        # exchange_index + subaccount added 2026-09-09: the amend lookup
+        # defaults to shard 0 / sub 0 like every portfolio read, so the old
+        # "routes by order_id" claim in the docstring above held only while
+        # this fork traded the default sub. On sub 1 every amend 404'd
+        # (9/9 on the first TT session) and fell back to cancel+post.
+        res = self.client.amend_order(
+            order_id=order_id,
+            ticker=ticker,
+            side=side,
+            new_count=new_count,
+            new_limit_cents=new_limit_cents,
+            client_order_id=client_order_id,
+            exchange_index=TENNIS_SHARD,
+            subaccount=TENNIS_SUBACCOUNT,
+        )
+        if isinstance(res, dict) and res.get("status") == 429:
+            _note_429("amend", ticker)
+        return res
 
         # ── TRACK D2 (2026-08-09): what did OUR book say at probe time? ──────
         # The probe reads REST only AFTER the miss, so "REST ask is worse than
@@ -627,7 +785,19 @@ class QuoterExecutionEngine:
                     # client_order_id for idempotency — same CID on retry is
                     # treated as duplicate and skipped, while fresh CID is treated
                     # as a new order against some creation-rate limit.
-                    resp = await asyncio.to_thread(self.client._post, V2_BATCHED_PATH, batch_body)
+                    # 2026-09-01: was `self.client._post(V2_BATCHED_PATH, ...)` — that
+                    # passthrough runs _post_internal(order_count=0, batched=False):
+                    # NO write tokens charged, NO inflight lock, status invisible.
+                    # Call _post_internal directly: tokens metered (10/order),
+                    # batched inflight lock held, and a 429 is now countable.
+                    def _post_batched_tracked(bb=batch_body, n=len(batch)):
+                        r, status = self.client._post_internal(
+                            V2_BATCHED_PATH, bb, order_count=n, batched=True,
+                            return_status=True)
+                        if status == 429:
+                            _note_429("post", f"batch of {n}")
+                        return r
+                    resp = await asyncio.to_thread(_post_batched_tracked)
                     log.debug(f"KALSHI RESPONSE NATIVE (attempt {attempt+1}): {resp}")
                     # A successful response is a dict with 'orders' key (even if some
                     # entries inside have per-order errors). An empty {} indicates the
@@ -910,7 +1080,7 @@ class QuoterExecutionEngine:
                               ticker=ticker_aliases.resolve(aq.ticker),
                               side=aq.kalshi_side, count=new_count,
                               price=new_limit_cents, coid=aq.client_order_id):
-                    return self.client.amend_order(
+                    return self._amend_order_shard3(
                         order_id=order_id,
                         ticker=ticker,
                         side=side,
@@ -1132,6 +1302,8 @@ class QuoterExecutionEngine:
                             (time.time() - _t0) * 1000.0)
                     except Exception:
                         pass
+                    if resp.status_code == 429:
+                        _note_429("cancel", f"chunk of {len(chunk)}")
                     if resp.status_code in (200, 204):
                         # Kalshi's batched DELETE returns 200 with per-order
                         # errors embedded in the response body:

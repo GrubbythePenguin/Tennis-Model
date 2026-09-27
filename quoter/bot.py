@@ -252,6 +252,11 @@ class QuoterBot:
             volumes=self.config.volumes,
             tick_step=self.config.tick_step,
             fav_edge_k=self.config.fav_edge_k,
+            # Own resting prices (from the manager's active_quotes view):
+            # levels matching these are JOINED, never improved — the guard
+            # that makes negative min_distance ratchet-proof. See quoter.py.
+            own_bid_prices=kwargs.get("own_bid_prices") or frozenset(),
+            own_offer_prices=kwargs.get("own_offer_prices") or frozenset(),
         )
 
         desired_quotes = []
@@ -304,8 +309,12 @@ class QuoterBot:
                         continue
                     kept.append(q)
                 if len(kept) < len(desired_quotes):
-                    log.warning(f"[QUOTER COOLDOWN] {self.config.ticker}: "
-                                f"filtered {len(desired_quotes) - len(kept)}/{len(desired_quotes)} quotes (cooldown active)")
+                    # debug, not warning (2026-09-03): this fires EVERY ~100ms
+                    # evaluate for the whole 15s cooldown window (~300 lines per
+                    # trigger, x2 tickers) — the "-> cool" trigger line above is
+                    # the once-per-fill signal worth seeing at info level.
+                    log.debug(f"[QUOTER COOLDOWN] {self.config.ticker}: "
+                              f"filtered {len(desired_quotes) - len(kept)}/{len(desired_quotes)} quotes (cooldown active)")
                 desired_quotes = kept
             except Exception as e:
                 log.exception(f"[QUOTER COOLDOWN] {self.config.ticker}: filter error: {e}")
@@ -317,16 +326,19 @@ class QuoterBot:
             for _q in desired_quotes:
                 _q["size"] = max(1, int(_q["size"] * 0.5))
 
-        # Check if position changed (fill happened) — always reprice after fills
+        # NIBBLE POLICY (2026-09-01): a fill does NOT force a reprice. Quotes
+        # rest until the model's desired price moves past the reprice buffer —
+        # for the tennis recenter model that is the point-boundary reprice
+        # (anchor/deltas are held constant within a point). Position skew from
+        # the fill folds into the NEXT normal reprice instead of triggering an
+        # immediate amend/cancel that forfeits queue position on the nibbled
+        # order. (Replaced the position_changed bypass that repriced on every
+        # fill; retreat_cap_cents=0 in the tennis params is the other half.)
         try:
             import position_store
             current_pos = position_store.get_position(self.config.ticker)
         except Exception:
             current_pos = None
-
-        position_changed = (self._last_position is not None and
-                           current_pos is not None and
-                           current_pos != self._last_position)
         self._last_position = current_pos
 
         # Final Anchor Check: Track strict physical differences over the reprice_buffer
@@ -352,7 +364,7 @@ class QuoterBot:
             effective_edge = max(variance_scaled, self.config.min_absolute_edge)
             return min(self.config.reprice_buffer, effective_edge * REPRICE_BUFFER_EDGE_FRACTION)
 
-        if not position_changed and self.last_desired_quotes is not None and len(self.last_desired_quotes) == len(desired_quotes):
+        if self.last_desired_quotes is not None and len(self.last_desired_quotes) == len(desired_quotes):
             should_reprice = False
             for i in range(len(desired_quotes)):
                 new_q = desired_quotes[i]

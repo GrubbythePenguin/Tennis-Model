@@ -1,0 +1,916 @@
+2026-09-10 23:36:30,532 - __main__ - Starting VWAP Esports Evaluator Engine... (run.py last modified: 2026-09-10 23:03:09)
+2026-09-10 23:36:30,532 - __main__ - [1;91m  LIVE TRADING — orders will fire to Kalshi.[0m
+2026-09-10 23:36:30,533 - position_store - POSITION STORE | Initiating critical boot-load physical REST synchronization globally...
+2026-09-10 23:36:30,632 - position_store - POSITION STORE | Synchronous boot REST API sync completed successfully (0 positions, 0 reverse-aliased). Decoupling sequence initialized!
+2026-09-10 23:36:30,633 - live_series_model - [LIVE SERIES] Loaded 0 probabilities
+2026-09-10 23:36:30,633 - execution - TENNIS RATE BUDGET | halved shared-client budgets for this process: read=37.5 rps, write=300 tokens/2s window
+2026-09-10 23:36:30,633 - orderbook_poller - [POLLER] disabled by config; skipping start.
+2026-09-10 23:36:30,633 - hedge_staleness - [POLY-STALE FALLBACK] provider installed (_kalshi_map_fallback_provider)
+2026-09-10 23:36:30,634 - trade_logger - TRADE LOGGER | Background WebSocket thread successfully ignited...
+2026-09-10 23:36:30,634 - trade_logger - TRADE LOGGER | Syphoning recent native fills from Kalshi REST gateway...
+2026-09-10 23:36:30,636 - trade_logger - TRADE LOGGER | Autonomous background physical capture daemon engaged seamlessly.
+[POLY MAP] Loaded 29 pre-verified mappings (29 with Poly, 0 Kalshi-only)
+2026-09-10 23:36:30,637 - __main__ - [WS LISTENER] _poly_ws_listener.py not found — Poly books will use the REST path
+2026-09-10 23:36:30,726 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 479x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:29:58.98341Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 419x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:30:33.976302Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 67x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:31:11.25706Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 19x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:31:21.430755Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 40x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:31:59.843208Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 23x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:32:36.503677Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 19x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:32:36.902017Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 28x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:33:23.106401Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 75x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:35:38.570129Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 59x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:35:56.293058Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 59x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:36:15.590567Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 2x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:36:31.509177Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 359x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:37:01.544043Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 23x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:37:11.220165Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 469x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:37:22.942529Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 11x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:38:13.156172Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 131x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:38:28.995339Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 1292x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:38:56.712126Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 251x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:39:11.751164Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 23x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:39:32.418702Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 51x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:42:40.167522Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 25x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:43:02.575594Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 172x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:43:13.915073Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 107x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:43:40.759224Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 2x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:43:56.778117Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY NO 205x
+ Ticker : KXVALORANTGAME-26AUG132000M80NV-NV
+ Price  : 60c
+ Time   : 2026-08-13T23:45:18.636121Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 7x
+ Ticker : KXTTELITEMATCH-26SEP091630JCHJKR-JCH
+ Price  : 28c
+ Time   : 2026-09-09T20:40:02.054087Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXTTELITEMATCH-26SEP091630JCHJKR-JKR
+ Price  : 14c
+ Time   : 2026-09-09T20:41:34.427276Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 18x
+ Ticker : KXTTELITEMATCH-26SEP091630JCHJKR-JCH
+ Price  : 61c
+ Time   : 2026-09-09T20:46:02.850286Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 100x
+ Ticker : KXTTELITEMATCH-26SEP091645WPYARU-ARU
+ Price  : 26c
+ Time   : 2026-09-09T20:49:17.18832Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 3x
+ Ticker : KXTTELITEMATCH-26SEP091645ASTKGU-KGU
+ Price  : 65c
+ Time   : 2026-09-09T20:57:08.430537Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 2x
+ Ticker : KXTTELITEMATCH-26SEP091645ASTKGU-KGU
+ Price  : 47c
+ Time   : 2026-09-09T20:58:39.290167Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 147x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-PRO
+ Price  : 28c
+ Time   : 2026-09-09T21:02:18.525788Z
+==============================================
+
+2026-09-10 23:36:30,727 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 63x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-ZUK
+ Price  : 28c
+ Time   : 2026-09-09T21:02:18.527374Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 3x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-PRO
+ Price  : 28c
+ Time   : 2026-09-09T21:02:18.533155Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 86x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-PRO
+ Price  : 57c
+ Time   : 2026-09-09T21:07:43.917699Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 64x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-PRO
+ Price  : 57c
+ Time   : 2026-09-09T21:07:43.920165Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 12x
+ Ticker : KXTTELITEMATCH-26SEP091710PSLOSO-OSO
+ Price  : 24c
+ Time   : 2026-09-09T21:10:47.576767Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 53x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-PRO
+ Price  : 12c
+ Time   : 2026-09-09T21:13:01.775555Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 53x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-ZUK
+ Price  : 12c
+ Time   : 2026-09-09T21:13:01.775771Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-PRO
+ Price  : 6c
+ Time   : 2026-09-09T21:13:38.82042Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 3x
+ Ticker : KXTTELITEMATCH-26SEP091705JSLZNO-JSL
+ Price  : 70c
+ Time   : 2026-09-09T21:14:05.973615Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-ZUK
+ Price  : 6c
+ Time   : 2026-09-09T21:14:16.709493Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 15x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-ZUK
+ Price  : 5c
+ Time   : 2026-09-09T21:14:31.969591Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 18x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-ZUK
+ Price  : 5c
+ Time   : 2026-09-09T21:14:31.979915Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXTTSTARMATCH-26SEP091700PROZUK-ZUK
+ Price  : 5c
+ Time   : 2026-09-09T21:14:47.297973Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 0x
+ Ticker : KXTTELITEMATCH-26SEP091710PSLOSO-PSL
+ Price  : 56c
+ Time   : 2026-09-09T21:16:23.502542Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 100x
+ Ticker : KXTTELITEMATCH-26SEP091710PSLOSO-PSL
+ Price  : 79c
+ Time   : 2026-09-09T21:19:38.341118Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 27x
+ Ticker : KXTTELITEMATCH-26SEP091710PSLOSO-PSL
+ Price  : 73c
+ Time   : 2026-09-09T21:20:40.725226Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 89x
+ Ticker : KXTTELITEMATCH-26SEP091710PSLOSO-OSO
+ Price  : 1c
+ Time   : 2026-09-09T21:21:21.412206Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXTTELITEMATCH-26SEP091710PSLOSO-OSO
+ Price  : 1c
+ Time   : 2026-09-09T21:21:43.884513Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 17x
+ Ticker : KXTTELITEMATCH-26SEP091705JSLZNO-JSL
+ Price  : 43c
+ Time   : 2026-09-09T21:23:17.299056Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXTTSTARMATCH-26SEP091700LINKEI-LIN
+ Price  : 79c
+ Time   : 2026-09-09T21:40:08.428203Z
+==============================================
+
+2026-09-10 23:36:30,728 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXTTSTARMATCH-26SEP091700LINKEI-KEI
+ Price  : 79c
+ Time   : 2026-09-09T21:40:08.428605Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 140x
+ Ticker : KXTTSTARMATCH-26SEP091700LINKEI-LIN
+ Price  : 79c
+ Time   : 2026-09-09T21:40:08.428831Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 114x
+ Ticker : KXTTELITEMATCH-26SEP091730MWAAST-AST
+ Price  : 43c
+ Time   : 2026-09-09T21:40:22.334127Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 51x
+ Ticker : KXTTELITEMATCH-26SEP091730MWAAST-MWA
+ Price  : 22c
+ Time   : 2026-09-09T21:40:51.379456Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 28x
+ Ticker : KXTTELITEMATCH-26SEP091730MWAAST-AST
+ Price  : 37c
+ Time   : 2026-09-09T21:45:18.096456Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXTTSTARMATCH-26SEP091700LINKEI-LIN
+ Price  : 5c
+ Time   : 2026-09-09T21:48:37.891256Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 11x
+ Ticker : KXTTELITEMATCH-26SEP091745MBAMLE-MBA
+ Price  : 28c
+ Time   : 2026-09-09T21:52:33.617046Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 22x
+ Ticker : KXTTELITEMATCH-26SEP091745MBAMLE-MLE
+ Price  : 32c
+ Time   : 2026-09-09T21:53:06.565274Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 25x
+ Ticker : KXTTELITEMATCH-26SEP091750MRUSKO-MRU
+ Price  : 25c
+ Time   : 2026-09-09T21:54:35.693775Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 115x
+ Ticker : KXTTELITEMATCH-26SEP091750MRUSKO-SKO
+ Price  : 61c
+ Time   : 2026-09-09T21:56:47.070299Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXTTELITEMATCH-26SEP091730MWAAST-MWA
+ Price  : 1c
+ Time   : 2026-09-09T21:57:24.522519Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXTTELITEMATCH-26SEP091730MWAAST-AST
+ Price  : 2c
+ Time   : 2026-09-09T21:57:24.52475Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 70x
+ Ticker : KXTTELITEMATCH-26SEP091750MRUSKO-SKO
+ Price  : 75c
+ Time   : 2026-09-09T22:00:15.763237Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 50x
+ Ticker : KXTTELITEMATCH-26SEP091750MRUSKO-MRU
+ Price  : 1c
+ Time   : 2026-09-09T22:04:43.930673Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXTTELITEMATCH-26SEP091800PADLMA-PAD
+ Price  : 16c
+ Time   : 2026-09-09T22:04:59.633309Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 28x
+ Ticker : KXTTELITEMATCH-26SEP091800PADLMA-PAD
+ Price  : 12c
+ Time   : 2026-09-09T22:05:19.558697Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 72x
+ Ticker : KXTTSTARMATCH-26SEP091730FOLHRI-FOL
+ Price  : 32c
+ Time   : 2026-09-09T22:07:10.397525Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 72x
+ Ticker : KXTTSTARMATCH-26SEP091730FOLHRI-HRI
+ Price  : 32c
+ Time   : 2026-09-09T22:07:10.398337Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 11x
+ Ticker : KXTTSTARMATCH-26SEP091730FOLHRI-FOL
+ Price  : 32c
+ Time   : 2026-09-09T22:07:10.398937Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 42x
+ Ticker : KXTTELITEMATCH-26SEP091800PADLMA-PAD
+ Price  : 6c
+ Time   : 2026-09-09T22:07:13.076624Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 70x
+ Ticker : KXTTSTARMATCH-26SEP091730FOLHRI-HRI
+ Price  : 28c
+ Time   : 2026-09-09T22:09:43.570329Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 56x
+ Ticker : KXTTSTARMATCH-26SEP091730FOLHRI-HRI
+ Price  : 12c
+ Time   : 2026-09-09T22:16:10.799555Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 7x
+ Ticker : KXTTSTARMATCH-26SEP091730FOLHRI-FOL
+ Price  : 12c
+ Time   : 2026-09-09T22:16:10.800803Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 62x
+ Ticker : KXTTELITEMATCH-26SEP091815MTRKKL-KKL
+ Price  : 7c
+ Time   : 2026-09-09T22:23:47.780936Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXTTELITEMATCH-26SEP091825PSLMBA-PSL
+ Price  : 53c
+ Time   : 2026-09-09T22:32:15.492007Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXTTELITEMATCH-26SEP091835SKOKKA-KKA
+ Price  : 6c
+ Time   : 2026-09-09T22:43:44.431666Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 30x
+ Ticker : KXTTELITEMATCH-26SEP091835SKOKKA-KKA
+ Price  : 4c
+ Time   : 2026-09-09T22:44:03.187207Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXTTELITEMATCH-26SEP091945ABAMBA-ABA
+ Price  : 62c
+ Time   : 2026-09-09T23:48:16.610025Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 10x
+ Ticker : KXTTELITEMATCH-26SEP091945POSGKU-POS
+ Price  : 53c
+ Time   : 2026-09-09T23:50:26.358216Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 41x
+ Ticker : KXTTELITEMATCH-26SEP091945POSGKU-GKU
+ Price  : 9c
+ Time   : 2026-09-09T23:51:45.978588Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 63x
+ Ticker : KXTTELITEMATCH-26SEP091945POSGKU-POS
+ Price  : 64c
+ Time   : 2026-09-09T23:52:40.707039Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 1x
+ Ticker : KXTTELITEMATCH-26SEP091945JCHSKO-JCH
+ Price  : 23c
+ Time   : 2026-09-09T23:55:28.485733Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXTTELITEMATCH-26SEP091945ABAMBA-MBA
+ Price  : 45c
+ Time   : 2026-09-09T23:56:23.540861Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXTTELITEMATCH-26SEP091945POSGKU-POS
+ Price  : 42c
+ Time   : 2026-09-10T00:00:45.66337Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 6x
+ Ticker : KXTTELITEMATCH-26SEP092000PSLPAD-PSL
+ Price  : 57c
+ Time   : 2026-09-10T00:12:56.026506Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 21x
+ Ticker : KXTTELITEMATCH-26SEP092010MLEAFO-AFO
+ Price  : 13c
+ Time   : 2026-09-10T00:16:24.432206Z
+==============================================
+
+2026-09-10 23:36:30,729 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 8x
+ Ticker : KXTTELITEMATCH-26SEP092010MLEAFO-AFO
+ Price  : 10c
+ Time   : 2026-09-10T00:17:01.324974Z
+==============================================
+
+2026-09-10 23:36:30,730 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 62x
+ Ticker : KXTTELITEMATCH-26SEP092020ZNOMWA-MWA
+ Price  : 45c
+ Time   : 2026-09-10T00:26:07.617605Z
+==============================================
+
+2026-09-10 23:36:30,730 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 2x
+ Ticker : KXTTELITEMATCH-26SEP092110PSLLMA-LMA
+ Price  : 3c
+ Time   : 2026-09-10T01:18:07.675026Z
+==============================================
+
+2026-09-10 23:36:30,730 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 1x
+ Ticker : KXTTELITEMATCH-26SEP092110MWASJA-MWA
+ Price  : 34c
+ Time   : 2026-09-10T01:24:13.799951Z
+==============================================
+
+2026-09-10 23:36:30,730 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXTTELITEMATCH-26SEP092155WSTSJA-SJA
+ Price  : 8c
+ Time   : 2026-09-10T02:04:56.695426Z
+==============================================
+
+2026-09-10 23:36:30,730 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 100x
+ Ticker : KXTTELITEMATCH-26SEP092155WSTSJA-WST
+ Price  : 6c
+ Time   : 2026-09-10T02:04:56.703114Z
+==============================================
+
+2026-09-10 23:36:30,730 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 78x
+ Ticker : KXTTELITEMATCH-26SEP092300AGRFGR-FGR
+ Price  : 24c
+ Time   : 2026-09-10T03:06:08.90083Z
+==============================================
+
+2026-09-10 23:36:30,730 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 12x
+ Ticker : KXTTELITEMATCH-26SEP092310LMAOSO-LMA
+ Price  : 18c
+ Time   : 2026-09-10T03:13:04.201076Z
+==============================================
+
+2026-09-10 23:36:30,730 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 2x
+ Ticker : KXTTELITEMATCH-26SEP092300WSTZNO-WST
+ Price  : 56c
+ Time   : 2026-09-10T03:18:20.578205Z
+==============================================
+
+2026-09-10 23:36:30,730 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : BUY YES 150x
+ Ticker : KXTTELITEMATCH-26SEP092300AGRFGR-AGR
+ Price  : 26c
+ Time   : 2026-09-10T03:27:19.242975Z
+==============================================
+
+2026-09-10 23:36:30,730 - trade_logger - 
+======== RECENT PHYSICAL TRADE (REST) ========
+ Action : SELL NO 150x
+ Ticker : KXTTELITEMATCH-26SEP092300AGRFGR-FGR
+ Price  : 25c
+ Time   : 2026-09-10T03:27:19.242997Z
+==============================================
+
+2026-09-10 23:36:30,731 - trade_logger - TRADE LOGGER | ws_ready=False (connecting), seen_fills=100 in dedup set
+2026-09-10 23:36:30,738 - __main__ - [WS_DELTA] default-on mode — all active esports tickers subscribed dynamically each loop iteration (periodic_reseed=600s)
+2026-09-10 23:36:30,782 - trade_logger - TRADE LOGGER | Authenticated Live WebSocket Protocol Engaged. Listening for fills seamlessly...
+2026-09-10 23:36:30,792 - trade_logger - TRADE LOGGER | ws_ready=True — hedge buffer now ARMED. {'type': 'subscribed', 'id': 1, 'msg': {'channel': 'fill', 'sid': 1}}
+2026-09-10 23:36:30,839 - __main__ - [MAP WS] dedicated map feed started (isolated from series; dormant until a map routes to Kalshi)
+2026-09-10 23:36:30,839 - hedge_staleness - [FB-WS-SHADOW] provider installed (_kalshi_map_ws_shadow_provider)
+2026-09-10 23:36:30,840 - ws_rest_shadow - ws_rest_shadow ARMED (idle). Enable live WITHOUT a restart: `touch /Users/bradleyguan/Documents/Coding/Tennis-Model/quoter/enable_ws_rest_shadow.flag` (remove it to stop). Read-only, zero new REST calls.
+2026-09-10 23:36:30,841 - manager - Loaded 0 QuoterBots natively from template_quoter_config.csv
+2026-09-10 23:36:30,841 - __main__ - VWAP Engine armed with configuration from template_quoter_config.csv. Engaging loop...
+2026-09-10 23:36:30,843 - __main__ - [METADATA-CACHE] loaded 702 cached ticker(s)
+2026-09-10 23:36:30,843 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-09-10 23:36:30,851 - manager - [FAST-CANCEL] context registered (main loop + shared engine)
+2026-09-10 23:37:09,510 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXCS2GAME-26SEP101900CHIANT-ANT sell yes x1.00
+2026-09-10 23:37:09,511 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXCS2GAME-26SEP101900CHIANT-ANT sell yes x1.00
+2026-09-10 23:37:09,511 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXCS2GAME-26SEP101900CHIANT-ANT sell yes x10.00
+2026-09-10 23:37:09,547 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXCS2GAME-26SEP101900CHIANT-ANT sell yes x1.00
+2026-09-10 23:37:09,547 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXCS2GAME-26SEP101900CHIANT-ANT sell yes x10.00
+2026-09-10 23:41:01,150 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x150.00
+2026-09-10 23:41:01,150 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x400.00
+2026-09-10 23:41:01,174 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU sell yes x69.00
+2026-09-10 23:41:30,903 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-09-10 23:41:45,309 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x88.35
+2026-09-10 23:43:30,757 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x27.24
+2026-09-10 23:43:30,802 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x122.76
+2026-09-10 23:43:50,838 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x150.00
+2026-09-10 23:44:24,803 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU buy yes x15.35
+2026-09-10 23:46:14,343 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x56.00
+2026-09-10 23:46:30,670 - ws_delta_book - WS closed intentionally (reseed) after 600s up — reconnecting immediately, no backoff
+2026-09-10 23:46:30,904 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+Error GET /trade-api/v2/portfolio/orders: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-09-10 23:47:31,644 - manager - RECONCILIATION | resting-orders fetch returned no 'orders' key — Kalshi API call likely 429/timeout. Skipping cycle; will retry next tick.
+2026-09-10 23:49:25,965 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU buy yes x1.00
+2026-09-10 23:49:25,967 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x5.00
+2026-09-10 23:49:25,967 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x1.00
+2026-09-10 23:51:31,004 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-09-10 23:54:02,313 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU buy yes x137.30
+2026-09-10 23:54:33,314 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x150.00
+2026-09-10 23:56:08,368 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU sell yes x0.85
+2026-09-10 23:56:30,687 - ws_delta_book - WS closed intentionally (reseed) after 600s up — reconnecting immediately, no backoff
+2026-09-10 23:56:31,106 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-09-10 23:58:55,946 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x44.00
+2026-09-10 23:58:55,946 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU buy yes x33.00
+2026-09-10 23:58:55,968 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU buy yes x1.00
+2026-09-10 23:58:55,968 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU buy yes x116.00
+2026-09-10 23:58:55,970 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x30.00
+2026-09-10 23:58:55,973 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x8.00
+2026-09-10 23:58:55,981 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x68.00
+2026-09-10 23:59:16,225 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x0.08
+2026-09-10 23:59:41,712 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x150.00
+2026-09-11 00:00:14,873 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXCS2GAME-26SEP101900WITVIL-WIT buy yes x188.00
+Error GET /trade-api/v2/portfolio/orders: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-09-11 00:00:32,201 - manager - RECONCILIATION | resting-orders fetch returned no 'orders' key — Kalshi API call likely 429/timeout. Skipping cycle; will retry next tick.
+2026-09-11 00:00:39,540 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x44.00
+2026-09-11 00:01:22,324 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXCS2GAME-26SEP101900PAINIMP-PAIN sell yes x188.00
+2026-09-11 00:01:31,185 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-09-11 00:01:51,113 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x87.00
+2026-09-11 00:01:51,113 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x44.00
+2026-09-11 00:01:51,140 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU sell yes x44.00
+2026-09-11 00:01:51,148 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU sell yes x44.00
+2026-09-11 00:02:00,274 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x37.78
+Error GET /trade-api/v2/portfolio/orders: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-09-11 00:04:32,387 - manager - RECONCILIATION | resting-orders fetch returned no 'orders' key — Kalshi API call likely 429/timeout. Skipping cycle; will retry next tick.
+2026-09-11 00:05:38,559 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU buy yes x150.00
+2026-09-11 00:05:45,713 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXCS2GAME-26SEP101900PAINIMP-PAIN sell yes x30.00
+2026-09-11 00:06:00,965 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU sell yes x0.01
+2026-09-11 00:06:30,700 - ws_delta_book - WS closed intentionally (reseed) after 600s up — reconnecting immediately, no backoff
+2026-09-11 00:06:31,270 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-09-11 00:07:27,603 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x16.66
+2026-09-11 00:07:52,900 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-MVU sell yes x150.00
+2026-09-11 00:08:12,961 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x51.59
+2026-09-11 00:09:18,569 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x4.00
+2026-09-11 00:09:53,749 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x91.94
+Error GET /trade-api/v2/portfolio/orders: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-09-11 00:10:32,727 - manager - RECONCILIATION | resting-orders fetch returned no 'orders' key — Kalshi API call likely 429/timeout. Skipping cycle; will retry next tick.
+2026-09-11 00:10:56,159 - trade_logger - TRADE LOGGER | SUBACCOUNT-0 fill IGNORED (not ours, sub=1): KXLOLGAME-26SEP101700MVUWU-WU buy yes x3.00
+2026-09-11 00:11:31,314 - __main__ - [BULK FETCH] refreshed 0 map ticker(s) (next refresh in 300s)
+2026-09-11 00:11:44,177 - __main__ - Received Cancel/Interrupt Flag. Breaking loop.
+2026-09-11 00:11:44,185 - __main__ - Triggering SYNC Kalshi shutdown sequence...
+2026-09-11 00:11:44,185 - manager - MANAGER SHUTDOWN | Initiating Hard Order Wipe...
+2026-09-11 00:11:47,193 - trade_logger - TRADE LOGGER | No trades recorded this active session limit. Exiting cleanly.
+Traceback (most recent call last):
+  File "/Users/bradleyguan/Documents/Coding/Tennis-Model/quoter/run.py", line 2736, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "/usr/lib/python3.14/asyncio/runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.14/asyncio/runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/bradleyguan/Documents/Coding/Tennis-Model/quoter/run.py", line 2715, in main
+    asyncio.get_event_loop().run_until_complete(book_view.close())
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/asyncio/base_events.py", line 695, in run_until_complete
+    self._check_running()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/asyncio/base_events.py", line 631, in _check_running
+    raise RuntimeError('This event loop is already running')
+RuntimeError: This event loop is already running
+<sys>:0: RuntimeWarning: coroutine 'RouterBookView.close' was never awaited

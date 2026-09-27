@@ -28,10 +28,15 @@ def init_positions(client: Any, active_tickers: List[str]) -> None:
             path = "/trade-api/v2/portfolio/positions"
             log.info("POSITION STORE | Initiating critical boot-load physical REST synchronization globally...")
             # Natively traverse user REST gateway directly!
-            # subaccount=0 is the documented API default, but pin it explicitly:
-            # manual positions on subaccount 1+ must never enter this store
-            # (max_position + position adjuster read from here).
-            resp_data = client._get(path, params={"limit": 1000, "subaccount": 0})
+            # Pin the subaccount explicitly to THIS process's trading sub
+            # (tennis mode -> 0, QUOTER_SPORT=tt -> 1; see execution.py).
+            # Positions on any OTHER subaccount must never enter this store
+            # (max_position + position adjuster read from here) — that used to
+            # mean "manual sub-1 positions stay out of the tennis store", and
+            # in tt mode it equally means "esports sub-0 positions stay out".
+            from execution import TENNIS_SUBACCOUNT
+            resp_data = client._get(path, params={"limit": 1000,
+                                                  "subaccount": TENNIS_SUBACCOUNT})
             
             if resp_data and "market_positions" in resp_data:
                 # Pick up any new alias entries from disk (alias module is
@@ -64,7 +69,12 @@ def get_position(ticker: str) -> int:
         pos_primary = _POSITIONS.get(ticker, 0)
         
         # Aggressively net mathematically opposing sides (Team A vs Team B) universally
-        if "LOL" in ticker or "CS2" in ticker or "VALORANT" in ticker or "DOTA2" in ticker or "COD" in ticker or "ATP" in ticker or "WTA" in ticker:
+        # "ITF" added 2026-09-03: ITF tickers were EXCLUDED from pair netting
+        # here while the skew adjuster's own netting list included them — so the
+        # STOP-CAP saw each leg raw and let same-direction exposure build across
+        # the pair (26SEP03ANDPIE: AND -80 + PIE +60 = net -140 vs max_position
+        # 50; only the AND leg tripped the 75 hard cap, at the very last fill).
+        if "LOL" in ticker or "CS2" in ticker or "VALORANT" in ticker or "DOTA2" in ticker or "COD" in ticker or "ATP" in ticker or "WTA" in ticker or "ITF" in ticker:
             base_group = "-".join(ticker.split("-")[:-1])
             for t, p in _POSITIONS.items():
                 if t != ticker and t.startswith(base_group + "-"):

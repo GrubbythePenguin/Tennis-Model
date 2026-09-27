@@ -41,6 +41,37 @@ from market_implied import ImpliedSplitError
 
 TAPES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tapes")
 
+_MUX_PATH = os.path.join(TAPES, "_livedata_mux.json")
+_MUX_MAX_AGE_S = 8.0
+_mux_cache = {"mtime": -1.0, "ts": 0.0, "data": {}}
+
+
+def _mux_details(mid: str):
+    """Details for one milestone from the live_data multiplexer's snapshot, or None.
+
+    live_data_mux.py (26SEP11) batch-fetches the whole board in 1-2 GETs per 3s
+    cycle and writes tapes/_livedata_mux.json atomically. Reading it here replaces
+    this poller's own /live_data GET whenever the snapshot is fresh — the fleet's
+    GET rate collapses from one-per-poller to one-shared. None (snapshot absent,
+    stale, or missing this milestone) => caller falls back to its direct GET, so a
+    dead mux degrades to exactly the old behaviour within one cycle.
+    """
+    try:
+        mt = os.path.getmtime(_MUX_PATH)
+    except OSError:
+        return None
+    if mt != _mux_cache["mtime"]:
+        try:
+            d = json.load(open(_MUX_PATH))
+            _mux_cache.update(mtime=mt, ts=float(d.get("ts") or 0.0),
+                              data=d.get("data") or {})
+        except Exception:
+            return None                      # torn write mid-read: fall back this cycle
+    if time.time() - _mux_cache["ts"] > _MUX_MAX_AGE_S:
+        return None
+    return _mux_cache["data"].get(mid)
+
+
 # FIT VARIANTS CARRIED LIVE. Until 26AUG25 the poller carried one fit — equal-weight,
 # refit on every boundary, i.e. ROLLING — so the static-vs-rolling and EWMA questions
 # could only ever be asked afterwards, by replaying a settled tape. Carrying all of
@@ -79,6 +110,49 @@ def _ewma_update(m, price, state, halflife):
     m.obs = [(st, px, max(w * dec, 1e-6)) for st, px, w in m.obs]
     m.observe(price, weight=1.0, **state)
     return m
+
+
+def pregame_book_usable(px, bid_me, ask_me, bid_opp, ask_opp, max_spread):
+    """Is this pregame sample a REAL two-sided book, or a placeholder?
+
+    A doubles placeholder (6/94, or 6/80) produces a perfectly non-None vig_free of ~0.50,
+    so "px is not None" is NOT a usable-book test -- that bug (26SEP23-24) made the cadence
+    ramp bail out of its fast phase on garbage. Require BOTH sides quoted and each side's
+    spread within max_spread.
+    """
+    if px is None:
+        return False
+    if None in (bid_me, ask_me, bid_opp, ask_opp):
+        return False
+    return (ask_me - bid_me) <= max_spread and (ask_opp - bid_opp) <= max_spread
+
+
+def _wsbook(event, max_age=10.0):
+    """Top of book from the quoter's WebSocket log, tapes/wsbook_<event>.jsonl, written
+    at 1 Hz by tennis_recenter_model while it quotes the match. NO GET. Returns
+    (mid_me, mid_opp, bid_me, ask_me, bid_opp, ask_opp) in probabilities, or all None
+    if the file is absent or older than max_age (quoter not running / not yet quoting).
+
+    26AUG28: every GET except /live_data is being removed from this process - the
+    shared bucket is the scarce resource and the quoter already holds both books over
+    the WS. The tape keeps the same fields so downstream readers are unchanged."""
+    path = os.path.join(TAPES, f"wsbook_{event}.jsonl")
+    try:
+        if time.time() - os.stat(path).st_mtime > max_age:
+            return (None,) * 6
+        with open(path, "rb") as f:
+            f.seek(max(0, os.stat(path).st_size - 4096))
+            line = f.read().decode("utf-8", "replace").strip().splitlines()[-1]
+        r = json.loads(line)
+        if time.time() - r["ts"] > max_age:
+            return (None,) * 6
+        bm, am = r["me"]; bo, ao = r["opp"]
+        c = lambda v: None if v is None or v <= 0 or v >= 100 else v / 100.0
+        bm, am, bo, ao = c(bm), c(am), c(bo), c(ao)
+        mid = lambda b, a: None if b is None or a is None else (b + a) / 2.0
+        return mid(bm, am), mid(bo, ao), bm, am, bo, ao
+    except Exception:
+        return (None,) * 6
 
 
 def _ahead_states(pstate):
@@ -328,7 +402,9 @@ def cmd_watch(a):
     opp_id = next(c for c in mapping if c != me_id)
     me_tick, opp_tick = mapping[me_id], mapping[opp_id]
 
-    verified = kt.best_of_from_exact_market(feed, a.event)
+    # --best-of given: trust it and skip the exact-market GET (26AUG28: no GETs beyond
+    # the startup pair and /live_data). Without it, the one-off lookup still runs.
+    verified = None if a.best_of else kt.best_of_from_exact_market(feed, a.event)
     try:
         best_of = kt.resolve_best_of(det_m, a.best_of, verified=verified)
     except ValueError as e:
@@ -345,8 +421,16 @@ def cmd_watch(a):
     print(f"  interval {a.interval}s live / {a.idle_interval}s idle, rps cap {a.rps}")
     print(f"  kill: touch {kt.KILL_FLAG}\n")
 
-    tape_p = os.path.join(TAPES, f"{a.event}.jsonl")
-    log_p = os.path.join(TAPES, f"{a.event}.log.json")
+    # --tape-dir lets a live shakedown run write somewhere harmless instead of clobbering
+    # the production tape while the arm loop's own poller is watching the same event.
+    _tape_dir = a.tape_dir or TAPES
+    os.makedirs(_tape_dir, exist_ok=True)
+    tape_p = os.path.join(_tape_dir, f"{a.event}.jsonl")
+    # --tape-dir must cover the LOG too. It originally redirected only the .jsonl, so a test
+    # run silently overwrote the production <event>.log.json -- which on a real match holds the
+    # boundary observations the fit is rebuilt from (26SEP25; caught on an event whose obs were
+    # empty, so nothing was lost, but it would have destroyed a played match's fit history).
+    log_p = os.path.join(_tape_dir, f"{a.event}.log.json")
     log = {"best_of": best_of, "first_server": "me", "split_prior": prior,
            "split_prior_sd": 0.30, "strict_split": False, "set_servers": {},
            "final_set_tb": final_tb,
@@ -370,9 +454,18 @@ def cmd_watch(a):
                                      split_prior=prior, warn_split=False,
                                      final_set_tb=final_tb)
             for h in halflives}
+    with open(log_p, "w") as f:          # bind-able from cycle 0: the quoter reads meta.me_ticker
+        json.dump(log, f, indent=1)
     last_key = None
     n_obs = 0
     cycles = 0
+    # PREGAME CADENCE RAMP state (26SEP23): sample fast until the first usable pregame
+    # price, then settle to --pregame-interval. See the pregame branch below.
+    pre_samples = 0
+    pre_got_px = False
+    ever_live = False        # has this match EVER been seen live? gates the miss-cap bailout
+    # -inf so the first pregame cycle always fetches a real book (26SEP23)
+    last_pre_mkts = float("-inf")
     misses = 0
     last_pts = None          # last observed (points_me, points_opp, games, sets)
     pt_seq = 0               # increments on every observed point-score change
@@ -406,7 +499,9 @@ def cmd_watch(a):
             if kt.disabled():
                 print(f"\nkill flag {kt.KILL_FLAG} present — stopping."); break
             try:
-                det = feed.live_data([mid_id]).get(mid_id)
+                det = _mux_details(mid_id)
+                if det is None:
+                    det = feed.live_data([mid_id]).get(mid_id)
             except kt.RateLimited as e:
                 print(f"\n*** {e}\n*** stopping to protect the live trading system's "
                       f"GET bucket.", file=sys.stderr)
@@ -427,6 +522,22 @@ def cmd_watch(a):
                 # 18:15 the bucket was so contended that a board scan could not complete
                 # at all (4 GETs, 4 rate-limited). Doubling per consecutive miss keeps
                 # the isolated-failure protection and stops the feedback loop.
+                # BAIL OUT OF AN ENDLESS MISS LOOP (26SEP25). Once an event drops off the
+                # board, _mux_details returns None AND feed.live_data returns nothing, so this
+                # branch `continue`s BEFORE the tape write -- forever. Measured that day: 9
+                # doubles pollers stuck at 260-989 consecutive misses, tapes untouched for up
+                # to 16.5h, each still burning one live_data GET per 60s (0.15 GET/s and
+                # 0.36GB of RAM across them) and none would exit until --max-cycles, ~14 days
+                # away at the 60s backoff cap.
+                # Only bail if the match was NEVER seen live: a phantom/cancelled fixture is
+                # safe to abandon, whereas a feed outage on a match IN PROGRESS must keep
+                # retrying (that tape is irreplaceable and the arm loop will not re-attach a
+                # match whose start time has passed).
+                if a.max_misses and misses >= a.max_misses and not ever_live:
+                    print(f"\n{misses} consecutive live_data misses and this match was never "
+                          f"seen live — abandoning (likely cancelled or off the board).",
+                          file=sys.stderr)
+                    break
                 back = min(a.interval * (2 ** (misses - 1)), 60.0)
                 print(f"\n[{time.strftime('%H:%M:%S')}] live_data returned nothing "
                       f"(miss {misses}) — retrying in {back:.0f}s.", file=sys.stderr)
@@ -435,6 +546,8 @@ def cmd_watch(a):
             misses = 0
 
             status = (det.get("status") or "").strip().lower()
+            if kt.is_live(det):
+                ever_live = True
             if not kt.is_live(det):
                 if det.get("winner"):
                     print(f"match over (status={status}, winner={det['winner'][:8]}…)")
@@ -448,13 +561,31 @@ def cmd_watch(a):
                 # which it does at its own whim (38 minutes before play on one match,
                 # not at all until first ball on another).
                 if a.pregame_interval > 0:
-                    mkts = feed.markets(a.event)
-                    mm = {m.get("ticker"): m for m in mkts}
-                    p_me = kt.mid(mm.get(me_tick) or {})
-                    p_opp = kt.mid(mm.get(opp_tick) or {})
+                    # PREGAME /markets THROTTLE (2026-09-02, made TIME-BASED 26SEP23):
+                    # pre-match books barely move, but markets_every=1 had every ITF
+                    # pregame poller GETting /markets each 20s cycle — 21 pregame pollers
+                    # were eating 96 429s/poller/hour and starving the LIVE pollers'
+                    # /markets calls (the ones the anchor needs). Fetch the real book at
+                    # most every --pregame-markets-secs; the WS-book fallback fills the rest.
+                    #
+                    # WAS `cycles % (markets_every * 15)`, which silently coupled the PREGAME
+                    # cadence to the IN-PLAY one and to --pregame-interval. Two ways that bit:
+                    # at a flat --pregame-interval 600 cycle 45 landed at t=7.5 HOURS, and
+                    # raising doubles --markets-every 3 -> 6 (26SEP23, to cut the in-play GET
+                    # rate) would have moved it to cycle 90, i.e. past match start for a
+                    # typical +26min attach. Pregame is ~1 GET / 5 min / poller either way;
+                    # the in-play rate is the thing worth tuning, so they are now independent.
+                    if (a.markets_every and a.pregame_markets_secs > 0
+                            and (time.time() - last_pre_mkts) >= a.pregame_markets_secs):
+                        last_pre_mkts = time.time()
+                        mkts = feed.markets(a.event)
+                        mm = {m.get("ticker"): m for m in mkts}
+                        p_me, p_opp = kt.mid(mm.get(me_tick) or {}), kt.mid(mm.get(opp_tick) or {})
+                        pb_me, pa_me = kt.top_of_book(mm.get(me_tick) or {})
+                        pb_opp, pa_opp = kt.top_of_book(mm.get(opp_tick) or {})
+                    else:
+                        p_me, p_opp, pb_me, pa_me, pb_opp, pa_opp = _wsbook(a.event)
                     px_pre = kt.vig_free(p_me, p_opp)
-                    pb_me, pa_me = kt.top_of_book(mm.get(me_tick) or {})
-                    pb_opp, pa_opp = kt.top_of_book(mm.get(opp_tick) or {})
                     with open(tape_p, "a") as f:
                         # models/edges_c empty rather than absent: there is no fit yet
                         # (no boundaries have happened), but keeping the key present on
@@ -468,10 +599,38 @@ def cmd_watch(a):
                                             "book": {"bid_me": pb_me, "ask_me": pa_me,
                                                      "bid_opp": pb_opp, "ask_opp": pa_opp},
                                             "details": det}) + "\n")
+                    # PREGAME CADENCE RAMP (26SEP23). Sample FAST until the first usable
+                    # price lands, then settle to --pregame-interval. Why: the only pregame
+                    # value the live path needs is ONE clean 0-0 tick with a finite vig_free
+                    # (quoter _pregame_vf_me takes the FIRST such row, else falls back to
+                    # seed_<ev>.json) -- but at attach time the quoter's WS book file usually
+                    # does not exist yet, so row 1 is almost always vig_free=None. A flat slow
+                    # interval therefore silently trades the real reference for the seed, which
+                    # for DOUBLES is ~0.50 placeholder garbage.
+                    # The fast phase is BUDGETED (--pregame-fast-samples) so a match whose
+                    # milestone start is a placeholder and whose book never appears (ATP
+                    # order-of-play doubles sat not_started for 11.8h on 26SEP23, 1,426 rows)
+                    # cannot spin at the fast rate: worst case is the budget, then slow rows.
+                    pre_samples += 1
+                    # A PRICE IS NOT ENOUGH -- IT MUST BE PLAUSIBLE (fixed 26SEP25). The first
+                    # version of this ramp dropped to the slow cadence as soon as px_pre was
+                    # not None, and a DOUBLES placeholder book (6/80, i.e. 74c wide) yields a
+                    # perfectly non-None vig_free of 0.5. So doubles pollers bailed out of the
+                    # fast phase on garbage and then sampled every 600s: measured 26SEP24,
+                    # median pregame ticks fell 7 -> 2 and tapes with no usable pregame book
+                    # rose 23% -> 37%, costing ~14 tau rows/day. Require both sides to be
+                    # quoted within --pregame-max-spread before believing the book is real.
+                    if pregame_book_usable(px_pre, pb_me, pa_me, pb_opp, pa_opp,
+                                           a.pregame_max_spread):
+                        pre_got_px = True
+                    fast = (not pre_got_px) and pre_samples < a.pregame_fast_samples
+                    nap = a.pregame_first_interval if fast else a.pregame_interval
                     print(f"\r[{time.strftime('%H:%M:%S')}] pre-match {status or '?'} "
                           f"mkt={px_pre if px_pre is None else round(px_pre, 3)} "
-                          f"({feed.n_get}g/{feed.n_429}x) ", end="", flush=True)
-                    time.sleep(a.pregame_interval)
+                          f"({feed.n_get}g/{feed.n_429}x) "
+                          f"[{'fast' if fast else 'slow'} {nap:.0f}s, n={pre_samples}] ",
+                          end="", flush=True)
+                    time.sleep(nap)
                 else:
                     print(f"\r[{time.strftime('%H:%M:%S')}] status={status or 'unknown'} — "
                           f"idling {a.idle_interval}s ", end="", flush=True)
@@ -484,9 +643,15 @@ def cmd_watch(a):
                       "stopping rather than logging a wrong state.", file=sys.stderr)
                 break
 
-            mkts = feed.markets(a.event)
-            mm = {m.get("ticker"): m for m in mkts}
-            mid_me, mid_opp = kt.mid(mm.get(me_tick) or {}), kt.mid(mm.get(opp_tick) or {})
+            if a.markets_every and cycles % a.markets_every == 0:
+                mkts = feed.markets(a.event)
+                mm = {m.get("ticker"): m for m in mkts}
+                mid_me, mid_opp = kt.mid(mm.get(me_tick) or {}), kt.mid(mm.get(opp_tick) or {})
+                bid_me, ask_me = kt.top_of_book(mm.get(me_tick) or {})
+                bid_opp, ask_opp = kt.top_of_book(mm.get(opp_tick) or {})
+            else:
+                # PRICE FROM THE QUOTER'S WS BOOK, NOT A GET (26AUG28). See _wsbook.
+                mid_me, mid_opp, bid_me, ask_me, bid_opp, ask_opp = _wsbook(a.event)
             px = kt.vig_free(mid_me, mid_opp)
             # RAW BOOK. Until 26AUG26 only the derived mids were kept, so every backtest
             # filled at the vig-free midpoint — a price nobody can actually trade — while
@@ -496,8 +661,6 @@ def cmd_watch(a):
             # spread from two mids that sum to 1 by construction is impossible.
             # Storing top of book lets a fill be modelled where it really happens —
             # buy at the ask, sell at the bid.
-            bid_me, ask_me = kt.top_of_book(mm.get(me_tick) or {})
-            bid_opp, ask_opp = kt.top_of_book(mm.get(opp_tick) or {})
 
             # Once the fit has something to say, price the FULL state (point score
             # included) at every poll. This is the mid-game comparison the hand-logged
@@ -518,7 +681,10 @@ def cmd_watch(a):
             model_px = None
             var_px = {}
             ahead = {}
-            if n_obs >= 2 and st.get("_points_known"):
+            # ONE boundary is enough for the branches (26AUG29; was 2). Measured on
+            # 14,596 points: bracket quality at n=1 (MAE 1.11c, 10.9% past +2c) equals
+            # n=8-11 (1.13c, 9.3%). Every match was losing its first two games of quotes.
+            if n_obs >= 1 and st.get("_points_known"):
                 pstate = {k: v for k, v in st.items() if not k.startswith("_")}
                 # Price every variant on the SAME state at the SAME tick, so the tape
                 # carries a like-for-like comparison rather than four series that each
@@ -674,6 +840,10 @@ if __name__ == "__main__":
     p = sub.add_parser("watch")
     p.add_argument("event")
     p.add_argument("--me", required=True, help="market ticker suffix for the tracked player, e.g. ALT")
+    p.add_argument("--markets-every", type=int, default=0, metavar="N",
+                   help="GET /markets every N cycles (0 = never; prices come from the quoter's "
+                        "WS book log, tapes/wsbook_<event>.jsonl). Set >0 only for capture "
+                        "without the quoter running.")
     p.add_argument("--best-of", type=int, choices=(3, 5),
                    help="REQUIRED when Kalshi's best_of is absent or contradicts the format "
                         "(it reports 3 for US Open men's, which is best-of-5)")
@@ -687,6 +857,40 @@ if __name__ == "__main__":
                         "duplicated h4 exactly on 4 of 10 matches. See per_match_pnl.py")
     p.add_argument("--interval", type=float, default=2.0)
     p.add_argument("--idle-interval", type=float, default=60.0)
+    p.add_argument("--max-misses", type=int, default=90, metavar="N",
+                   help="abandon the match after N CONSECUTIVE live_data misses, but only if "
+                        "it was never seen live (default 90 ~= 90 min at the 60s backoff cap; "
+                        "0 disables). Stops phantom fixtures spinning a GET/min forever.")
+    p.add_argument("--tape-dir", default=None, metavar="DIR",
+                   help="write the tape here instead of tapes/ (for test runs that must not "
+                        "touch a production tape).")
+    p.add_argument("--pregame-max-spread", type=float, default=0.25, metavar="D",
+                   help="widest two-sided spread (dollars, EACH side) still counted as a real "
+                        "pregame book. Below this the cadence ramp keeps sampling fast. Guards "
+                        "against doubles placeholder books (6/94) whose vig_free is a "
+                        "non-None but meaningless 0.50.")
+    p.add_argument("--pregame-markets-secs", type=float, default=300.0, metavar="SEC",
+                   help="minimum seconds between PRE-MATCH /markets book fetches when "
+                        "--markets-every is set (default 300 = ~5 min, 0 disables). Time-based "
+                        "on purpose: the old cycle-based rule coupled this to --markets-every "
+                        "and --pregame-interval, which pushed the first real doubles book fetch "
+                        "past match start. Pregame books barely move, so 5 min is plenty.")
+    p.add_argument("--pregame-first-interval", type=float, default=20.0, metavar="SEC",
+                   help="pre-match sampling interval BEFORE the first usable price is seen "
+                        "(default 20s). Pregame costs no GETs -- state comes from the "
+                        "live_data_mux file and the book from the quoter's WS book file -- so "
+                        "sampling fast early is nearly free, and it is what actually captures "
+                        "the pregame reference instead of falling back to the discovery seed.")
+    p.add_argument("--pregame-fast-samples", type=int, default=90, metavar="N",
+                   help="give up the fast pre-match cadence after N samples even if no price "
+                        "has appeared (default 90 = 30 min at 20s, i.e. the arm loop's whole "
+                        "attach lookahead), then use --pregame-interval. Bounds the tape for "
+                        "matches whose milestone start is a placeholder and whose book never "
+                        "shows up: ~90 fast rows then 10-minute rows, vs 1,426 rows at a flat "
+                        "30s over the 11.8h ATP order-of-play case on 26SEP23. Must stay wide "
+                        "enough to contain _pregame_mkts_every (markets_every*15 CYCLES): for "
+                        "doubles that is cycle 45, which at the fast 20s lands at t=15min but "
+                        "at a flat 600s would land at t=7.5 HOURS -- i.e. never before start.")
     p.add_argument("--pregame-interval", type=float, default=60.0,
                    help="seconds between PRE-MATCH price samples (0 disables). The "
                         "pre-match price path is what pregame_stability.py screens on, "

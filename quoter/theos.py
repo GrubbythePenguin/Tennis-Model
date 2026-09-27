@@ -9,6 +9,11 @@ from intermission_model import EsportsIntermissionTheoGenerator
 from live_series_model import LiveSeriesTheoGenerator
 from props_theo_generator import PropsTheoGenerator
 from tennis_branch_model import TennisBranchTheoGenerator
+from tennis_recenter_model import TennisRecenterTheoGenerator
+from tennis_set3_dog_model import Set3DogTheoGenerator
+from tennis_set1_dog_model import Set1DogTheoGenerator
+from tennis_dog_windows_model import DogWindowsTheoGenerator
+from tt_band_model import TTBandTheoGenerator
 
 log = logging.getLogger(__name__)
 
@@ -32,6 +37,29 @@ class HybridTheoGenerator(BaseTheoGenerator):
             # feed lag creates, so the model quotes a spread as wide as its
             # own uncertainty about the point it cannot see.
             "tennis_branch": TennisBranchTheoGenerator(client, configs),
+            # tennis_recenter_model.py - takes NO view on the level: it
+            # re-anchors to the market at every point change and applies
+            # only the model's one-point deltas.
+            "tennis_recenter": TennisRecenterTheoGenerator(client, configs),
+            # tennis_set3_dog_model.py - ITF set-3 dog maker: sided theos
+            # (dog 49.5/100, fav 0/49.5) ONLY during the armed set-break
+            # window after a momentum dog levels at 1-1; nothing otherwise.
+            # Shadow by default - live only with ROOT/set3_live.flag.
+            "tennis_set3_dog": Set3DogTheoGenerator(client, configs),
+            # tennis_set1_dog_model.py - 1-0 dog-leader maker: frozen sided
+            # theos during the set-1 break after the PREGAME dog takes set 1.
+            # Shadow until ROOT/set1_live.flag.
+            "tennis_set1_dog": Set1DogTheoGenerator(client, configs),
+            # tennis_dog_windows_model.py - dispatcher running set1 (all six
+            # series) AND set3 (ITF) behind one row per ticker; the production
+            # model_name for the dog-maker book.
+            "tennis_dog_windows": DogWindowsTheoGenerator(client, configs),
+            # tt_band_model.py - table tennis: level from the screener's
+            # pregame-anchored model (no in-play market to re-anchor to),
+            # band edges from the delayed-feed worst case (opponent/we win
+            # the next N unseen points). Feed = tapes/_tt_state.json written
+            # by tt_screener.py; staleness or non-live status = no theo.
+            "tt_band": TTBandTheoGenerator(client, configs),
         }
         super().__init__(client, configs)
 

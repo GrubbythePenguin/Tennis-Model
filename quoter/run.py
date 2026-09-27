@@ -88,7 +88,9 @@ log = logging.getLogger(__name__)
 #         All [DRY] log lines show what WOULD have been fired.
 # False = LIVE TRADING. Orders fire to Kalshi.
 # Flip to False when you're confident in the refactor and ready to go live.
-DRY_RUN = False
+DRY_RUN = False  # 26SEP18: LIVE for the set1 taker (500 lots, set1_taker_live.flag). All maker
+                 # models remain shadow via their own flags — with no theos they rest nothing.
+                 # 26SEP14 capture-only note kept for history: True = WS books only, zero orders.
 
 def _load_force_start_patterns(path: str = "force_start_tickers.txt") -> list:
     """Read substring patterns that bypass the time gate.
@@ -642,7 +644,12 @@ async def main():
         client=client,
         registry=orderbook_registry,
         ticker_provider=_active_tickers_for_poller,
-        enabled=True,
+        # OFF for tennis (26AUG27). Tennis rows quote off the ws_delta WebSocket book;
+        # this REST poller was the esports stack's fallback and here it was pure load:
+        # 6 tickers x 1 GET/s on the key the tennis pollers share, which starved them
+        # into 429 backoff, made their tapes stale, and cancelled every resting order.
+        # The registry stays constructed (empty) so the guarded readers are unaffected.
+        enabled=False,
     )
     orderbook_poller.start()
     # Make the registry available on the manager for Phase 2 reads.
@@ -935,7 +942,11 @@ async def main():
         isolated_book = None
 
     # Load the configured constraints!
-    CSV_PATH = "template_quoter_config.csv"
+    # QUOTER_CONFIG_CSV (2026-09-10, set3 dog maker): a second framework instance
+    # (own cwd, own subaccount via QUOTER_SUBACCOUNT) needs its own config file —
+    # two instances hot-reloading one template would fight over it. Default
+    # unchanged: cwd-relative template_quoter_config.csv.
+    CSV_PATH = os.environ.get("QUOTER_CONFIG_CSV", "template_quoter_config.csv")
     quoter.load_bots_from_csv(CSV_PATH)
     
     log.info(f"VWAP Engine armed with configuration from {CSV_PATH}. Engaging loop...")
@@ -1522,7 +1533,10 @@ async def main():
                     _save_run_metadata_cache(_run_meta_cache)
                 
                 # Pre-filter explicitly for Orderbook-dependent derivations
-                all_esports_tickers = [t for t in active_tickers if any(prefix in t for prefix in ["KXLOL", "KXCS2", "KXVALORANT", "KXUFCMOV", "KXDOTA2", "KXCOD", "KXATP", "KXWTA"])]
+                # KXTTELITEMATCH added 2026-09-09: this list feeds obs_to_fetch
+                # (WS book subscriptions + fetch_all), so a series missing here
+                # NEVER GETS BOOKS and its bots silently cannot quote.
+                all_esports_tickers = [t for t in active_tickers if any(prefix in t for prefix in ["KXLOL", "KXCS2", "KXVALORANT", "KXUFCMOV", "KXDOTA2", "KXCOD", "KXATP", "KXWTA", "KXTTELITEMATCH"])]
 
                 # Split: Poly CLOB for esports maps, WS for series + everything else
                 # endswith("MAP") on the first dash-separated component avoids
@@ -1593,6 +1607,43 @@ async def main():
                     if t not in esports_map_tickers and t not in esports_finalized
                     and t not in esports_decided
                 ]
+                # ── ITF LIVE BOOK (26SEP27) ──────────────────────────────────────
+                # KXITF is absent from the all_esports_tickers prefix list at ~1539,
+                # which is the ONLY input to set_tickers() below. So KXITFMATCH /
+                # KXITFWMATCH were never subscribed to ws_delta and never fetched —
+                # while run.py:647 had already disabled the REST OrderbookPoller for
+                # tennis on the belief that "tennis rows quote off the ws_delta
+                # WebSocket book" (true for KXATP/KXWTA, false for ITF). ITF top of
+                # book therefore fell through to the full_markets metadata snapshot
+                # at ~1714. Measured cost: 294 set-1 taker fires carried both the
+                # displayed ask and a REST book, and REST was dearer by a mean of
+                # 11.5c, in 286 of 294 cases.
+                #
+                # Added HERE and deliberately NOT to all_esports_tickers: that list
+                # also feeds esports_map_tickers (which matches "SETWINNER" in the
+                # prefix and would route ITF set markets into Poly CLOB map logic),
+                # finalization, and the Poly fallback. obs_to_fetch is exactly the
+                # two things ITF needs — set_tickers() and book_view.fetch_all() —
+                # and the application loop at ~1692 already iterates active_tickers,
+                # so b_bid/b_offer land in top_level_bids/offers with no other change.
+                #
+                # DOUBLES added 26SEP27 for BOOK CAPTURE ONLY. Their config rows exist
+                # so the tickers reach active_tickers and get a live book; the recenter
+                # model (the only ungated quoter in the tennis_dog_windows dispatcher)
+                # carries a RECENTER_SERIES guard that stops at book-logging for them,
+                # and every other model in that dispatcher is already scoped to the two
+                # singles series. SETWINNER stays out: it is what the naive fix at ~1539
+                # would have misrouted into Poly CLOB map logic.
+                _itf_ws = [
+                    t for t in active_tickers
+                    if t.split("-", 1)[0] in ("KXITFMATCH", "KXITFWMATCH",
+                                              "KXITFDOUBLES", "KXITFWDOUBLES")
+                    and t not in esports_finalized and t not in esports_decided
+                ]
+                if _itf_ws:
+                    obs_to_fetch = obs_to_fetch + [t for t in _itf_ws if t not in obs_to_fetch]
+                    log.warning("[ITF-WS] %d ITF ticker(s) added to the ws_delta target set "
+                                "(total obs_to_fetch=%d)", len(_itf_ws), len(obs_to_fetch))
                 ob_results = {}
 
                 # Keep ws_delta's subscription set in sync with the live ticker

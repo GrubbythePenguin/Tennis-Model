@@ -76,12 +76,40 @@ TIMEOUT = 12.0
 # guessing (KXATPCHALLENGER / KXCHALLENGER / KXATPCH all return 0 events); the real
 # ticker is KXATPCHALLENGERMATCH. Do not infer that a tour is absent from a handful
 # of negative ticker guesses — enumerate instead.
+# Doubles series (26SEP18, operator: extend data collection to doubles — the tau
+# hypothesis should hold harder where nobody models the teams). OPT-IN via
+# TENNIS_DOUBLES=1 so the arm loop's poller fleet does not silently double: the
+# operator gates when that GET load starts. Kalshi carries full live_data for
+# doubles milestones (round_scores/points/server, verified 26SEP18 on
+# KXITFWDOUBLES-26SEP17ISHSAWTIAMAT) — type "tennis_tournament_doubles".
+# Caveats: the deciding "set" is a 10-point MATCH TIEBREAK (last_set_scoring_type
+# = "MatchTiebreak"), which tennis_model's final_set_tb=10 only approximates
+# (it models a set with a TB at 6-6), and games are no-ad — fine for capture and
+# the tau analysis (model-free), wrong for model-theo quoting. Do not quote
+# doubles off tennis_branch without fixing both.
+DOUBLES_SERIES = {
+    "ATPDBL": "KXATPDOUBLES",
+    "WTADBL": "KXWTADOUBLES",
+    "ATPCHDBL": "KXATPCHALLENGERDOUBLES",
+    "ITFDBL": "KXITFDOUBLES",
+    "ITFWDBL": "KXITFWDOUBLES",
+    "MXDBL": "KXMIXEDDOUBLESMATCH",   # seasonal (Slams/exhibitions); 0 open most weeks
+}
+
 SERIES = {
     "ATP": "KXATPMATCH",
     "WTA": "KXWTAMATCH",
     "ATPCH": "KXATPCHALLENGERMATCH",
     "WTACH": "KXWTACHALLENGERMATCH",
+    # ITF (26AUG28): same shard 3, same milestone/live_data shape (status, server,
+    # round_scores, current_round_score), tour='ITF', gender populated. match_status
+    # is EMPTY for ITF where ATP shows '1st_set' - nothing here reads it. Series
+    # fee_type is plain 'quadratic': no maker fee, same as the Challengers.
+    "ITF": "KXITFMATCH",
+    "ITFW": "KXITFWMATCH",
 }
+if os.environ.get("TENNIS_DOUBLES") == "1":
+    SERIES = {**SERIES, **DOUBLES_SERIES}
 KILL_FLAG = "disable_tennis_poller.flag"
 
 # status values that mean "not currently being played"
@@ -103,11 +131,16 @@ def disabled() -> bool:
 
 # ----------------------------------------------------------------- transport
 
+BACKOFF_S = 5.0              # flat sleep after a 429
+CEILING_CONSEC_429 = 60      # give up after this many consecutive 429s (~5 min)
+
+
 class Feed:
     """Rate-limited read-only Kalshi client.
 
-    rps is a HARD ceiling on this process. On 429 the backoff doubles from 5s to
-    120s and every retry is announced — a quiet 429 would look like a stalled match.
+    rps is a HARD ceiling on this process. On 429 the backoff is a flat BACKOFF_S and
+    every retry is announced — a quiet 429 would look like a stalled match. The process
+    gives up only after CEILING_CONSEC_429 consecutive rejections.
     """
 
     def __init__(self, rps: float = 2.0, max_backoff: float = 120.0, verbose: bool = True):
@@ -119,6 +152,7 @@ class Feed:
         self._backoff = 0.0
         self.n_get = 0
         self.n_429 = 0
+        self._consec_429 = 0
         self._mid_cache: Dict[str, Optional[dict]] = {}
 
     def _sleep_to_slot(self):
@@ -146,14 +180,21 @@ class Feed:
         self.n_get += 1
         if r.status_code == 429:
             self.n_429 += 1
-            self._backoff = min(max(self._backoff * 2, 5.0), self.max_backoff)
+            self._consec_429 += 1
+            # FLAT 5s, not doubling to 120s (changed 26AUG27). The doubling assumed this
+            # process was the bad actor; with a handful of pollers it is not, and one
+            # escalation past 30s made the quoter's tape stale, which cancels every
+            # resting order on that match. A 429 now costs one poll, not the point.
+            # The ceiling is CONSECUTIVE rejections (~5 min solid), not backoff size.
+            self._backoff = BACKOFF_S
             print(f"[feed] *** HTTP 429 on {path} — shared bucket with the live "
-                  f"trading system. backoff now {self._backoff:.0f}s "
-                  f"({self.n_429} total)", file=sys.stderr)
-            if self._backoff >= self.max_backoff:
-                raise RateLimited(f"429 ceiling reached after {self.n_429} rejections")
+                  f"trading system. backoff {self._backoff:.0f}s "
+                  f"({self.n_429} total, {self._consec_429} consecutive)", file=sys.stderr)
+            if self._consec_429 >= CEILING_CONSEC_429:
+                raise RateLimited(f"429 ceiling reached after {self._consec_429} consecutive rejections")
             return None
         self._backoff = 0.0
+        self._consec_429 = 0
         if r.status_code != 200:
             if self.verbose:
                 print(f"[feed] {path} HTTP {r.status_code}", file=sys.stderr)
@@ -189,7 +230,9 @@ class Feed:
         if body is None:
             return None                              # transient — do not cache
         ms = body.get("milestones") or []
-        ms = [m for m in ms if m.get("type") == "tennis_tournament_singles"]
+        # singles / doubles / mixed all carry the same live_data schema; match by
+        # prefix so a new tennis_tournament_* subtype cannot silently drop a feed
+        ms = [m for m in ms if (m.get("type") or "").startswith("tennis_tournament")]
         got = ms[0] if ms else None
         self._mid_cache[event_ticker] = got
         return got

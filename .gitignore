@@ -14,3 +14,30 @@ disable_tennis_poller.flag
 # Local venv for the quoter stack (mirrors the esports venv's packages).
 # Not committed: 37 packages, and it is reproducible from pip freeze.
 .venv/
+
+# ---------------------------------------------------------------
+# 26SEP27 backup pass: keep this repo pushable to GitHub.
+# ---------------------------------------------------------------
+
+# Run logs. quoter/run.log was 667MB and unignored — GitHub hard-rejects any
+# blob over 100MB, so this would have blocked every push.
+*.log
+*.log.*
+
+# Telemetry / runtime caches (regenerable run output, not source)
+_telemetry.jsonl
+*.jsonl
+_run_kalshi_metadata_cache.json
+
+# Bulk API/telemetry traces (kalshi_api_trace.csv was 17MB)
+kalshi_api_trace.csv
+kalshi_api_trace.csv.*
+
+# Process locks
+*.lock
+
+# Fill/trade record and bulk data CSVs — data, not config. The config CSVs
+# (market_parameters, *_quoter_config, kalshi_poly_team_map, arb_overrides,
+# parsed_markets) ARE committed: they are the pipeline's source of truth.
+trades.csv
+trades.csv.*

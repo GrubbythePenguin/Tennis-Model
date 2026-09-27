@@ -156,6 +156,61 @@ def set_win_prob(p, q, games_me=0, games_opp=0, i_serve=True, points_me=0, point
             + (1 - g) * set_from_games(p, q, games_me, games_opp + 1, not i_serve, tb_target))
 
 
+def set_number_win_prob(p, q, set_no, sets_me=0, sets_opp=0, best_of=3,
+                        final_set_tb=7, **state):
+    """P(I win set number `set_no` of the match), from the current state.
+
+    `state` describes the set IN PROGRESS (same keyword arguments as set_win_prob,
+    minus tb_target, which is derived here). Three cases:
+
+        set_no == the set in progress   set_win_prob on the live state
+        set_no  > the set in progress   integrate over reaching it: future sets start
+                                        fresh at 0-0 (server-independent), and a set
+                                        that is NEVER PLAYED counts as won by NEITHER
+                                        player, so P(me wins set N) + P(opp wins set N)
+                                        = P(set N is played), not 1. The two sides of a
+                                        future-set market are complements only
+                                        conditional on the set happening.
+        set_no <= sets already played   ValueError - the set is decided, and this
+                                        state does not record WHO won it, so any
+                                        answer would be a guess.
+
+    The unplayed-set convention matters to whoever prices a market off this: if the
+    venue instead VOIDS an unplayed set's market (refund, not No), the quotable value
+    is P(win set N | set N played) = this / (this_me + this_opp). Verify the actual
+    resolution rules before quoting set 3 of a best-of-3 (or sets 4-5 of a 5).
+
+    tb_target plumbing mirrors match_win_prob: the deciding set (number `best_of`)
+    tiebreaks to final_set_tb, every other set to 7.
+    """
+    need = best_of // 2 + 1
+    played = sets_me + sets_opp
+    if not 1 <= set_no <= best_of:
+        raise ValueError(f"set_no {set_no} outside 1..{best_of}")
+    if sets_me >= need or sets_opp >= need:
+        raise ValueError(f"match already decided at {sets_me}-{sets_opp}")
+    if set_no <= played:
+        raise ValueError(f"set {set_no} already played at {sets_me}-{sets_opp}; "
+                         "its winner is not recoverable from set COUNTS")
+
+    def future(sm, so):
+        """P(I win set `set_no`) standing at the START of set sm+so+1 (fresh)."""
+        if sm >= need or so >= need:
+            return 0.0                       # match over first -> set never played
+        idx = sm + so + 1
+        s0 = set_from_games(p, q, 0, 0, True,
+                            final_set_tb if idx == best_of else 7)
+        if idx == set_no:
+            return s0
+        return s0 * future(sm + 1, so) + (1 - s0) * future(sm, so + 1)
+
+    cur = played + 1
+    s = set_win_prob(p, q, tb_target=(final_set_tb if cur == best_of else 7), **state)
+    if set_no == cur:
+        return s
+    return s * future(sets_me + 1, sets_opp) + (1 - s) * future(sets_me, sets_opp + 1)
+
+
 def match_win_prob(p, q, sets_me=0, sets_opp=0, best_of=3, final_set_tb=7, **state):
     """P(I win the match). `state` describes the set in progress (same keyword
     arguments as set_win_prob). Future sets start fresh at 0-0, and a fresh set's

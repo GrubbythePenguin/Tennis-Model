@@ -12,6 +12,25 @@ from typing import List, Dict, Any
 # Pass-through for any non-aliased ticker (the common case).
 import ticker_aliases
 
+# A session must survive this long before its reconnect backoff is forgiven.
+# Without it, resetting the delay on every connect turns a connect->error->
+# reconnect cycle into a 1s hot loop (see WSSubscriptionDead below).
+WS_STABLE_SESSION_S = 60.0
+
+
+class WSSubscriptionDead(Exception):
+    """Kalshi sent an `error` frame — the subscription is gone, the socket is not.
+
+    26AUG27 (esports stack): `{'code': 25, 'msg': 'Subscription buffer overflow'}`
+    arrived at 12:01:52Z and was merely logged, so no exception reached the
+    reconnect handler and `_ws_ready` stayed True. The listener sat connected and
+    deaf for ~3h while 193 fills (~24,000 lots across 12 tickers) bypassed
+    position_store, the hedge buffer and trades.csv — max_position and the
+    position adjuster traded blind the whole time. An error frame is a
+    DISCONNECT: raise it so the existing handler resets _ws_ready and reconnects
+    with backoff. Ported to the tennis stack the same day.
+    """
+
 log = logging.getLogger(__name__)
 
 class TradeLogger:
@@ -59,11 +78,19 @@ class TradeLogger:
         
         reconnect_delay = 1.0
         log.info("TRADE LOGGER | Background WebSocket thread successfully ignited...")
+        # Pre-bound: the reconnect handler reads it, and the try block can raise
+        # before the per-session stamp (e.g. auth header signing failing).
+        session_start = time.monotonic()
         
         # ── One-time REST pull for recent historical trades! ──
         try:
             log.info("TRADE LOGGER | Syphoning recent native fills from Kalshi REST gateway...")
-            resp = self.client._get("/trade-api/v2/portfolio/fills", {"limit": 100})
+            # Scope the preload to our subaccount: fills reads default to sub 0
+            # (same convention as /portfolio/orders, verified 2026-09-09), and
+            # the preload only exists to dedupe OUR fills against the WS stream.
+            from execution import TENNIS_SUBACCOUNT as _our_sub
+            resp = self.client._get("/trade-api/v2/portfolio/fills",
+                                    {"limit": 100, "subaccount": _our_sub})
             if resp and "error" not in resp:
                 fills = resp.get("fills", [])
                 fills.sort(key=lambda x: x.get("created_time", ""), reverse=False)
@@ -102,6 +129,7 @@ class TradeLogger:
         while not self._shutdown.is_set():
             try:
                 headers = self.client.auth.get_headers("GET", WS_PATH)
+                session_start = time.monotonic()
                 self._ws_ready = False  # Reset on each reconnect — fills before subscription confirm are replays
                 log.info(f"TRADE LOGGER | ws_ready=False (connecting), seen_fills={len(self.seen_fills)} in dedup set")
                 async with websockets.connect(WS_URL, additional_headers=headers) as ws:
@@ -112,7 +140,11 @@ class TradeLogger:
                     }
                     await ws.send(json.dumps(sub_msg))
                     log.info("TRADE LOGGER | Authenticated Live WebSocket Protocol Engaged. Listening for fills seamlessly...")
-                    reconnect_delay = 1.0
+                    # NB: the backoff is NOT reset here. Connecting proves
+                    # nothing — the 26AUG27 failure mode is a socket that opens
+                    # fine and then immediately loses its subscription. The
+                    # delay is forgiven in the reconnect handler below, and only
+                    # for a session that actually stayed up WS_STABLE_SESSION_S.
 
                     async for raw in ws:
                         if self._shutdown.is_set():
@@ -136,17 +168,19 @@ class TradeLogger:
 
                             # Subaccount gate: the fill WS delivers ALL subaccounts
                             # on one connection (see watch_fills_sub1.py). Only
-                            # subaccount-0 fills may reach position_store / hedge
-                            # accounting / trades.csv — manual positions live on
-                            # subaccount 1+ and must stay invisible to max_position
-                            # and the position adjuster. Field is absent on primary
-                            # fills, so missing → 0.
+                            # THIS process's subaccount (execution.TENNIS_SUBACCOUNT:
+                            # tennis -> 0, QUOTER_SPORT=tt -> 1) may reach
+                            # position_store / hedge accounting / trades.csv —
+                            # fills on any other sub (manual, esports) must stay
+                            # invisible to max_position and the position adjuster.
+                            # Field is absent on primary fills, so missing → 0.
                             try:
                                 _sub = int(f.get("subaccount") or f.get("subaccount_number") or 0)
                             except (TypeError, ValueError):
                                 _sub = 0
-                            if _sub != 0:
-                                log.info(f"TRADE LOGGER | SUBACCOUNT-{_sub} fill IGNORED (manual/scoped): "
+                            from execution import TENNIS_SUBACCOUNT as _our_sub
+                            if _sub != _our_sub:
+                                log.info(f"TRADE LOGGER | SUBACCOUNT-{_sub} fill IGNORED (not ours, sub={_our_sub}): "
                                          f"{f.get('ticker', f.get('market_ticker', '?'))} "
                                          f"{f.get('action', '')} {f.get('side', '')} "
                                          f"x{f.get('count_fp', f.get('size', '?'))}")
@@ -266,6 +300,19 @@ class TradeLogger:
                             ticker = ticker_aliases.reverse(f.get("ticker", f.get("market_ticker", "UNKNOWN")))
                             f["ticker"] = ticker
                             f["market_ticker"] = ticker
+
+                            # ── TENNIS-ONLY FILTER (2026-09-01) ──────────────
+                            # The fills WS is ACCOUNT-wide: the esports system's
+                            # fills arrive here too (observed 21:56Z — a
+                            # KXLOLGAME maker fill got position-tracked,
+                            # hedge-pushed, and written into tennis trades.csv).
+                            # This process only trades shard-3 tennis series;
+                            # everything else is another system's fill — log it
+                            # at debug and skip ALL downstream accounting.
+                            from execution import _is_tennis_ticker
+                            if not _is_tennis_ticker(ticker):
+                                log.debug(f"TRADE LOGGER | non-tennis fill ignored: {ticker}")
+                                continue
 
                             # Immediately push execution vectors mathematically into the local position container securely tracking the fills!
                             import position_store
@@ -469,14 +516,27 @@ class TradeLogger:
                             self.recorded_trades.append(f)
                             
                         elif msg_type == "error":
-                            log.warning(f"TRADE LOGGER | Synchronous WS Message Error: {msg}")
+                            # NOT recoverable in place: Kalshi has torn down the
+                            # subscription but leaves the socket open, so the
+                            # `async for` would block forever on a stream that
+                            # will never deliver another fill. Raise into the
+                            # reconnect handler (which resets _ws_ready first).
+                            raise WSSubscriptionDead(str(msg))
                         else:
                             # Log heartbeat or unknown just so we see the stream alive!
                             log.debug(f"TRADE LOGGER | Unhandled WS Type {msg_type}: {msg}")
                             
+            except WSSubscriptionDead as e:
+                log.error(f"TRADE LOGGER | SUBSCRIPTION DEAD — Kalshi error frame, "
+                          f"ws_ready set to False, reconnecting. Frame: {e}")
             except Exception as e:
                 log.error(f"TRADE LOGGER | WS DISCONNECTED — ws_ready set to False, reconnecting. Error: {e}")
 
+            # Forgive the backoff only for a session that actually held up. A
+            # connect that dies immediately must keep escalating, or a repeating
+            # error frame becomes a 1s reconnect hot loop against Kalshi.
+            if time.monotonic() - session_start >= WS_STABLE_SESSION_S:
+                reconnect_delay = 1.0
             if self._shutdown.is_set():
                 break
             log.info(f"TRADE LOGGER | Reconnecting in {reconnect_delay:.1f}s...")

@@ -12,6 +12,8 @@ def calculate_quote_levels(
     volumes: list[int],
     tick_step: int = 1,
     fav_edge_k: float = 0.0,
+    own_bid_prices: frozenset = frozenset(),
+    own_offer_prices: frozenset = frozenset(),
 ) -> tuple[list[tuple[int, int]], list[tuple[int, int]]]:
     """
     Calculates multiple levels of bids and offers you are willing to quote.
@@ -55,20 +57,35 @@ def calculate_quote_levels(
 
     # ILLIQUID MARKET CHECK: If the Kalshi orderbook is completely native-empty on a side (0c bid or 100c offer),
     # physically abort the entire quoting layer for that side so we don't automatically anchor down to 1c / 99c!
+    # SELF-JUMP GUARD (2026-09-09, prerequisite for negative min_distance):
+    # a top level whose price matches one of OUR OWN resting orders is JOINED,
+    # never improved. Without this, any scrub miss (placement->tracking lag,
+    # orphans) makes a negative min_distance leapfrog our own order every
+    # cycle until min_edge binds — the 24->26->28 ratchet. With it, -1 is
+    # stable under every failure mode:
+    #   external 26, us at 27          -> top 26 external -> cap 27, stay ✓
+    #   scrub misses our 27            -> top 27 == ours  -> cap 27, stay ✓
+    #   competitor JOINS our 27        -> top 27 == ours  -> stay (they're
+    #                                     behind us in FIFO — improving pays
+    #                                     a cent for priority we already own)
+    #   competitor improves to 28      -> top 28 external -> cap 29 (bounded
+    #                                     by theo - edge, as ever)
     if top_level_bid > 0:
-        raw_bid_level = min(
-            bid_theo - bid_edge,
-            top_level_bid - min_distance_from_top_level
-        )
+        if int(round(top_level_bid)) in own_bid_prices:
+            bid_cap = float(int(round(top_level_bid)))
+        else:
+            bid_cap = top_level_bid - min_distance_from_top_level
+        raw_bid_level = min(bid_theo - bid_edge, bid_cap)
         base_bid_level = int(math.floor(raw_bid_level))
     else:
         base_bid_level = None
 
     if top_level_offer < 100:
-        raw_offer_level = max(
-            offer_theo + offer_edge,
-            top_level_offer + min_distance_from_top_level
-        )
+        if int(round(top_level_offer)) in own_offer_prices:
+            offer_cap = float(int(round(top_level_offer)))
+        else:
+            offer_cap = top_level_offer + min_distance_from_top_level
+        raw_offer_level = max(offer_theo + offer_edge, offer_cap)
         base_offer_level = int(math.ceil(raw_offer_level))
     else:
         base_offer_level = None
